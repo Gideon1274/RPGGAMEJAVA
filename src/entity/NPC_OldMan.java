@@ -13,6 +13,7 @@ public class NPC_OldMan extends Entity{
         direction = "down";
         speed = 1;
         getImage();
+        setDialogue();
     }
 
     public void getImage() {
@@ -25,6 +26,13 @@ public class NPC_OldMan extends Entity{
         left2 = setup("/pics/npc/oldman_left_2");
         right1 = setup("/pics/npc/oldman_right_1");
         right2 = setup("/pics/npc/oldman_right_2");
+    }
+    public void setDialogue(){
+        dialogues[0] = "Hello, idiotsqqw eqw e\nqweqwe qwe qwe qwe ";
+        dialogues[1] = "So, youve come bakatare qwe qwe qwe qweqweqweqw qw ";
+        dialogues[2] = "blah blaahqwe qwe qwe qwe qwe qwe qwe qwe qwe";
+        dialogues[3] = "blah blahqwe qwe qwe qwe qwe qwe";
+
     }
     public void setAction(){
         actionLockCounter++;
@@ -48,4 +56,7 @@ public class NPC_OldMan extends Entity{
         actionLockCounter = 0;
     }
     }
+    public void speak(){
+       super.speak();
+}
 }

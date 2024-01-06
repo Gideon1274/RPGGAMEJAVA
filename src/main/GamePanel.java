@@ -18,8 +18,8 @@ public class GamePanel extends JPanel implements Runnable{
     final int scale = 3;
 
     public final int tileSize = originalTilzeSize * scale;
-    public final int maxScreenCol = 24;
-    public final int maxScreenRow= 16;
+    public final int maxScreenCol = 16;
+    public final int maxScreenRow= 12;
     public final int screenWidth = tileSize*maxScreenCol;
     public final int screenHeight = tileSize*maxScreenRow;
 
@@ -33,11 +33,11 @@ public class GamePanel extends JPanel implements Runnable{
 
     public final int FPS = 60;
     
-    TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler(this);
+    public TileManager tileM = new TileManager(this);
+    public KeyHandler keyH = new KeyHandler(this);
 
-    Sound music = new Sound();
-    Sound se = new Sound();
+    public Sound music = new Sound();
+    public Sound se = new Sound();
 
     
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -52,6 +52,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     //game state
     public int gameState;
+    public final int titleState =0;
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
@@ -70,7 +71,7 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter.setNPC();
 
         playMusic(0);
-        gameState = playState;
+        gameState = titleState;
 
     }
 
@@ -164,30 +165,37 @@ public class GamePanel extends JPanel implements Runnable{
         if(keyH.checkDrawTime == true){
         drawStart = System.nanoTime();
         }
+        //title screen
+        if(gameState == titleState){
+            ui.draw(g2);
+        }else{
+                    
 
-        //tile
-        tileM.draw(g2);
+                //tile
+                tileM.draw(g2);
 
-        //object
-        for(int i=0;i < obj.length;i++){
-            if(obj[i] != null){
-                obj[i].draw(g2, this);
-            }
-        }
+                //object
+                for(int i=0;i < obj.length;i++){
+                    if(obj[i] != null){
+                        obj[i].draw(g2, this);
+                    }
+                }
 
-        //npc
-        for(int i=0;i < npc.length;i++){
-            if(npc[i] != null){
-                npc[i].draw(g2);
-            }
-            
-        }
+                //npc
+                for(int i=0;i < npc.length;i++){
+                    if(npc[i] != null){
+                        npc[i].draw(g2);
+                    }
+                    
+                }
 
-        //player
-        player.draw(g2);
-        
-        //ui
+                //player
+                player.draw(g2);
+                
+                //ui
         ui.draw(g2);
+        }
+
 
 
             //debug
