@@ -227,14 +227,22 @@ public class Player extends Entity{
             
         }
     }
-    public void damageMonster(int i){
-        if(i!=999){
-            System.out.println("Hit");
-
-        }else{
-            System.out.println("miss");
-        }
-    }
+    
+    public void damageMonster(int i) {
+        
+		if(i != 999) {
+			
+			if(gp.monster[i].invincible == false) {
+				
+				gp.monster[i].life -= 1;
+				gp.monster[i].invincible = true;
+                System.out.println("Monster life: "+gp.monster[i].life);
+				if(gp.monster[i].life <= 0) {
+					gp.monster[i].dying = true;
+				}
+			}
+		}
+	}
     public void draw(Graphics2D g2){
 
         // g2.setColor(Color.white); 

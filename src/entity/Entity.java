@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.UtilityTool;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -22,6 +23,9 @@ public class Entity {
     
     public int spriteCounter = 0;
     public int spriteNum = 1;
+    public boolean invincible = false;
+    public int invincibleCounter = 0;
+    int dyingCounter = 0;
 
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
@@ -30,9 +34,9 @@ public class Entity {
     public boolean collisionOn = false;
     
 	public int actionLockCounter = 0;
-    public boolean invincible = false;
-    public int invincibleCounter = 0;
-    boolean attacking = false;
+    public boolean attacking = false;
+    public boolean alive = true;
+    public boolean dying  = false;
 
 	String dialogues[] = new String[20];
 	int dialogueIndex = 0;
@@ -113,6 +117,14 @@ public class Entity {
             }
             spriteCounter=0;
         }
+
+        if(invincible == true){
+            invincibleCounter++;
+            if(invincibleCounter >40){
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
     }
     public void draw(Graphics2D g2) {
 		
@@ -126,46 +138,57 @@ public class Entity {
 			switch(direction) {
                 
 			case "up":
-				if (spriteNum == 1) {
-					image = up1;
-				}
-				if (spriteNum == 2) {
-					image = up2;
-				}
+				if (spriteNum == 1) {image = up1;}
+				if (spriteNum == 2) {image = up2;}
 				break;
 			case "down":
-				if (spriteNum == 1) {
-					image = down1;
-				}
-				if (spriteNum == 2) {
-					image = down2;
-				}
+				if (spriteNum == 1) {image = down1;}
+				if (spriteNum == 2) {image = down2;}
 				break;
 			case "left":
-				if (spriteNum == 1) {
-					image = left1;
-				}
-				if (spriteNum == 2) {
-					image = left2;
-				}
+				if (spriteNum == 1) {image = left1;}
+				if (spriteNum == 2) {image = left2;}
 				break;
 			case "right":
-				if (spriteNum == 1) {
-					image = right1;
-				}
-				if (spriteNum == 2) {
-					image = right2;
-				}
+				if (spriteNum == 1) {image = right1;}
+				if (spriteNum == 2) {image = right2;}
 				break;
 			}
-            
+            if(invincible == true){
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+            }
+            if(dying == true){
+                dyingAnimation(g2);
+            }
 			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-			
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 			
 			
 		}
 	}
+    public void dyingAnimation(Graphics2D g2){
 
+        dyingCounter++;
+        int i=5;
+        if(dyingCounter<=i){changeAlpha(g2, 0f);}
+        if(dyingCounter>i && dyingCounter<=i*2){changeAlpha(g2, 1f);}
+        if(dyingCounter>i*2 && dyingCounter<=i*3){changeAlpha(g2, 0f);}
+        if(dyingCounter>i*3 && dyingCounter<=i*4){changeAlpha(g2, 1f);}
+        if(dyingCounter>i*4 && dyingCounter<=i*5){changeAlpha(g2, 0f);}
+        if(dyingCounter>i*5 && dyingCounter<=i*6){changeAlpha(g2, 1f);}
+        if(dyingCounter>i*6 && dyingCounter<=i*7){changeAlpha(g2, 0f);}
+        if(dyingCounter>i*7 && dyingCounter<=i*8){changeAlpha(g2, 1f);}
+        if(dyingCounter>i*8){
+            dying = false;
+            alive = false;
+        }
+        
+
+        
+    }
+    public void changeAlpha(Graphics2D g2, float alphaValue){
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
+    }
     public BufferedImage setup(String imagePath, int width, int height){
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
