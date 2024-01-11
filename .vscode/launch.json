@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LinearRegressionExample",
+            "request": "launch",
+            "mainClass": "main.LinearRegressionExample",
+            "projectName": "RPGGAMEJAVA_34fa4e8d"
+        },
+        {
+            "type": "java",
             "name": "RectangleGUI",
             "request": "launch",
             "mainClass": "main.RectangleGUI",
