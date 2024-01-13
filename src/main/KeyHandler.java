@@ -141,6 +141,9 @@ public class KeyHandler implements KeyListener {
                     checkDrawTime = false;
                 }
             }
+            // if (code == KeyEvent.VK_R){
+            //     gp.tileM.loadMap("/pics/maps/WORLDV2.txt");
+            // }
     }
     
     public void pauseState(int code){
