@@ -79,6 +79,7 @@ public class EventHandler {
     }
     public void damagePit(int col, int row, int gameState) {
         gp.gameState = gameState;
+        gp.playSE(6);
         gp.ui.currentDialogue = "You fall into a pit";
         gp.player.life -= 1;
         // eventRect[col][row].eventDone = true;
@@ -88,15 +89,18 @@ public class EventHandler {
     public void healingPool(int col, int row,int gameState){
         if(gp.keyH.enterPressed ==true){
             gp.gameState = gameState;
+            gp.player.attackCanceled = true;
+            gp.playSE(6);
             gp.ui.currentDialogue = "You drink the water.\n Your life has been recovered";
             if(gp.player.life!=gp.player.maxLife){
                 gp.player.life += 1;
             }
-            
+            gp.aSetter.setMonster();
         }
     }
     public void teleport(int col, int row, int gameState){
         gp.gameState = gameState;
+        gp.playSE(6);
         gp.ui.currentDialogue = "Teleport!";
         gp.player.worldX = gp.tileSize * 37;
         gp.player.worldY = gp.tileSize * 10;
