@@ -1,5 +1,6 @@
 package main;
 
+import entity.Entity;
 import entity.NPC_OldMan;
 import monster.MON_GreenSlime;
 import object.OBJ_Door;
@@ -15,6 +16,7 @@ public class AssetSetter {
         gp.obj[0] = new OBJ_Door(gp);
         gp.obj[0].worldX = gp.tileSize*26;
         gp.obj[0].worldY = gp.tileSize*16;
+        gp.obj[0].collision = false;
 
 
     }

@@ -46,7 +46,7 @@ public class EventHandler {
         }
         if(canTouchEvent==true){
             // if(hit(26,16, "any") == true){damagePit(26,16,gp.dialogueState);}
-            if(hit(25,16, "any") == true){teleport(25,16,gp.dialogueState);}
+            if(hit(26,16, "any") == true){teleport(25,16,gp.dialogueState);}
             if(hit(23, 12, "up") == true){healingPool(23,12,gp.dialogueState);}     
         }
         
