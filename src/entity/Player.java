@@ -354,7 +354,10 @@ public class Player extends Entity{
                                     + "Your dick is stronger!";
         }
     }
-    
+    public void selectItem(){
+        
+    }
+
     public void draw(Graphics2D g2){
 
         // g2.setColor(Color.white); 
