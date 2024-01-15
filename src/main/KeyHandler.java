@@ -49,12 +49,14 @@ public class KeyHandler implements KeyListener {
             if(gp.ui.commandNum<0){
                 gp.ui.commandNum = 2;
             }
+            gp.playSE(9);
         }
         if (code == KeyEvent.VK_S){
             gp.ui.commandNum++;
             if(gp.ui.commandNum>2){
                 gp.ui.commandNum = 0;
             }
+            gp.playSE(9);
         }
         if(code == KeyEvent.VK_ENTER){
             if(gp.ui.commandNum == 0){
@@ -75,12 +77,14 @@ public class KeyHandler implements KeyListener {
             if(gp.ui.commandNum<0){
                 gp.ui.commandNum = 3;
             }
+            gp.playSE(9);
         }
         if (code == KeyEvent.VK_S){
             gp.ui.commandNum++;
             if(gp.ui.commandNum>3){
                 gp.ui.commandNum = 0;
             }
+            gp.playSE(9);
         }
         if(code == KeyEvent.VK_ENTER){
             if(gp.ui.commandNum == 0){
@@ -161,6 +165,31 @@ public class KeyHandler implements KeyListener {
         if(code == KeyEvent.VK_C){
                 gp.gameState = gp.playState;
             }
+        if(code == KeyEvent.VK_W){
+            if(gp.ui.slotRow!=0){
+            gp.ui.slotRow--;
+            gp.playSE(9);
+            }
+        }
+        if(code == KeyEvent.VK_A){
+            if(gp.ui.slotCol!=0){
+            gp.ui.slotCol--;
+            gp.playSE(9);
+            }
+        }
+        if(code == KeyEvent.VK_S){
+            if(gp.ui.slotRow!=3){
+            gp.ui.slotRow++;
+            gp.playSE(9);
+            }
+        }
+        if(code == KeyEvent.VK_D){
+            if(gp.ui.slotCol!=4){
+            gp.ui.slotCol++;
+            gp.playSE(9);
+            }
+        }
+        
     }
     @Override
     public void keyReleased(KeyEvent e){

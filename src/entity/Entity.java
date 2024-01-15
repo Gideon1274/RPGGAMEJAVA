@@ -46,7 +46,7 @@ public class Entity {
 
     public BufferedImage image,image2, image3;
     public boolean collision  = false;
-    
+    public boolean obtainable = true;
 
 
 
@@ -66,10 +66,12 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentShield;
 
+
     // item attributes
     public int attackValue;
     public int defenseValue;
-
+    public String description = "";
+    
     public Entity(GamePanel gp){
 		
         this.gp = gp;
