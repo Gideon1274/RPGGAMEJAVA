@@ -2,6 +2,8 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.OBJ_Heart;
+import object.OBJ_Key;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
@@ -11,6 +13,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 
 public class Player extends Entity{
@@ -21,6 +24,8 @@ public class Player extends Entity{
     public final int screenY;
     int standCounter = 0;
     public boolean attackCanceled = false;
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 20;
 
     public Player(GamePanel gp, KeyHandler keyH){
         super(gp);
@@ -39,7 +44,8 @@ public class Player extends Entity{
         solidArea.width = 24;
         solidArea.height = 24;
 
-        attackArea = new Rectangle(0,0,36,36);
+        //ATTACK AREA
+        // attackArea = new Rectangle(0,0,36,36);
 
 
         //height bottom
@@ -48,6 +54,7 @@ public class Player extends Entity{
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
+        setItems();
     }
     public void setDefaultValues(){
         
@@ -74,7 +81,14 @@ public class Player extends Entity{
         defense = getDefense();
 
     }
+    public void setItems(){
+        inventory.add(currentWeapon);
+        inventory.add(currentShield);
+        inventory.add(new OBJ_Key(gp));
+        
+    }
     public int getAttack(){
+        attackArea = currentWeapon.attackArea;
         return attack = strength * currentWeapon.attackValue;
     }
     public int getDefense(){
@@ -228,6 +242,20 @@ public class Player extends Entity{
     }
     public void pickUpObject(int i){
         if(i!=999){
+            String text;
+            if(inventory.size()!=maxInventorySize&&gp.obj[i].obtainable==true){
+                inventory.add(gp.obj[i]);
+                gp.playSE(1);
+                text = "Got a " + gp.obj[i].name + "!";
+                gp.obj[i] = null;    
+            }
+            else if(gp.obj[i].obtainable == false){
+                text = "Item cannot be obtained!";
+            }
+            else{
+                text = "You cannot carry any more!";
+            }
+            gp.ui.addMessage(text);
             
         }
         
@@ -288,25 +316,45 @@ public class Player extends Entity{
 			}
 		}
 	}
+    // public void checkLevelUp(){
+    //     if(exp>=nextLevelExp){
+    //         level++;
+    //         nextLevelExp = nextLevelExp * 2;
+    //         maxLife+=2;
+    //         strength++;
+    //         dexterity++;
+    //         attack = getAttack();
+    //         defense = getDefense();
+
+    //         gp.playSE(8);
+    //         gp.gameState = gp.dialogueState;
+    //         gp.ui.currentDialogue = "You are now level "+level+"!\n"
+    //                                 +"Your  is stronger!";
+    //         exp = 0;
+        
+
+    //     }
+    // }
     public void checkLevelUp(){
-        if(exp>=nextLevelExp){
+        if(exp >= nextLevelExp){
+            //adds the excess exp
+            exp -= nextLevelExp;
+
             level++;
             nextLevelExp = nextLevelExp * 2;
-            maxLife+=2;
+            maxLife += 2;
             strength++;
             dexterity++;
             attack = getAttack();
             defense = getDefense();
-
+    
             gp.playSE(8);
             gp.gameState = gp.dialogueState;
-            gp.ui.currentDialogue = "You are now level "+level+"!\n"
-                                    +"Your dick is stronger!";
-            exp = 0;
-        
-
+            gp.ui.currentDialogue = "You are now level " + level + "!\n"
+                                    + "Your dick is stronger!";
         }
     }
+    
     public void draw(Graphics2D g2){
 
         // g2.setColor(Color.white); 
