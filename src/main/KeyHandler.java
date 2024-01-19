@@ -2,7 +2,7 @@ package main;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 public class KeyHandler implements KeyListener {
-    public boolean upPressed, downPressed, leftPressed,rightPressed, enterPressed;
+    public boolean upPressed, downPressed, leftPressed,rightPressed, enterPressed, shotKeyPressed;
     GamePanel gp;
     // debugg
     boolean checkDrawTime = false;
@@ -127,15 +127,19 @@ public class KeyHandler implements KeyListener {
             }
             if (code == KeyEvent.VK_ENTER){
                     enterPressed = true;
-                }
+            }
+
+            if(code == KeyEvent.VK_F){
+                shotKeyPressed = true;
+            }
             if(code == KeyEvent.VK_C){
                 gp.gameState = gp.characterState;
             }
 
-                //pause and play
-                if (code == KeyEvent.VK_Q){
-                    gp.gameState = gp.pauseState;
-                }
+            //pause and play
+            if (code == KeyEvent.VK_Q){
+                gp.gameState = gp.pauseState;
+            }
 
             //debug
             if (code == KeyEvent.VK_T){
@@ -145,9 +149,9 @@ public class KeyHandler implements KeyListener {
                     checkDrawTime = false;
                 }
             }
-            // if (code == KeyEvent.VK_R){
-            //     gp.tileM.loadMap("/pics/maps/WORLDV2.txt");
-            // }
+            if (code == KeyEvent.VK_R){
+                gp.tileM.loadMap("/pics/maps/WORLDV2.txt");
+            }
     }
     
     public void pauseState(int code){
@@ -189,6 +193,9 @@ public class KeyHandler implements KeyListener {
             gp.playSE(9);
             }
         }
+        if(code==KeyEvent.VK_ENTER){
+            gp.player.selectItem();
+        }
         
     }
     @Override
@@ -205,6 +212,9 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_D){
             rightPressed=false;
+        }
+        if(code == KeyEvent.VK_F){
+            shotKeyPressed = false;
         }
     }
 }
