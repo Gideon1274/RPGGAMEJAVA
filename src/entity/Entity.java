@@ -19,7 +19,8 @@ public class Entity {
     public int speed;
 
     public BufferedImage up1,up2, down1, down2, left1, left2, right1, right2;
-    public BufferedImage attackUp1,attackUp2, attackDown1, attackDown2, attackRight1, attackRight2, attackLeft1, attackLeft2; 
+    public BufferedImage upright1,upright2, upleft1,upleft2,downright1,downright2,downleft1,downleft2;
+    public BufferedImage attackUp1,attackUp2, attackDown1, attackDown2, attackRight1, attackRight2, attackLeft1, attackLeft2;
     public String direction = "down";
     
     public int spriteCounter = 0;
@@ -34,6 +35,7 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     
+    public int shotAvailableCounter = 0;
 	public int actionLockCounter = 0;
     public boolean attacking = false;
     public boolean alive = true;
@@ -53,23 +55,27 @@ public class Entity {
 	//character status 
 	public int maxLife;
 	public int life;
+    public int maxMana;
+    public int mana;
     public String name;
     public int level;
     public int strength;
     public int dexterity;
     public int attack;
+    public int ammo;
     public int defense;
     public int exp;
     public int nextLevelExp;
     public int coin;
     public Entity currentWeapon;
     public Entity currentShield;
-
+    public Projectile projectile;
 
     // item attributes
     public int attackValue;
     public int defenseValue;
     public String description = "";
+    public int useCost;
 
     // type
     public int type; // 0 = player, 1 = npc, 2 monster
@@ -112,6 +118,7 @@ public class Entity {
                 break;
         }
 	}
+    public void use(Entity entity){}
     public void update(){
         setAction();
 
@@ -122,16 +129,7 @@ public class Entity {
         gp.cChecker.checkEntity(this, gp.monster);
 		boolean contactPlayer = gp.cChecker.checkPlayer(this);
         if(this.type == type_monster && contactPlayer == true){
-            if(gp.player.invincible == false){
-                gp.playSE(6);
-
-                int damage = attack - gp.player.defense;
-                if(damage<0){
-                    damage = 0;
-                }
-                gp.player.life -= damage;
-                gp.player.invincible = true;
-            }
+            damagePlayer(attack);
         }
 
 		if(collisionOn == false){
@@ -140,7 +138,22 @@ public class Entity {
                 case "down":worldY+=speed;break;
                 case "left":worldX-=speed;break;
                 case "right":worldX+=speed;break;
-                    
+                case "upright":
+                    worldY-=speed;
+                    worldX+=speed;
+                    break;
+                case "upleft":
+                    worldY-=speed;
+                    worldX-=speed;
+                    break;
+                case "downright":
+                    worldY+=speed;
+                    worldX+=speed;
+                    break;
+                case "downleft":
+                    worldY+=speed;
+                    worldX-=speed;
+                    break;
             }
         }
 
@@ -161,6 +174,21 @@ public class Entity {
                 invincible = false;
                 invincibleCounter = 0;
             }
+        }
+        if(shotAvailableCounter < 30){
+            shotAvailableCounter++;
+        }
+    }
+    public void damagePlayer(int attack){
+        if(gp.player.invincible == false){
+            gp.playSE(6);
+
+            int damage = attack - gp.player.defense;
+            if(damage<0){
+                damage = 0;
+            }
+            gp.player.life -= damage;
+            gp.player.invincible = true;
         }
     }
     public void draw(Graphics2D g2) {
@@ -190,6 +218,25 @@ public class Entity {
 				if (spriteNum == 1) {image = right1;}
 				if (spriteNum == 2) {image = right2;}
 				break;
+            
+            case "upright":
+				if (spriteNum == 1) {image = upright1;}
+				if (spriteNum == 2) {image = upright2;}
+				break;
+            case "upleft":
+				if (spriteNum == 1) {image = upleft1;}
+				if (spriteNum == 2) {image = upleft2;}
+				break;
+            case "downright":
+				if (spriteNum == 1) {image = downright1;}
+				if (spriteNum == 2) {image = downright2;}
+				break;
+            case "downleft":
+				if (spriteNum == 1) {image = downleft1;}
+				if (spriteNum == 2) {image = downleft2;}
+				break;
+            
+            
 			}
 
             //monster healthbar
@@ -239,7 +286,7 @@ public class Entity {
         if(dyingCounter>i*6 && dyingCounter<=i*7){changeAlpha(g2, 0f);}
         if(dyingCounter>i*7 && dyingCounter<=i*8){changeAlpha(g2, 1f);}
         if(dyingCounter>i*8){
-            dying = false;
+            // dying = false;
             alive = false;
         }
         
