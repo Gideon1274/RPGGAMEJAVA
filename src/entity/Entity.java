@@ -72,6 +72,7 @@ public class Entity {
     public Projectile projectile;
 
     // item attributes
+    public int value;
     public int attackValue;
     public int defenseValue;
     public String description = "";
@@ -86,7 +87,9 @@ public class Entity {
     public final int type_axe = 4;
     public final int type_shield = 5;
     public final int type_consumable = 6;
-    
+    public final int type_pickupOnly = 7;
+
+
     public Entity(GamePanel gp){
 		
         this.gp = gp;
@@ -119,6 +122,17 @@ public class Entity {
         }
 	}
     public void use(Entity entity){}
+    public void checkDrop(){}
+    public void dropItem(Entity droppedItem){
+        for(int i = 0;i<gp.obj.length;i++){
+            if(gp.obj[i] == null){
+                gp.obj[i] = droppedItem;
+                gp.obj[i].worldX = worldX; //the dead monster's worldx;
+                gp.obj[i].worldY = worldY;  //the dead monster's worldy;
+                break;
+            }
+        }
+    }
     public void update(){
         setAction();
 
@@ -188,6 +202,7 @@ public class Entity {
                 damage = 0;
             }
             gp.player.life -= damage;
+            gp.ui.addMessage("Damage by "+damage);
             gp.player.invincible = true;
         }
     }
@@ -267,7 +282,7 @@ public class Entity {
             if(dying == true){
                 dyingAnimation(g2);
             }
-			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+			g2.drawImage(image, screenX, screenY, null);
             changeAlpha(g2,1F);
 			
 			
@@ -296,6 +311,7 @@ public class Entity {
     public void changeAlpha(Graphics2D g2, float alphaValue){
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
     }
+    
     public BufferedImage setup(String imagePath, int width, int height){
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;

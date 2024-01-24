@@ -2,7 +2,9 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
-import monster.OBJ_Fireball;
+import main.MouseHandler;
+import java.awt.event.MouseMotionListener;
+import object.OBJ_Fireball;
 import object.OBJ_Heart;
 import object.OBJ_Key;
 import object.OBJ_Rock;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 public class Player extends Entity{
     
     KeyHandler keyH;
-
+    MouseHandler mouseH;
     public final int screenX;
     public final int screenY;
     int standCounter = 0;
@@ -29,11 +31,11 @@ public class Player extends Entity{
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
 
-    public Player(GamePanel gp, KeyHandler keyH){
+    public Player(GamePanel gp, KeyHandler keyH,MouseHandler mouseH){
         super(gp);
     
         this.keyH = keyH;
-
+        this.mouseH = mouseH;
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
         screenY = gp.screenHeight/2 - (gp.tileSize/2);
 
@@ -81,8 +83,8 @@ public class Player extends Entity{
         coin = 0;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
-        // projectile = new OBJ_Fireball(gp);
-        projectile = new OBJ_Rock(gp);
+        projectile = new OBJ_Fireball(gp);
+        // projectile = new OBJ_Rock(gp);
         attack = getAttack();
         defense = getDefense();
 
@@ -111,6 +113,10 @@ public class Player extends Entity{
 
         down1 = setup("/pics/player/boy_down_1", gp.tileSize, gp.tileSize);
         down2 = setup("/pics/player/boy_down_2", gp.tileSize, gp.tileSize);
+        
+        // down1 = setup("/pics/player/Warrior_Redwalk01", gp.tileSize, gp.tileSize);
+        // down2 = setup("/pics/player/Warrior_Redwalk02", gp.tileSize, gp.tileSize);
+
         downleft1 = setup("/pics/player/boy_left_1", gp.tileSize, gp.tileSize);
         downleft2 = setup("/pics/player/boy_left_2", gp.tileSize, gp.tileSize);
         downright1 = setup("/pics/player/boy_right_1", gp.tileSize, gp.tileSize);
@@ -165,13 +171,12 @@ public class Player extends Entity{
         }
         
     }
-
     public void update(){
         if(attacking==true){
             attacking();
             keyH.enterPressed = false;
         }
-
+        //setting
         else if(keyH.upPressed==true||keyH.downPressed==true||keyH.leftPressed==true||keyH.rightPressed==true || keyH.enterPressed == true && attacking == false){
               if(keyH.upPressed==true){
                 if(keyH.leftPressed==true){
@@ -268,12 +273,11 @@ public class Player extends Entity{
             }
         }
         
-        if(keyH.enterPressed == true && attackCanceled == false){
+        if(keyH.enterPressed == true && attackCanceled == false ){
             gp.playSE(7);
             attacking = true;
             spriteCounter = 0;
         }
-
         attackCanceled = false;
         gp.keyH.enterPressed =false;
 
@@ -301,6 +305,18 @@ public class Player extends Entity{
             shotAvailableCounter = 0;
             gp.playSE(10);
         }
+        else if(mouseH.leftClicked == true && projectile.alive == false && shotAvailableCounter == 30 && projectile.haveResource(this) == true){
+            //set default coorindatesd
+            projectile.set(worldX, worldY, direction, true, this);
+
+            //subtract source
+            projectile.subtractResource(this);
+
+            // add it to the list
+            gp.projectileList.add(projectile);
+            shotAvailableCounter = 0;
+            gp.playSE(10);
+        }
         //this needs to be outside of key if statement
         if(invincible == true){
             invincibleCounter++;
@@ -311,6 +327,12 @@ public class Player extends Entity{
         }
         if(shotAvailableCounter < 30){
             shotAvailableCounter++;
+        }
+        if(life>maxLife){
+            life = maxLife;
+        }
+        if(mana>maxMana){
+            mana = maxMana;
         }
       
     }
@@ -359,8 +381,17 @@ public class Player extends Entity{
 
     }
     public void pickUpObject(int i){
+
         if(i!=999){
-            String text;
+            //pick up only items
+            if(gp.obj[i].type == type_pickupOnly){
+                gp.obj[i].use(this);
+                gp.obj[i] = null;
+            }
+
+            //invetory items
+            else{
+                String text;
             if(inventory.size()!=maxInventorySize&&gp.obj[i].obtainable==true){
                 inventory.add(gp.obj[i]);
                 gp.playSE(1);
@@ -375,6 +406,7 @@ public class Player extends Entity{
             }
             gp.ui.addMessage(text);
             
+            }
         }
         
 
@@ -403,8 +435,7 @@ public class Player extends Entity{
             }
             
         }
-    }
-    
+    }    
     public void damageMonster(int i, int attack) {
         
 		if(i != 999) {
@@ -443,14 +474,11 @@ public class Player extends Entity{
     //         dexterity++;
     //         attack = getAttack();
     //         defense = getDefense();
-
     //         gp.playSE(8);
     //         gp.gameState = gp.dialogueState;
     //         gp.ui.currentDialogue = "You are now level "+level+"!\n"
     //                                 +"Your  is stronger!";
     //         exp = 0;
-        
-
     //     }
     // }
     public void checkLevelUp(){
@@ -492,7 +520,6 @@ public class Player extends Entity{
         }
 
     }
-    
     public void draw(Graphics2D g2){
 
         // g2.setColor(Color.white); 
@@ -545,6 +572,7 @@ public class Player extends Entity{
                     if(spriteNum==2){image = attackRight2;}
                 }
                 break;
+
             //8 DIRECTION
             case "upright":
                 if(attacking ==false){
