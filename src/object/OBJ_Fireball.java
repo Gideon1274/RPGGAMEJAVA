@@ -1,4 +1,4 @@
-package monster;
+package object;
 
 import entity.Entity;
 import entity.Projectile;

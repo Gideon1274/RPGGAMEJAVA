@@ -36,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable{
     
     public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
+    public MouseHandler mouseH = new MouseHandler(this);
 
     public Sound music = new Sound();
     public Sound se = new Sound();
@@ -48,7 +49,7 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
 
     // entity and object
-    public Player player = new Player(this,keyH);
+    public Player player = new Player(this,keyH, mouseH);
     public Entity obj[] = new Entity[10];
     public Entity npc[] = new Entity[10];
     public Entity monster[] = new Entity[20];
@@ -91,19 +92,14 @@ public class GamePanel extends JPanel implements Runnable{
     //  public void run(){
     //         double drawInterval = 1000000000/FPS;
     //         double nextDrawTime = System.nanoTime()+drawInterval;
-    
     //         while(gameThread!=null){
     //             // long currentTime = System.nanoTime();
     //             // System.out.println("CurrentTime: "+currentTime);
-    
-                
     //             update();
     //             repaint();
-                
     //             try {
     //                 double remainingTime = nextDrawTime - System.nanoTime();
     //                 remainingTime = remainingTime/1000000;
-    
     //                 if(remainingTime<0){
     //                     remainingTime=0;
     //                 }
@@ -112,8 +108,6 @@ public class GamePanel extends JPanel implements Runnable{
     //             }catch(InterruptedException e){
     //                 e.printStackTrace();
     //             }
-                
-    
     //         }
     //     }
     
@@ -146,8 +140,6 @@ public class GamePanel extends JPanel implements Runnable{
             }
         }
     }
-   
-
     public void update(){
         if(gameState == playState){
             //player
@@ -164,6 +156,7 @@ public class GamePanel extends JPanel implements Runnable{
                         monster[i].update();    
                     }
                     if(monster[i].alive== false){
+                        monster[i].checkDrop();
                         monster[i] = null;    
                     }
                 }
