@@ -43,6 +43,7 @@ public class UI {
     public int slotRow = 0;
 
     
+    
     public UI(GamePanel gp){
         this.gp = gp;
         try{
@@ -154,6 +155,7 @@ public class UI {
             i++;
             x+=35;
         }
+        
     }   
     public void drawMessage(){
         int messageX = gp.tileSize;

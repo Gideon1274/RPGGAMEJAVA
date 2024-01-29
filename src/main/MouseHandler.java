@@ -6,92 +6,131 @@ import java.awt.event.MouseListener;
 
 import java.awt.event.MouseAdapter;
 
-public class MouseHandler extends MouseAdapter implements MouseMotionListener {
+public class MouseHandler extends MouseAdapter implements MouseMotionListener,MouseListener {
     public boolean leftClicked = false;
     GamePanel gp;
+    private static int mouseX = -1 , mouseY = -1, mouseB = -1;
+    public static int getX(){
+        return mouseX;
+    }
+    public static int getY(){
+        return mouseY;
+    }
+    public static int getButton(){
+        return mouseB;
+    }
+    
     public MouseHandler(GamePanel gp){
         this.gp =gp;
+        
         gp.addMouseListener(this);
         gp.addMouseMotionListener(this);
     }
 
+
+    public void mouseDragged(MouseEvent e){
+        mouseX = e.getX();
+        mouseY = e.getY();
+    }
+    public void mouseMoved(MouseEvent e){
+        mouseX = e.getX();
+        mouseY = e.getY();
+    }
+    public void mouseClicked(MouseEvent e){}
+    public void mouseEntered(MouseEvent e){}
+    public void mouseExited(MouseEvent e){}
+    public void mousePressed(MouseEvent e){
+        // mouseX = e.getX();
+        // mouseY = e.getY();
+        mouseB = e.getButton();
+        leftClicked = true;
+    }
+    public void mouseReleased(MouseEvent e){
+        mouseB = -1;
+        leftClicked =false;
+    }
+
+
+
+
+
     
 
-    // @Override
+    // // @Override
+    // // public void mouseMoved(MouseEvent e) {
+    // //     // Handle mouse move event
+    // //     System.out.println("Mouse Moved at: " + e.getX() + ", " + e.getY());
+    // // // }
+    // // @Override
     // public void mouseMoved(MouseEvent e) {
-    //     // Handle mouse move event
-    //     System.out.println("Mouse Moved at: " + e.getX() + ", " + e.getY());
+    //     // Get the mouse position whenever it moves
+    //     mouseX = e.getX();
+    //     mouseY = e.getY();
+
+    //     // Example: Output the current mouse position
+    //     System.out.println("Mouse Moved - Current Position: " + mouseX + ", " + mouseY);
+
+    // //     // Add more logic based on your specific requirements
     // }
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        // Get the mouse position whenever it moves
-        int mouseX = e.getX();
-        int mouseY = e.getY();
+    // // @Override
+    // // public void mouseClicked(MouseEvent e) {
+    // //     // Handle mouse click event
+    // //     System.out.println("Mouse Clicked at: " + e.getX() + ", " + e.getY());
+    // // }
+    // // @Override
+    // // public void mouseClicked(MouseEvent e) {
+    // //     // Handle mouse click event
+    // //     int mouseX = e.getX();
+    // //     int mouseY = e.getY();
 
-        // Example: Output the current mouse position
-        System.out.println("Mouse Moved - Current Position: " + mouseX + ", " + mouseY);
+    // //     // Calculate the mouse position relative to a specific component in the game
+    // //     double targetX = mouseX - (gp.getLocationOnScreen().x + gp.player.worldX);
+    // //     double targetY = mouseY - (gp.getLocationOnScreen().y + gp.player.worldY);
 
-        // Add more logic based on your specific requirements
-    }
-    // @Override
-    // public void mouseClicked(MouseEvent e) {
-    //     // Handle mouse click event
-    //     System.out.println("Mouse Clicked at: " + e.getX() + ", " + e.getY());
-    // }
-    // @Override
-    // public void mouseClicked(MouseEvent e) {
-    //     // Handle mouse click event
-    //     int mouseX = e.getX();
-    //     int mouseY = e.getY();
-
-    //     // Calculate the mouse position relative to a specific component in the game
-    //     double targetX = mouseX - (gp.getLocationOnScreen().x + gp.player.worldX);
-    //     double targetY = mouseY - (gp.getLocationOnScreen().y + gp.player.worldY);
-
-    //     // Example: Output the calculated target position
-    //     System.out.println("Target Position: " + targetX + ", " + targetY);
+    // //     // Example: Output the calculated target position
+    // //     System.out.println("Target Position: " + targetX + ", " + targetY);
         
-    //     System.out.println();
+    // //     System.out.println();
 
-    //     // Add more logic based on your specific requirements
+    // //     // Add more logic based on your specific requirements
+    // // }
+
+    // @Override
+    // public void mousePressed(MouseEvent e) {
+    //     int code = e.getButton();
+    //     if (code == MouseEvent.BUTTON1) {
+    //         leftClicked = true;
+    //         int mouseX = e.getX();
+    //         int mouseY = e.getY();
+    //         // System.out.println("Mouse Pressed at: " + mouseX + ", " + mouseY);
+    //     }
     // }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        int code = e.getButton();
-        if (code == MouseEvent.BUTTON1) {
-            leftClicked = true;
-            int mouseX = e.getX();
-            int mouseY = e.getY();
-            System.out.println("Mouse Pressed at: " + mouseX + ", " + mouseY);
-        }
-    }
+    // @Override
+    // public void mouseReleased(MouseEvent e) {
+    //     // Handle mouse release event
+    //     // System.out.println("Mouse Released at: " + e.getX() + ", " + e.getY());
+    //     leftClicked = false;
+    // }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        // Handle mouse release event
-        System.out.println("Mouse Released at: " + e.getX() + ", " + e.getY());
-        leftClicked = false;
-    }
+    // public static void main(String[] args) {
+    //     // Example of how to use the MouseHandler
+    //     // Assuming you have a JFrame or JPanel
+    //     // Add the following lines where you initialize your GUI components
+    //     // For example, in your JFrame constructor:
 
-    public static void main(String[] args) {
-        // Example of how to use the MouseHandler
-        // Assuming you have a JFrame or JPanel
-        // Add the following lines where you initialize your GUI components
-        // For example, in your JFrame constructor:
+    //     // JFrame frame = new JFrame("Mouse Handler Example");
+    //     // frame.setSize(500, 500);
+    //     // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // JFrame frame = new JFrame("Mouse Handler Example");
-        // frame.setSize(500, 500);
-        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    //     // JPanel panel = new JPanel();
+    //     // MouseHandler mouseHandler = new MouseHandler();
+    //     // panel.addMouseListener(mouseHandler);
+    //     // panel.addMouseMotionListener(mouseHandler);
 
-        // JPanel panel = new JPanel();
-        // MouseHandler mouseHandler = new MouseHandler();
-        // panel.addMouseListener(mouseHandler);
-        // panel.addMouseMotionListener(mouseHandler);
-
-        // frame.add(panel);
-        // frame.setVisible(true);
-    }
+    //     // frame.add(panel);
+    //     // frame.setVisible(true);
+    // }
 
 }
 
