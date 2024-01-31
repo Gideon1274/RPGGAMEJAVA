@@ -20,7 +20,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 
-public class Player extends Entity{
+public class Player extends Entity implements Cloneable{
     
     KeyHandler keyH;
     MouseHandler mouseH;
@@ -355,32 +355,59 @@ public class Player extends Entity{
         }
         }
         
-        if(gp.keyH.shotKeyPressed == true && shotAvailableCounter == 30 && projectile.haveResource(this) == true){
-            //set default coorindatesd
-            // projectile.set(worldX, worldY, direction, true, this);
-            projectile.set(worldX, worldY, this);
+        // if(gp.keyH.shotKeyPressed == true && shotAvailableCounter == 30 && projectile.haveResource(this) == true){
+        //     //set default coorindatesd
+        //     // projectile.set(worldX, worldY, direction, true, this);
+        //     projectile.set(worldX, worldY, this);
 
-            //subtract source
-            projectile.subtractResource(this);
+        //     //subtract source
+        //     projectile.subtractResource(this);
 
-            // add it to the list
-            gp.projectileList.add(projectile);
-            shotAvailableCounter = 0;
-            gp.playSE(10);
+        //     // add it to the list
+        //     gp.projectileList.add(projectile);
+        //     shotAvailableCounter = 0;
+        //     gp.playSE(10);
+        // }
+        // else 
+        // if(mouseH.leftClicked == true  && shotAvailableCounter == 30 && projectile.haveResource(this) == true){
+        //     //set default coorindatesd
+        //     // projectile.set(worldX, worldY, direction, true, this);
+        //     projectile.set(worldX, worldY,true, this);
+        //     //subtract source
+        //     projectile.subtractResource(this);
+
+        //     // add it to the list
+        //     gp.projectileList.add(projectile);
+        //     shotAvailableCounter = 0;
+        //     gp.playSE(10);
+        // }
+        if (mouseH.leftClicked && shotAvailableCounter == 10 && projectile.haveResource(this)) {
+            // Cloning the projectile
+            Projectile clonedProjectile = null;
+            try {
+                clonedProjectile = (Projectile) projectile.clone();
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace(); // Handle or log the exception as needed
+            }
+        
+            if (clonedProjectile != null) {
+                // Set default coordinates for the cloned projectile
+                clonedProjectile.set(worldX, worldY, true, this);
+        
+                // Subtract resources from the original projectile
+                projectile.subtractResource(this);
+        
+                // Add the cloned projectile to the list
+                gp.projectileList.add(clonedProjectile);
+        
+                // Reset the shotAvailableCounter
+                shotAvailableCounter = 0;
+        
+                // Play sound effect
+                gp.playSE(10);
+            }
         }
-        else 
-        if(mouseH.leftClicked == true  && shotAvailableCounter == 30 && projectile.haveResource(this) == true){
-            //set default coorindatesd
-            // projectile.set(worldX, worldY, direction, true, this);
-            projectile.set(worldX, worldY, this);
-            //subtract source
-            projectile.subtractResource(this);
-
-            // add it to the list
-            gp.projectileList.add(projectile);
-            shotAvailableCounter = 0;
-            gp.playSE(10);
-        }
+        
         //this needs to be outside of key if statement
         if(invincible == true){
             invincibleCounter++;
@@ -389,7 +416,7 @@ public class Player extends Entity{
                 invincibleCounter = 0;
             }
         }
-        if(shotAvailableCounter < 30){
+        if(shotAvailableCounter < 10){
             shotAvailableCounter++;
         }
         if(life>maxLife){
@@ -400,6 +427,20 @@ public class Player extends Entity{
         }
       
     }
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Player clonedObject = (Player) super.clone();
+        
+        // Now you can handle specific cloning logic for your class if needed
+        
+        // For example, if projectile is also cloneable
+        if (this.projectile != null && this.projectile instanceof Cloneable) {
+            clonedObject.projectile = (Projectile) this.projectile.clone();
+        }
+
+        return clonedObject;
+    }
+
     public void attacking(){
         spriteCounter++;
         if(spriteCounter<=5){

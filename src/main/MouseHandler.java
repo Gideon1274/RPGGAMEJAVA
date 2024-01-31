@@ -31,23 +31,30 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener,Mo
     public void mouseDragged(MouseEvent e){
         mouseX = e.getX();
         mouseY = e.getY();
+        // leftClicked = true;
+        // System.out.println("Leftclicked: "+leftClicked+"mosueX: "+mouseX+"mouseY: "+mouseY);
     }
     public void mouseMoved(MouseEvent e){
         mouseX = e.getX();
         mouseY = e.getY();
     }
-    public void mouseClicked(MouseEvent e){}
+    public void mouseClicked(MouseEvent e){
+        // leftClicked = true;
+        // System.out.println("clicked");
+    }
     public void mouseEntered(MouseEvent e){}
     public void mouseExited(MouseEvent e){}
     public void mousePressed(MouseEvent e){
         // mouseX = e.getX();
         // mouseY = e.getY();
-        mouseB = e.getButton();
+        // mouseB = e.getButton();
         leftClicked = true;
+        System.out.println("clicked");
     }
     public void mouseReleased(MouseEvent e){
         mouseB = -1;
         leftClicked =false;
+        System.out.println("released");
     }
 
 
