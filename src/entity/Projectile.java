@@ -123,14 +123,16 @@ import main.GamePanel;
 
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class Projectile extends Entity implements MouseMotionListener {
+public class Projectile extends Entity implements MouseMotionListener,MouseListener,Cloneable {
     Entity user;
     int mouseX;
     int mouseY;
     double targetAngle;
     public double dx;
     public double dy;
+    public boolean leftClicked;
     public double screenHeight = gp.screenHeight;
     public double screenWidth = gp.screenWidth;
     public double shotAvailableCounter;
@@ -139,16 +141,20 @@ public class Projectile extends Entity implements MouseMotionListener {
         gp.addMouseMotionListener(this);
     }
 
-    public void set(int worldX, int worldY, Entity user) {
+    public void set(int worldX, int worldY, boolean alive, Entity user) {
         this.worldX = worldX;
         this.worldY = worldY;
-        // this.alive = alive;
+        this.alive = alive;
         this.user = user;
         this.life = this.maxLife;
 
         calculateTargetAngle();
     }
-
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+        // Additional logic for deep cloning if necessary
+    }
     private void calculateTargetAngle() {
         double dx = mouseX - screenWidth / 2;
         double dy = mouseY - screenHeight / 2;
@@ -164,6 +170,8 @@ public class Projectile extends Entity implements MouseMotionListener {
                 if (monsterIndex != 999) {
                     gp.player.damageMonster(monsterIndex, attack);
                     alive = false; // projectile alive is false
+                    System.out.println("COllision");
+                    
                 }
             }
             if (user != gp.player) {
@@ -171,12 +179,17 @@ public class Projectile extends Entity implements MouseMotionListener {
                 if (!gp.player.invincible && contactPlayer) {
                     damagePlayer(attack);
                     alive = false;
+                    System.out.println("COllision");
                 }
             }
             life--;
-            System.out.println("Current Position: X = " + mouseX + ", Y =" + mouseY);
-            System.out.println("WORLDPP Position: X = " + worldX + ", Y =" + worldY);
-            System.out.println("TargetAngle: " + targetAngle);
+            if(life<=0){
+                alive = false;
+                System.out.println("end");
+            }
+            // System.out.println("Current Position: X = " + mouseX + ", Y =" + mouseY);
+            // System.out.println("WORLDPP Position: X = " + worldX + ", Y =" + worldY);
+            // System.out.println("TargetAngle: " + targetAngle);
 
             spriteCounter++;
             if (spriteCounter > 12) {
@@ -191,17 +204,7 @@ public class Projectile extends Entity implements MouseMotionListener {
     
     
 
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        // mouseX = e.getX();
-        // mouseY = e.getY();
-    }
-
-    public void mouseMoved(MouseEvent e) {
-        mouseX = e.getX();
-        mouseY = e.getY();
-    }
-
+    
     public boolean haveResource(Entity user) {
         boolean haveResource = false;
         return haveResource;
@@ -209,4 +212,32 @@ public class Projectile extends Entity implements MouseMotionListener {
 
     public void subtractResource(Entity user) {
     }
+
+    public void mouseClicked(MouseEvent e){
+        leftClicked = true;
+        System.out.println("clicked");
+    }
+    public void mouseEntered(MouseEvent e){}
+    public void mouseExited(MouseEvent e){}
+    public void mousePressed(MouseEvent e){
+        // mouseX = e.getX();
+        // mouseY = e.getY();
+        System.out.println("pressed");
+    }
+    public void mouseReleased(MouseEvent e){
+       
+        leftClicked =false;
+        System.out.println("released");
+    }
+    public void mouseDragged(MouseEvent e) {
+        mouseX = e.getX();
+        mouseY = e.getY();
+        System.out.println("Leftclicked: "+leftClicked+" mosueX: "+mouseX+" mouseY: "+mouseY);
+    }
+
+    public void mouseMoved(MouseEvent e) {
+        mouseX = e.getX();
+        mouseY = e.getY();
+    }
+
 }
