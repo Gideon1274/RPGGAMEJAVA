@@ -1,37 +1,55 @@
 package object;
 
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+
 import entity.Entity;
 import entity.Projectile;
 import main.GamePanel;
 
 public class OBJ_Fireball extends Projectile{
     GamePanel gp;
+    Projectile p;
+    // double dx = mouseX - screenWidth / 2;
+    //     double dy = mouseY - screenHeight / 2;
+    //     double angle = Math.atan2(dy, dx);
+        double lastAngle;
+        public Entity user;
     public OBJ_Fireball(GamePanel gp){
         super(gp);
         this.gp = gp;
 
         name = "Fireball";
-        speed = 8;
-        maxLife = 80;
+        speed = 10;
+        maxLife = 200;
         life = maxLife;
         attack = 2;
         useCost = 1;
         alive = false;
         getImage();
-
+        // direction = "down";
+        type = 10;
+        lastAngle = 0;
     }
-    public void getImage(){
-        up1 = setup("/pics/projectile/fireball_up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/pics/projectile/fireball_up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/pics/projectile/fireball_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/pics/projectile/fireball_down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/pics/projectile/fireball_left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/pics/projectile/fireball_left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/pics/projectile/fireball_right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/pics/projectile/fireball_right_2", gp.tileSize, gp.tileSize);
-
-
+    public void getImage() {
+        // Set imageProjectile1 and imageProjectile2 based on mouse direction
+        
+        down1 = setup("/pics/projectile/chinko", gp.tileSize, gp.tileSize);
+        down2 = setup("/pics/projectile/chinko", gp.tileSize, gp.tileSize);
+    
+        // Rotate images based on the calculated angle
     }
+    
+    // Helper method to rotate an image
+    private BufferedImage rotateImage(BufferedImage image, double angle) {
+        AffineTransform tx = new AffineTransform();
+        tx.rotate(angle, image.getWidth() / 2, image.getHeight() / 2);
+    
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+        return op.filter(image, null);
+    }
+    
     public boolean haveResource(Entity user){
         boolean haveResource = false;
         if(user.mana >= useCost){
@@ -40,6 +58,57 @@ public class OBJ_Fireball extends Projectile{
         return haveResource;
     }
     public void subtractResource(Entity user){
-        user.mana -= useCost;
+        // user.mana -= useCost;
     }
+    public void update() {
+        double newDx = mouseX - screenWidth / 2;
+        double newDy = mouseY - screenHeight / 2;
+        double newAngle = Math.atan2(newDy, newDx);
+
+        // Check if the direction has changed
+        if (newAngle != lastAngle) {
+            // Rotate the images only when the direction changes
+            down1 = rotateImage(down1, newAngle);
+            down2 = rotateImage(down2, newAngle);
+
+            lastAngle = newAngle; 
+        }
+        if (user != gp.player) {
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            if (monsterIndex != 999) {
+                gp.player.damageMonster(monsterIndex, attack);
+                alive = false; // projectile alive is false
+                System.out.println("COllision");
+                
+            }
+        }
+        if (user == gp.player) {
+            boolean contactPlayer = gp.cChecker.checkPlayer(this);
+            if (!gp.player.invincible && contactPlayer) {
+                damagePlayer(attack);
+                alive = false;
+                System.out.println("COllision");
+            }
+        }
+        if (alive) {
+            worldX += speed * Math.cos(newAngle);
+            worldY += speed * Math.sin(newAngle);
+            life--;
+    
+            // Check if the projectile's life has expired
+            if (life <= 0) {
+                alive = false;
+            }
+        }
+    }
+    
 }
+
+// up1 = setup("/pics/projectile/fireball_up_1", gp.tileSize, gp.tileSize);
+        // up2 = setup("/pics/projectile/fireball_up_2", gp.tileSize, gp.tileSize);
+        // down1 = setup("/pics/projectile/fireball_down_1", gp.tileSize, gp.tileSize);
+        // down2 = setup("/pics/projectile/fireball_down_2", gp.tileSize, gp.tileSize);
+        // left1 = setup("/pics/projectile/fireball_left_1", gp.tileSize, gp.tileSize);
+        // left2 = setup("/pics/projectile/fireball_left_2", gp.tileSize, gp.tileSize);
+        // right1 = setup("/pics/projectile/fireball_right_1", gp.tileSize, gp.tileSize);
+        // right2 = setup("/pics/projectile/fireball_right_2", gp.tileSize, gp.tileSize);   

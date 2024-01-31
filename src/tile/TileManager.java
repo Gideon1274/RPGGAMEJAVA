@@ -68,7 +68,7 @@ public class TileManager{
             setup(36, "road10", false);
             setup(37, "road11", false);
             setup(38, "road12", false);
-            setup(39, "earth", true);
+            setup(39, "earth", false);
             setup(40, "wall", true);
             setup(41, "tree", true);
 

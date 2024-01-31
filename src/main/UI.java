@@ -116,45 +116,63 @@ public class UI {
         int y = gp.tileSize/2;
         int i = 0;
         //draw blank heart
-        while(i  < gp.player.maxLife/2){
-            g2.drawImage(heart_blank, x,y, null);
-            i++;
-            x+=gp.tileSize;
-        }
+        // while(i  < gp.player.maxLife/2){
+        //     g2.drawImage(heart_blank, x,y, null);
+        //     i++;
+        //     x+=gp.tileSize;
+        // }
 
         // reset
         x = gp.tileSize/2;
         y = gp.tileSize/2;
         i = 0;
+        g2.drawImage(heart_full, x, y, null);
+        int borderSize=2;
+        x += gp.tileSize * 1.25;
+        y *= 1.5;
+        int rectWidth = gp.tileSize * 3;
+        int rectHeight = 20;
+        g2.setColor(Color.BLACK);
+        int largerRectSize = 2 * borderSize; 
+        g2.fillRoundRect(x - borderSize, y - borderSize, (int)gp.tileSize*3, rectHeight + 2 * borderSize, 10, 10);
+        // g2.setColor(Color.WHITE);
+        // g2.fillRect(x, y, rectWidth, rectHeight);
+        i++;
+        double oneScale = (double)gp.tileSize/gp.player.maxLife;
+        double hpBarValue = oneScale*gp.player.life;
+        g2.setColor(Color.RED);
+        g2.fillRect(x, y, (int)hpBarValue*3-5, rectHeight);
 
-        //draw current life
-        while(i< gp.player.life){
-            g2.drawImage(heart_half,x,y, null);
-            i++;
-            if(i<gp.player.life){
-                g2.drawImage(heart_full, x,y, null);
-            }
-            i++;
-            x+=gp.tileSize;
-        }
+
+        // i++;
+        // //draw current life
+        // while(i< gp.player.life){
+        //     g2.drawImage(heart_half,x,y, null);
+        //     i++;
+        //     if(i<gp.player.life){
+        //         g2.drawImage(heart_full, x,y, null);
+        //     }
+        //     i++;
+        //     x+=gp.tileSize;
+        // }
         //draw max mana
-        x = (gp.tileSize/2)-5;
-        y = (int)(gp.tileSize*1.5);
-        i = 0;
-        while(i < gp.player.maxMana){
-            g2.drawImage(crystal_blank,x,y,null);
-            i++;
-            x+=35;
-        }
-        //draw mana
-        x = (gp.tileSize/2)-5;
-        y = (int)(gp.tileSize*1.5);
-        i = 0;
-        while(i < gp.player.mana){
-            g2.drawImage(crystal_full,x,y, null);
-            i++;
-            x+=35;
-        }
+        // x = (gp.tileSize/2)-5;
+        // y = (int)(gp.tileSize*1.5);
+        // i = 0;
+        // while(i < gp.player.maxMana){
+        //     g2.drawImage(crystal_blank,x,y,null);
+        //     i++;
+        //     x+=35;
+        // }
+        // //draw mana
+        // x = (gp.tileSize/2)-5;
+        // y = (int)(gp.tileSize*1.5);
+        // i = 0;
+        // while(i < gp.player.mana){
+        //     g2.drawImage(crystal_full,x,y, null);
+        //     i++;
+        //     x+=35;
+        // }
         
     }   
     public void drawMessage(){

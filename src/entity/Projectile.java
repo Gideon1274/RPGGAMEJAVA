@@ -127,8 +127,8 @@ import java.awt.event.MouseListener;
 
 public class Projectile extends Entity implements MouseMotionListener,MouseListener,Cloneable {
     Entity user;
-    int mouseX;
-    int mouseY;
+    public int mouseX;
+    public int mouseY;
     double targetAngle;
     public double dx;
     public double dy;
@@ -161,27 +161,27 @@ public class Projectile extends Entity implements MouseMotionListener,MouseListe
         targetAngle = Math.atan2(dy, dx);
     }
     public void update() {
-            
+        
             worldX += speed * Math.cos(targetAngle);
             worldY += speed * Math.sin(targetAngle);
 
-            if (user == gp.player) {
-                int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-                if (monsterIndex != 999) {
-                    gp.player.damageMonster(monsterIndex, attack);
-                    alive = false; // projectile alive is false
-                    System.out.println("COllision");
+            // if (user == gp.player) {
+            //     int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            //     if (monsterIndex != 999) {
+            //         gp.player.damageMonster(monsterIndex, attack);
+            //         alive = false; // projectile alive is false
+            //         System.out.println("COllision");
                     
-                }
-            }
-            if (user != gp.player) {
-                boolean contactPlayer = gp.cChecker.checkPlayer(this);
-                if (!gp.player.invincible && contactPlayer) {
-                    damagePlayer(attack);
-                    alive = false;
-                    System.out.println("COllision");
-                }
-            }
+            //     }
+            // }
+            // if (user != gp.player) {
+            //     boolean contactPlayer = gp.cChecker.checkPlayer(this);
+            //     if (!gp.player.invincible && contactPlayer) {
+            //         damagePlayer(attack);
+            //         alive = false;
+            //         System.out.println("COllision");
+            //     }
+            // }
             life--;
             if(life<=0){
                 alive = false;

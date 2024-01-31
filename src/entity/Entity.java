@@ -11,6 +11,7 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 
 
 public class Entity {
@@ -18,9 +19,12 @@ public class Entity {
     public int worldX,worldY;
     
 
-    public BufferedImage up1,up2, down1, down2, left1, left2, right1, right2;
+    public BufferedImage up1,up2, down1, down2;
+    public BufferedImage left1,left2,left3,left4,left5,left6,left7;
+    public BufferedImage right1,right2,right3,right4,right5,right6,right7;
     public BufferedImage upright1,upright2, upleft1,upleft2,downright1,downright2,downleft1,downleft2;
     public BufferedImage attackUp1,attackUp2, attackDown1, attackDown2, attackRight1, attackRight2, attackLeft1, attackLeft2;
+    public BufferedImage imageProjectile1,imageProjectile2;
     public String direction = "down";
     // public String directionformoving = "hasmoveddown";
     public int spriteCounter = 0;
@@ -93,6 +97,7 @@ public class Entity {
     public final int type_shield = 5;
     public final int type_consumable = 6;
     public final int type_pickupOnly = 7;
+    public final int type_bullet = 10;
 
 
     public Entity(GamePanel gp){
@@ -175,9 +180,9 @@ public class Entity {
                     break;
             }
         }
-
+        if(type==2){
         spriteCounter++;
-        if(spriteCounter>12){
+        if(spriteCounter>2){
             if(spriteNum == 1){
                 spriteNum = 2;
             }
@@ -186,6 +191,29 @@ public class Entity {
             }
             spriteCounter=0;
         }
+    }else{
+        spriteCounter++;
+        if(spriteCounter>2){
+            if(spriteNum == 1){
+                spriteNum = 2;
+            }
+            else if(spriteNum == 2){
+                spriteNum = 3;
+            }else if(spriteNum == 3){
+                spriteNum = 4;
+            }else if(spriteNum == 4){
+                spriteNum = 5;
+            }else if(spriteNum == 5){
+                spriteNum = 6;
+            }else if(spriteNum == 6){
+                spriteNum = 7;
+            }else if(spriteNum == 7){
+                spriteNum = 1;
+            }
+            spriteCounter=0;
+        }
+    }
+        
 
         if(invincible == true){
             invincibleCounter++;
@@ -258,7 +286,9 @@ public class Entity {
             
             
 			}
-
+            
+        
+            
             //monster healthbar
             if(type == 2 && hpBarOn == true){
 
@@ -290,6 +320,7 @@ public class Entity {
 			g2.drawImage(image, screenX, screenY, null);
             changeAlpha(g2,1F);
 			
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			
 		}
 	}
