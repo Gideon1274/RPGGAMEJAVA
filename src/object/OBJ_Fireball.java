@@ -53,6 +53,7 @@ public class OBJ_Fireball extends Projectile{
     public boolean haveResource(Entity user){
         boolean haveResource = false;
         if(user.mana >= useCost){
+            user.mana-=useCost;
             haveResource = true;
         }
         return haveResource;
