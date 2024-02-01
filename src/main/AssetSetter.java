@@ -21,11 +21,11 @@ public class AssetSetter {
 
     public void setObject(){
         int i =0;
-        gp.obj[i] = new OBJ_Door(gp);
-        gp.obj[i].worldX = gp.tileSize*26;
-        gp.obj[i].worldY = gp.tileSize*16;
-        gp.obj[i].collision = false;
-        i++;
+        // gp.obj[i] = new OBJ_Door(gp);
+        // gp.obj[i].worldX = gp.tileSize*26;
+        // gp.obj[i].worldY = gp.tileSize*16;
+        // gp.obj[i].collision = false;
+        // i++;
 
         gp.obj[i] = new OBJ_Coin_Bronze(gp);
         gp.obj[i].worldX = gp.tileSize*25;
