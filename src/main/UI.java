@@ -123,9 +123,7 @@ public class UI {
         // }
 
         // reset
-        x = gp.tileSize/2;
-        y = gp.tileSize/2;
-        i = 0;
+        
         g2.drawImage(heart_full, x, y, null);
         int borderSize=2;
         x += gp.tileSize * 1.25;
@@ -135,6 +133,7 @@ public class UI {
         g2.setColor(Color.BLACK);
         int largerRectSize = 2 * borderSize; 
         g2.fillRoundRect(x - borderSize, y - borderSize, (int)gp.tileSize*3, rectHeight + 2 * borderSize, 10, 10);
+        
         // g2.setColor(Color.WHITE);
         // g2.fillRect(x, y, rectWidth, rectHeight);
         i++;
@@ -142,8 +141,11 @@ public class UI {
         double hpBarValue = oneScale*gp.player.life;
         g2.setColor(Color.RED);
         g2.fillRect(x, y, (int)hpBarValue*3-5, rectHeight);
-
-
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 25F));
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.setColor(Color.black);
+        g2.drawString(gp.player.life+"/"+gp.player.maxLife, x+gp.tileSize, y+20);
+            //max mana
         // i++;
         // //draw current life
         // while(i< gp.player.life){
@@ -173,6 +175,23 @@ public class UI {
         //     i++;
         //     x+=35;
         // }
+        x = gp.tileSize/2+3;
+        y = (int)(gp.tileSize*1.5);
+        i = 0;
+        g2.drawImage(crystal_full, x, y, null);
+        g2.setColor(Color.BLACK);
+        g2.fillRoundRect(x*3, y, (int)gp.tileSize*3, rectHeight + 2 * borderSize, 10, 10);
+        // g2.setColor(Color.WHITE);
+        // g2.fillRect(x, y, rectWidth, rectHeight);
+        oneScale = (double)gp.tileSize/gp.player.maxMana;
+        double manaBarValue = oneScale*gp.player.mana;
+        g2.setColor(Color.BLUE);
+        g2.fillRect(x*3+borderSize, y+borderSize, (int)manaBarValue*3-5, rectHeight);
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 25F));
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.setColor(Color.black);
+        g2.drawString(gp.player.mana+"/"+gp.player.maxMana, x*4, y+20);
+
         
     }   
     public void drawMessage(){

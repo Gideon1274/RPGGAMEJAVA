@@ -77,13 +77,13 @@ public class Player extends Entity implements Cloneable{
         life = maxLife;
         strength = 1;
         dexterity = 1;
-        maxMana = 4;
+        maxMana = 100;
         ammo = 10;
         mana = maxMana;
         exp = 0;
         nextLevelExp = 5;
         coin = 0;
-        rateoffire = 10;
+        rateoffire = 15;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         projectile = new OBJ_Fireball(gp);
@@ -410,7 +410,7 @@ public class Player extends Entity implements Cloneable{
                 shotAvailableCounter = 0;
         
                 // Play sound effect
-                gp.playSE(10);
+                // gp.playSE(10);
             }
         }
         

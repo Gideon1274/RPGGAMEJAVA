@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "main.Main",
+            "projectName": "RPGGAMEJAVA_a48a8fb8"
+        },
+        {
+            "type": "java",
             "name": "MouseHandler",
             "request": "launch",
             "mainClass": "main.MouseHandler",
