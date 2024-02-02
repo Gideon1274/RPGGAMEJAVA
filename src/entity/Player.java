@@ -72,24 +72,26 @@ public class Player extends Entity implements Cloneable{
         direction = "down";
         
         //player life status
+        
         level = 1;
         maxLife = 6;
         life = maxLife;
         strength = 1;
         dexterity = 1;
-        maxMana = 100;
+        maxMana = 200;
         ammo = 10;
         mana = maxMana;
         exp = 0;
         nextLevelExp = 5;
         coin = 0;
-        rateoffire = 15;
+        rateOfFire = 10;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         projectile = new OBJ_Fireball(gp);
         // projectile = new OBJ_Rock(gp);
         attack = getAttack();
         defense = getDefense();
+        projectileDamage = getProjectileDamage();
 
     }
     public void setItems(){
@@ -101,6 +103,9 @@ public class Player extends Entity implements Cloneable{
     public int getAttack(){
         attackArea = currentWeapon.attackArea;
         return attack = strength * currentWeapon.attackValue;
+    }
+    public int getProjectileDamage(){
+        return strength+dexterity*(int)(currentWeapon.attackValue*0.5);
     }
     public int getDefense(){
         return defense = dexterity * currentShield.defenseValue;
@@ -394,7 +399,7 @@ public class Player extends Entity implements Cloneable{
         //     shotAvailableCounter = 0;
         //     gp.playSE(10);
         // }
-        if (mouseH.leftClicked && shotAvailableCounter == rateoffire && projectile.haveResource(this)) {
+        if (mouseH.leftClicked && shotAvailableCounter == rateOfFire && projectile.haveResource(this)) {
             // Cloning the projectile
             Projectile clonedProjectile = null;
             try {
@@ -422,12 +427,15 @@ public class Player extends Entity implements Cloneable{
                 invincibleCounter = 0;
             }
         }
-        if(shotAvailableCounter < rateoffire){
+        if(shotAvailableCounter < rateOfFire){
             shotAvailableCounter++;
         }
         if(life>maxLife){
             life = maxLife;
+        }if(life<0){
+            life = 0;
         }
+
         if(mana>maxMana){
             mana = maxMana;
         }
@@ -559,7 +567,7 @@ public class Player extends Entity implements Cloneable{
                     damage = 0;
                 }
                 
-                // gp.ui.addMessage(damage+" damage!");
+                gp.ui.addMessage(damage+" damage!");
 				gp.monster[i].life -= damage;
 				gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
@@ -603,7 +611,7 @@ public class Player extends Entity implements Cloneable{
             dexterity++;
             attack = getAttack();
             defense = getDefense();
-    
+            projectileDamage = getProjectileDamage();
             gp.playSE(8);
             // gp.gameState = gp.dialogueState;
             // gp.ui.currentDialogue = "You are now level " + level + "!\n"

@@ -5,6 +5,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 import entity.Entity;
+import entity.Player;
 import entity.Projectile;
 import main.GamePanel;
 
@@ -16,15 +17,15 @@ public class OBJ_Fireball extends Projectile{
     //     double angle = Math.atan2(dy, dx);
         double lastAngle;
         public Entity user;
+        public int attack;
     public OBJ_Fireball(GamePanel gp){
         super(gp);
         this.gp = gp;
-
+        
         name = "Fireball";
-        speed = 10;
+        speed = 5;
         maxLife = 200;
         life = maxLife;
-        attack = 2;
         useCost = 1;
         alive = false;
         getImage();
@@ -35,10 +36,12 @@ public class OBJ_Fireball extends Projectile{
     public void getImage() {
         // Set imageProjectile1 and imageProjectile2 based on mouse direction
         
-        down1 = setup("/pics/projectile/chinko", gp.tileSize, gp.tileSize);
-        down2 = setup("/pics/projectile/chinko", gp.tileSize, gp.tileSize);
-    
-        // Rotate images based on the calculated angle
+        // down1 = setup("/pics/projectile/chinko", gp.tileSize, gp.tileSize);
+        // down2 = setup("/pics/projectile/chinko", gp.tileSize, gp.tileSize);
+        
+        down1 = setup("/pics/projectile/fireball_right_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/pics/projectile/fireball_right_2", gp.tileSize, gp.tileSize);   
+        // d images based on the calculated angle
     }
     
     // Helper method to rotate an image
@@ -68,16 +71,17 @@ public class OBJ_Fireball extends Projectile{
 
         // Check if the direction has changed
         if (newAngle != lastAngle) {
-            // Rotate the images only when the direction changes
             down1 = rotateImage(down1, newAngle);
             down2 = rotateImage(down2, newAngle);
 
             lastAngle = newAngle; 
         }
         if (user != gp.player) {
+
+            
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             if (monsterIndex != 999) {
-                gp.player.damageMonster(monsterIndex, attack);
+                gp.player.damageMonster(monsterIndex, gp.player.projectileDamage);
                 alive = false; // projectile alive is false
                 System.out.println("COllision");
                 
@@ -102,6 +106,7 @@ public class OBJ_Fireball extends Projectile{
             }
         }
     }
+    
     
 }
 

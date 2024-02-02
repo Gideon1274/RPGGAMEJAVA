@@ -143,7 +143,7 @@ public class UI {
         g2.fillRect(x, y, (int)hpBarValue*3-5, rectHeight);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 25F));
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.setColor(Color.black);
+        g2.setColor(Color.white);
         g2.drawString(gp.player.life+"/"+gp.player.maxLife, x+gp.tileSize, y+20);
             //max mana
         // i++;
@@ -189,7 +189,7 @@ public class UI {
         g2.fillRect(x*3+borderSize, y+borderSize, (int)manaBarValue*3-5, rectHeight);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 25F));
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.setColor(Color.black);
+        g2.setColor(Color.white);
         g2.drawString(gp.player.mana+"/"+gp.player.maxMana, x*4, y+20);
 
         

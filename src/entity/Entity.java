@@ -29,6 +29,7 @@ public class Entity {
     // public String directionformoving = "hasmoveddown";
     public int spriteCounter = 0;
     public int spriteNum = 1;
+    public int spriteNumMobs = 1;
     public boolean invincible = false;
     public int invincibleCounter = 0;
     int dyingCounter = 0;
@@ -72,8 +73,8 @@ public class Entity {
     public int nextLevelExp;
     public int coin;
     public int speed;
-    public int rateoffire;
-
+    public int rateOfFire;
+    public int projectileDamage;
     public double nx,ny;
 
     public Entity currentWeapon;
@@ -180,20 +181,16 @@ public class Entity {
                     break;
             }
         }
-        if(type==2){
         spriteCounter++;
-        if(spriteCounter>2){
-            if(spriteNum == 1){
-                spriteNum = 2;
+        if(spriteCounter>12){
+            if(spriteNumMobs == 1){
+                spriteNumMobs = 2;
             }
-            else if(spriteNum == 2){
-                spriteNum = 1;
+            else if(spriteNumMobs == 2){
+                spriteNumMobs = 1;
             }
-            spriteCounter=0;
-        }
-    }else{
         spriteCounter++;
-        if(spriteCounter>2){
+        if(spriteCounter>12){
             if(spriteNum == 1){
                 spriteNum = 2;
             }
@@ -213,7 +210,7 @@ public class Entity {
             spriteCounter=0;
         }
     }
-        
+
 
         if(invincible == true){
             invincibleCounter++;
@@ -251,37 +248,37 @@ public class Entity {
 			switch(direction) {
                 
 			case "up":
-				if (spriteNum == 1) {image = up1;}
-				if (spriteNum == 2) {image = up2;}
+				if (spriteNumMobs == 1) {image = up1;}
+				if (spriteNumMobs == 2) {image = up2;}
 				break;
 			case "down":
-				if (spriteNum == 1) {image = down1;}
-				if (spriteNum == 2) {image = down2;}
+				if (spriteNumMobs == 1) {image = down1;}
+				if (spriteNumMobs == 2) {image = down2;}
 				break;
 			case "left":
-				if (spriteNum == 1) {image = left1;}
-				if (spriteNum == 2) {image = left2;}
+				if (spriteNumMobs == 1) {image = left1;}
+				if (spriteNumMobs == 2) {image = left2;}
 				break;
 			case "right":
-				if (spriteNum == 1) {image = right1;}
-				if (spriteNum == 2) {image = right2;}
+				if (spriteNumMobs == 1) {image = right1;}
+				if (spriteNumMobs == 2) {image = right2;}
 				break;
             
             case "upright":
-				if (spriteNum == 1) {image = upright1;}
-				if (spriteNum == 2) {image = upright2;}
+				if (spriteNumMobs == 1) {image = upright1;}
+				if (spriteNumMobs == 2) {image = upright2;}
 				break;
             case "upleft":
-				if (spriteNum == 1) {image = upleft1;}
-				if (spriteNum == 2) {image = upleft2;}
+				if (spriteNumMobs == 1) {image = upleft1;}
+				if (spriteNumMobs == 2) {image = upleft2;}
 				break;
             case "downright":
-				if (spriteNum == 1) {image = downright1;}
-				if (spriteNum == 2) {image = downright2;}
+				if (spriteNumMobs == 1) {image = downright1;}
+				if (spriteNumMobs == 2) {image = downright2;}
 				break;
             case "downleft":
-				if (spriteNum == 1) {image = downleft1;}
-				if (spriteNum == 2) {image = downleft2;}
+				if (spriteNumMobs == 1) {image = downleft1;}
+				if (spriteNumMobs == 2) {image = downleft2;}
 				break;
             
             

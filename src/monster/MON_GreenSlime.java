@@ -42,29 +42,47 @@ public class MON_GreenSlime extends Entity {
         up2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
         down1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
         down2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+        
         left1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
         left2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+        downleft1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
+        downleft2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+        upleft1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
+        upleft2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+
         right1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
         right2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+        downright1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
+        downright2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+        upright1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
+        upright2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
     }
     public void setAction(){
             actionLockCounter++;
     
             if(actionLockCounter == 120){
             Random random = new Random();
-            int i = random.nextInt(100)+1;
-            if(i<=25){
+            int i = random.nextInt(128)+1;
+            if(i<=16){
                 direction ="up";
     
             }
-            if(i>25 && i<=50){
+            if(i>16 && i<=32){
                 direction = "down";
             }
-            if(i>50 && i <=75){
+            if(i>32 && i <=48){
                 direction = "left";
             }
-            if(i>75 &&i<=100){
+            if(i>48 &&i<=64){
                 direction ="right";
+            }if(i>64 &&i<=80){
+                direction ="upright";
+            }if(i>80 &&i<=96){
+                direction ="upleft";
+            }if(i>96 &&i<=112){
+                direction ="downright";
+            }if(i>112 &&i<=128){
+                direction ="downleft";
             }
             actionLockCounter = 0;
         }
