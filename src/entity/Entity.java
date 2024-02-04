@@ -19,7 +19,7 @@ public class Entity {
     public int worldX,worldY;
     
 
-    public BufferedImage up1,up2, down1, down2;
+    public BufferedImage up1,up2, down1, down2,down3,down4;
     public BufferedImage left1,left2,left3,left4,left5,left6,left7;
     public BufferedImage right1,right2,right3,right4,right5,right6,right7;
     public BufferedImage upright1,upright2, upleft1,upleft2,downright1,downright2,downleft1,downleft2;
@@ -55,7 +55,8 @@ public class Entity {
     public boolean collision  = false;
     public boolean obtainable = true;
 
-
+    public int projectileHeight;
+    public int projectileWidth;
 
 	//character status 
 	public int maxLife;
@@ -75,7 +76,7 @@ public class Entity {
     public int speed;
     public int rateOfFire;
     public int projectileDamage;
-    public double nx,ny;
+    public double skillMultiplier;
 
     public Entity currentWeapon;
     public Entity currentShield;
@@ -132,6 +133,12 @@ public class Entity {
                 break;
         }
 	}
+    public Rectangle getAdjustedSolidArea() {
+        Rectangle adjustedSolidArea = new Rectangle(solidArea);
+        adjustedSolidArea.x += worldX;
+        adjustedSolidArea.y += worldY;
+        return adjustedSolidArea;
+    }
     public void use(Entity entity){}
     public void checkDrop(){}
     public void dropItem(Entity droppedItem){
@@ -163,22 +170,10 @@ public class Entity {
                 case "down":worldY+=speed;break;
                 case "left":worldX-=speed;break;
                 case "right":worldX+=speed;break;
-                case "upright":
-                    worldY-=speed;
-                    worldX+=speed;
-                    break;
-                case "upleft":
-                    worldY-=speed;
-                    worldX-=speed;
-                    break;
-                case "downright":
-                    worldY+=speed;
-                    worldX+=speed;
-                    break;
-                case "downleft":
-                    worldY+=speed;
-                    worldX-=speed;
-                    break;
+                case "upright":worldY-=speed;worldX+=speed;break;
+                case "upleft":worldY-=speed;worldX-=speed;break;
+                case "downright":worldY+=speed;worldX+=speed;break;
+                case "downleft":worldY+=speed;worldX-=speed;break;
             }
         }
         spriteCounter++;
@@ -207,6 +202,7 @@ public class Entity {
             }else if(spriteNum == 7){
                 spriteNum = 1;
             }
+            // System.out.println(spriteNum);
             spriteCounter=0;
         }
     }
@@ -214,7 +210,7 @@ public class Entity {
 
         if(invincible == true){
             invincibleCounter++;
-            if(invincibleCounter >40){
+            if(invincibleCounter >15){
                 invincible = false;
                 invincibleCounter = 0;
             }
@@ -305,7 +301,7 @@ public class Entity {
                 }
             }
             
-
+            
             if(invincible == true){
                 hpBarOn = true;
                 hpBarCounter = 0;

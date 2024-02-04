@@ -21,7 +21,7 @@ public class MON_GreenSlime extends Entity {
         type = type_monster;
         name = "Green Slime";
         speed = 1;
-        maxLife = 16;
+        maxLife = 1000;
         life = maxLife;
         attack = 5;
         defense = 0;
@@ -119,18 +119,15 @@ public class MON_GreenSlime extends Entity {
         // SET MONSTER DROP 
         if(i==1){
             dropItem(new OBJ_Coin_Bronze(gp));
-            System.out.println(i);
+            
         }
         if(i==2){
-            dropItem(new OBJ_Heart(gp));
-            System.out.println(i);
+            dropItem(new OBJ_Coin_Bronze(gp));
+            dropItem(new OBJ_Coin_Bronze(gp));
         }
         if(i==3){
-            dropItem(new OBJ_ManaCrystal(gp));
-            System.out.println(i);
-        }
-        else{
-            System.out.println(i);
+            dropItem(new OBJ_Coin_Bronze(gp));
+            dropItem(new OBJ_Coin_Bronze(gp));
         }
 
     }

@@ -1,4 +1,6 @@
 package main;
+import java.awt.Rectangle;
+
 import entity.Entity;
 
 
@@ -23,7 +25,7 @@ public class CollisionChecker {
         int entityBottomRow = entityBottomWorldY / gp.tileSize;
 
         int tileNum1, tileNum2 ;
-
+        Rectangle adjustedSolidArea = entity.getAdjustedSolidArea();
         switch(entity.direction){
             case "up":
                 entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
@@ -138,7 +140,7 @@ public class CollisionChecker {
 
     }
     public int checkObject(Entity entity, boolean player){
-
+        Rectangle adjustedSolidArea = entity.getAdjustedSolidArea();
         int index = 999;
 
         for(int i = 0;i < gp.obj.length;i++){
@@ -260,7 +262,7 @@ public class CollisionChecker {
     }
     public int checkEntity(Entity entity, Entity[] target){
         int index = 999;
-
+        Rectangle adjustedSolidArea = entity.getAdjustedSolidArea();
         for(int i = 0;i < target.length;i++){
             
             if(target[i]!=null){

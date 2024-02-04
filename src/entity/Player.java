@@ -5,6 +5,7 @@ import main.KeyHandler;
 import main.MouseHandler;
 import java.awt.event.MouseMotionListener;
 import object.OBJ_Fireball;
+import object.OBJ_Getsuga;
 import object.OBJ_Heart;
 import object.OBJ_Key;
 import object.OBJ_Rock;
@@ -31,7 +32,7 @@ public class Player extends Entity implements Cloneable{
     public boolean attackCanceled = false;
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
-
+    public int playerClass;
     public Player(GamePanel gp, KeyHandler keyH,MouseHandler mouseH){
         super(gp);
     
@@ -52,28 +53,43 @@ public class Player extends Entity implements Cloneable{
         //ATTACK AREA
         // attackArea = new Rectangle(0,0,36,36);
 
-
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
         //height bottom
         //width top
         // x = right
-        setDefaultValues();
-        getPlayerImage();
-        getPlayerAttackImage();
-        setItems();
     }
-    public void setDefaultValues(){
+    public void setPlayerClass(int playerClass){
+        this.playerClass = playerClass;
+        
+        level = 1;
+        speed = 10;
+        exp = 0;
+        nextLevelExp = 5;
+        coin = 0;
+        direction = "down";
+        if(this.playerClass == 1){
+            setDefaultValuesForKnight();
+        }
+        if(this.playerClass == 2){
+            setDefaultValuesForAssassin();    
+        }
+        if(this.playerClass == 3){
+            setDefaultValuesForAssassin();    
+        }
+        
+    }
+    
+    public void setDefaultValuesForKnight(){
         
         // worldX = gp.tileSize * 8;
         // worldY = gp.tileSize * 6;
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
-        speed = 8;
+        
+        
         // directionformoving = "hasmoveddown";
-        direction = "down";
         
         //player life status
         
-        level = 1;
         maxLife = 6;
         life = maxLife;
         strength = 1;
@@ -81,9 +97,6 @@ public class Player extends Entity implements Cloneable{
         maxMana = 200;
         ammo = 10;
         mana = maxMana;
-        exp = 0;
-        nextLevelExp = 5;
-        coin = 0;
         rateOfFire = 10;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
@@ -92,7 +105,39 @@ public class Player extends Entity implements Cloneable{
         attack = getAttack();
         defense = getDefense();
         projectileDamage = getProjectileDamage();
-
+        setItems();
+        getPlayerImage();
+        getPlayerAttackImage();
+    }
+    public void setDefaultValuesForAssassin(){
+        
+        // worldX = gp.tileSize * 8;
+        // worldY = gp.tileSize * 6;
+        
+        speed = 10;
+        // directionformoving = "hasmoveddown";
+        direction = "down";
+        
+        //player life status
+        
+        maxLife = 20;
+        life = maxLife;
+        strength = 1;
+        dexterity = 1;
+        maxMana = 200;
+        ammo = 10;
+        mana = maxMana;
+        rateOfFire = 10;
+        currentWeapon = new OBJ_Sword_Normal(gp);
+        currentShield = new OBJ_Shield_Wood(gp);
+        projectile = new OBJ_Getsuga(gp);
+        // projectile = new OBJ_Rock(gp);
+        attack = getAttack();
+        defense = getDefense();
+        projectileDamage = getProjectileDamage();
+        setItems();
+        getPlayerImage();
+        getPlayerAttackImage();
     }
     public void setItems(){
         inventory.add(currentWeapon);
@@ -132,23 +177,6 @@ public class Player extends Entity implements Cloneable{
         // right1 = setup("/pics/player/boy_right_1", gp.tileSize, gp.tileSize);
         // right2 = setup("/pics/player/boy_right_2", gp.tileSize, gp.tileSize);
         
-
-        up1 = setup("/pics/player/walking/wa1", gp.tileSize, gp.tileSize);
-        up2 = setup("/pics/player/walking/wa2", gp.tileSize, gp.tileSize);
-
-        upleft1 = setup("/pics/player/boy_left_1", gp.tileSize, gp.tileSize);
-        upleft2 = setup("/pics/player/boy_left_2", gp.tileSize, gp.tileSize);
-        upright1 = setup("/pics/player/boy_right_1", gp.tileSize, gp.tileSize);
-        upright2 = setup("/pics/player/boy_right_2", gp.tileSize, gp.tileSize);
-
-        down1 = setup("/pics/player/walking/wa1", gp.tileSize, gp.tileSize);
-        down2 = setup("/pics/player/walking/wa2", gp.tileSize, gp.tileSize);
-        
-        downleft1 = setup("/pics/player/boy_left_1", gp.tileSize, gp.tileSize);
-        downleft2 = setup("/pics/player/boy_left_2", gp.tileSize, gp.tileSize);
-        downright1 = setup("/pics/player/boy_right_1", gp.tileSize, gp.tileSize);
-        downright2 = setup("/pics/player/boy_right_2", gp.tileSize, gp.tileSize);
-
         left1 = setup("/pics/player/walking/lwa1", gp.tileSize, gp.tileSize);
         left2 = setup("/pics/player/walking/lwa2", gp.tileSize, gp.tileSize);
         left3 = setup("/pics/player/walking/lwa3", gp.tileSize, gp.tileSize);
@@ -229,68 +257,7 @@ public class Player extends Entity implements Cloneable{
               }
               else{direction = "right";}
             }
-        // else if(keyH.upPressed==true||keyH.downPressed==true||keyH.leftPressed==true||keyH.rightPressed==true || keyH.enterPressed == true && attacking == false){
-        //       if(keyH.upPressed==true){
-        //         if(keyH.leftPressed==true){
-        //             directionformoving = "hasmovedupleft";
-        //         }else if(keyH.rightPressed==true){
-        //             directionformoving = "hasmovedupright";
-        //         }
-        //         else{directionformoving ="hasmovedup";}
-            
-        //     }else if(keyH.downPressed==true){
-        //         if(keyH.leftPressed == true){
-        //             directionformoving = "hasmoveddownleft";
-        //         }else if(keyH.rightPressed == true){
-        //             directionformoving = "hasmoveddownright";
-        //         }
-        //         else{directionformoving="hasmoveddown";}
-                
-        //     }else if(keyH.leftPressed==true){ 
-        //         if(keyH.upPressed==true){
-        //             directionformoving = "hasmovedupleft";
-        //         }else if(keyH.downPressed==true){
-        //             directionformoving = "hasmoveddownleft";
-        //         }
-        //         else{directionformoving="hasmovedleft";}
-            
-        //     }else if(keyH.rightPressed==true){
-        //         if(keyH.upPressed== true){
-        //             directionformoving ="hasmovedupright";
-        //         }else if(keyH.downPressed == true){
-        //             directionformoving ="hasmoveddownright";
-        //         }
-        //         else{directionformoving = "hasmovedright";}
-
-        //     }
-        //     if (y >= 1 && y <= 197) {
-        //         if (x >= 1 && x <= 260) {
-        //             direction = "upleft";
-        //         } else if (x >= 460 && x <= 766) {
-        //             direction = "upright";
-        //         }
-        //     } else if (y >= 300 && y <= 575) {
-        //         if (x >= 1 && x <= 310) {
-        //             direction = "downleft";
-        //         } else if (x >= 500 && x <= 766) {
-        //             direction = "downright";
-        //         }
-        //     } else if (y >= 1 && y <= 280) {
-        //         if (x >= 260 && x <= 460) {
-        //             direction = "up";
-        //         }
-        //     } else if (y >= 197 && y <= 360) {
-        //         if (x >= 380 && x <= 766) {
-        //             direction = "right";
-        //         } else if (x >= 1 && x <= 380) {
-        //             direction = "left";
-        //         }
-        //     } else if (y >= 300 && y <= 575) {
-        //         if (x >= 260 && x <= 500) {
-        //             direction = "down";
-        //         }
-        //     }
-            
+    
         // tig check sa collison
         collisionOn = false;
         gp.cChecker.checkTile(this);
@@ -517,13 +484,13 @@ public class Player extends Entity implements Cloneable{
                 text = "Got a " + gp.obj[i].name + "!";
                 gp.obj[i] = null;    
             }
-            else if(gp.obj[i].obtainable == false){
-                text = "Item cannot be obtained!";
-            }
-            else{
-                text = "You cannot carry any more!";
-            }
-            gp.ui.addMessage(text);
+            // else if(gp.obj[i].obtainable == false){
+            //     text = "Item cannot be obtained!";
+            // }
+            // else{
+            //     text = "You cannot carry any more!";
+            // }
+            // gp.ui.addMessage(text);
             
             }
         }
@@ -558,9 +525,9 @@ public class Player extends Entity implements Cloneable{
         
 		if(i != 999) {
 			
-			// if(gp.monster[i].invincible == false) {
+			if(gp.monster[i].invincible == false) {
 				
-                gp.playSE(11);
+                gp.playSE(10);
 
                 int damage = attack - gp.monster[i].defense;
                 if(damage<0){
@@ -580,7 +547,7 @@ public class Player extends Entity implements Cloneable{
                     exp+=gp.monster[i].exp;
                     checkLevelUp();
 				}
-			// }
+			}
 		}
 	}
     // public void checkLevelUp(){
@@ -719,7 +686,7 @@ public class Player extends Entity implements Cloneable{
         // }
         switch(direction){
             case "up":
-                if(attacking ==false && gp.mouseH.getX()>=0 && gp.mouseH.getX()<=380){
+                if(attacking ==false && gp.mouseH.getX()>=0 && gp.mouseH.getX()<=gp.screenWidth/2){
                     if(spriteNum ==1){image = left1;}
                     if(spriteNum==2){image =left2;}
                     if(spriteNum==3){image =left3;}
@@ -728,7 +695,7 @@ public class Player extends Entity implements Cloneable{
                     if(spriteNum==6){image =left6;}
                     if(spriteNum==7){image =left7;}
                 }
-                if(attacking ==false && gp.mouseH.getX()>=380 && gp.mouseH.getX()<=759){
+                if(attacking ==false && gp.mouseH.getX()>=gp.screenWidth/2 && gp.mouseH.getX()<=gp.screenWidth){
                     if(spriteNum ==1){image = right1;}
                     if(spriteNum==2){image =right2;}
                     if(spriteNum==3){image =right3;}
@@ -745,7 +712,7 @@ public class Player extends Entity implements Cloneable{
                 
                 break;
             case "down":
-            if(attacking ==false && gp.mouseH.getX()>=0 && gp.mouseH.getX()<=380){
+            if(attacking ==false && gp.mouseH.getX()>=0 && gp.mouseH.getX()<=gp.screenWidth/2){
                 if(spriteNum ==1){image = left1;}
                 if(spriteNum==2){image =left2;}
                 if(spriteNum==3){image =left3;}
@@ -753,7 +720,7 @@ public class Player extends Entity implements Cloneable{
                 if(spriteNum==5){image =left5;}
                 if(spriteNum==6){image =left6;}
                 if(spriteNum==7){image =left7;}
-            }if(attacking ==false && gp.mouseH.getX()>=380 && gp.mouseH.getX()<=759){
+            }if(attacking ==false && gp.mouseH.getX()>=gp.screenWidth/2 && gp.mouseH.getX()<=gp.screenWidth){
                 if(spriteNum ==1){image = right1;}
                 if(spriteNum==2){image =right2;}
                 if(spriteNum==3){image =right3;}

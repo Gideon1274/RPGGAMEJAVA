@@ -68,7 +68,6 @@ public class UI {
         crystal_full = crystal.image;
         crystal_blank = crystal.image2;
     
-    
 
         // arial_40 = new Font("Georgia", Font.PLAIN, 40);
         // arial_80B = new Font("Arial", Font.BOLD, 80);
@@ -82,7 +81,6 @@ public class UI {
     }
     public void draw(Graphics2D g2){
         this.g2 = g2;
-
         g2.setFont(maruMonica);
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2.setColor(Color.white);
@@ -218,13 +216,16 @@ public class UI {
         }
         
     }
+    public void drawBlack(){
+        g2.setColor(new Color(0,0,0));
+        g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
+        
+    }
     public void drawTitleScreen(){
-
+        g2.setColor(new Color(0,0,0));
+        g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
 
         if(titleScreenState==0){
-            
-            g2.setColor(new Color(0,0,0));
-            g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
             //title name
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
             String text = "Blue Boy Adventure";
@@ -270,6 +271,7 @@ public class UI {
             if(commandNum ==2){
                 g2.drawString(">", x - gp.tileSize,y );
             }
+            
         }
         else if (titleScreenState == 1){
             g2.setColor(Color.white);
@@ -280,15 +282,15 @@ public class UI {
             int y = gp.tileSize * 3;
             g2.drawString(text, x, y);
 
-            text = "Fighter";
+            text = "Knight";
             x = getXforCenteredText(text);
             y+= gp.tileSize*3;
             g2.drawString(text, x, y);
             if(commandNum == 0){
-                g2.drawString(">", x-gp.tileSize, y);
+            g2.drawString(">", x-gp.tileSize, y);
             }
             
-            text = "Thief";
+            text = "Assassin";
             x = getXforCenteredText(text);
             y+= gp.tileSize;
             g2.drawString(text, x, y);
@@ -296,7 +298,7 @@ public class UI {
                 g2.drawString(">", x-gp.tileSize, y);
             }
 
-            text = "Sorcerer";
+            text = "Caster";
             x = getXforCenteredText(text);
             y+= gp.tileSize;
             g2.drawString(text, x, y);
@@ -312,6 +314,7 @@ public class UI {
                 g2.drawString(">", x-gp.tileSize, y);
             }
         }
+        
 
         
     }

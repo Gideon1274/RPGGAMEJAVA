@@ -1,108 +1,188 @@
-package entity;
 
+package object;
+
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+
+import entity.Entity;
+import entity.Player;
+import entity.Projectile;
 import main.GamePanel;
 
-import java.awt.event.MouseMotionListener;
-
-import java.awt.event.MouseEvent;
-
-public class Projectile extends Entity implements MouseMotionListener {
-    Entity user;
-    int mouseX;
-    int mouseY;
-    double targetAngle;
-    public double dx;
-    public double dy;
-    public Projectile(GamePanel gp) {
+public class OBJ_Fireball extends Projectile{
+    GamePanel gp;
+    Projectile p;
+    // double dx = mouseX - screenWidth / 2;
+    //     double dy = mouseY - screenHeight / 2;
+    //     double angle = Math.atan2(dy, dx);
+        double lastAngle;
+        public Entity user;
+        public int attack;
+    public OBJ_Fireball(GamePanel gp){
         super(gp);
-        gp.addMouseMotionListener(this);
+        this.gp = gp;
+        
+        name = "Fireball";
+        speed = 2;
+        maxLife = 200;
+        life = maxLife;
+        useCost = 1;
+        alive = false;
+        getImage();
+        direction = "right";
+        type = 10;
+        lastAngle = 0;
     }
+    public void getImage() {
 
-    public void set(int worldX, int worldY, boolean alive, Entity user) {
-        this.worldX = worldX;
-        this.worldY = worldY;
-        this.alive = alive;
-        this.user = user;
-        this.life = this.maxLife;
-        
-        // Calculate the angle based on the current mouse position
-        this.targetAngle = Math.atan2(mouseY - worldY, mouseX - worldX);
-        // this.targetAngle = Math.atan2(mouseY - (worldY + gp.screenHeight / 2), mouseX - (worldX + gp.screenWidth / 2));
-        
+        right1 = setup("/pics/projectile/fireball.gif", gp.tileSize, gp.tileSize);  
+        // d images based on the calculated angle
     }
     
-
+    // Helper method to rotate an image
+    private BufferedImage rotateImage(BufferedImage image, double angle) {
+        AffineTransform tx = new AffineTransform();
+        tx.rotate(angle, image.getWidth() / 2, image.getHeight() / 2);
+    
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+        return op.filter(image, null);
+    }
+    
+    public boolean haveResource(Entity user){
+        boolean haveResource = false;
+        if(user.mana >= useCost){
+            user.mana-=useCost;
+            haveResource = true;
+        }
+        return haveResource;
+    }
+    public void subtractResource(Entity user){
+        // user.mana -= useCost;
+    }
     public void update() {
-        if (user == gp.player) {
-            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            if (monsterIndex != 999) {
-                gp.player.damageMonster(monsterIndex, attack);
-                alive = false; // projectile alive is false
-            }
+        double newDx = mouseX - screenWidth / 2;
+        double newDy = mouseY - screenHeight / 2;
+        double newAngle = Math.atan2(newDy, newDx);
+
+        // Check if the direction has changed
+        if (newAngle != lastAngle) {
+            right1 = rotateImage(right1, newAngle);
+            right2 = rotateImage(right2, newAngle);
+            right3 = rotateImage(right3, newAngle);
+            right4 = rotateImage(right4, newAngle);
+
+            lastAngle = newAngle; 
         }
         if (user != gp.player) {
+
+            
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            if (monsterIndex != 999) {
+                gp.player.damageMonster(monsterIndex, gp.player.projectileDamage);
+                alive = false; // projectile alive is false
+                System.out.println("COllision");
+                
+            }
+        }
+        if (user == gp.player) {
             boolean contactPlayer = gp.cChecker.checkPlayer(this);
             if (!gp.player.invincible && contactPlayer) {
                 damagePlayer(attack);
                 alive = false;
+                System.out.println("COllision");
             }
         }
-        System.out.println("Current Position: X = " + mouseX + ", Y =" + mouseY);
-        System.out.println("WORLDPP Position: X = " + worldX + ", Y =" + worldY);
-        System.out.println("TargetAngle: "+targetAngle);
-        // Update the projectile position based on the mouse position
-        
-        // worldX += speed * Math.cos(Math.atan2(mouseY - worldY, mouseX - worldX));
-        // worldY += speed * Math.sin(Math.atan2(mouseY - worldY, mouseX - worldX));
+        if (alive) {
+            worldX += speed * Math.cos(newAngle);
+            worldY += speed * Math.sin(newAngle);
+            life--;
     
-        life--;
-        if (life <= 0) {
-            alive = false;
-            System.out.println("end");
-        }
-        spriteCounter++;
-        if (spriteCounter > 12) {
-            if (spriteCounter == 1) {
-                spriteNum = 2;
-            } else if (spriteCounter == 2) {
-                spriteNum = 1;
+            // Check if the projectile's life has expired
+            if (life <= 0) {
+                alive = false;
             }
-            spriteCounter = 0;
         }
     }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        // mouseX = e.getX();
-        // mouseY = e.getY();
-    }
-    // public void mouseMoved(MouseEvent e) {
-    //     // Update the mouse position
-    //     mouseX = e.getXOnScreen();
-    //     mouseY = e.getYOnScreen();
-
-    //     // Calculate the angle based on the current mouse position
-        
-    // }
-    public void mouseMoved(MouseEvent e) {
-        // Update the mouse position
-        mouseX = e.getX();
-        mouseY = e.getY();
-        // set(worldX, worldY, alive, user);
-        // Pass the correct mouse position to the set() method
-        // set(worldX, worldY, alive, user);
     
-        // Calculate the angle based on the current mouse position
-        // targetAngle = Math.atan2(mouseY - worldY, mouseX - worldX)*180/Math.PI;
-    }
+    
+}
+    public BufferedImage setup(String imagePath, int width, int height){
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
 
-    public boolean haveResource(Entity user) {
+        try{
+            image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
+            image = uTool.scaleImage(image, width, height);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return image;
+    }
+// Helper method to rotate an image
+    private BufferedImage rotateImage(BufferedImage image, double angle) {
+        AffineTransform tx = new AffineTransform();
+        tx.rotate(angle, image.getWidth() / 2, image.getHeight() / 2);
+    
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+        return op.filter(image, null);
+    }
+    
+    public boolean haveResource(Entity user){
         boolean haveResource = false;
+        if(user.mana >= useCost){
+            user.mana-=useCost;
+            haveResource = true;
+        }
         return haveResource;
     }
-
-    public void subtractResource(Entity user) {
+    public void subtractResource(Entity user){
+        // user.mana -= useCost;
     }
+    public void update() {
+        double newDx = mouseX - screenWidth / 2;
+        double newDy = mouseY - screenHeight / 2;
+        double newAngle = Math.atan2(newDy, newDx);
 
-    // 768x576 pixels
+        // Check if the direction has changed
+        if (newAngle != lastAngle) {
+            right1 = rotateImage(right1, newAngle);
+            right2 = rotateImage(right2, newAngle);
+            right3 = rotateImage(right3, newAngle);
+            right4 = rotateImage(right4, newAngle);
+
+            lastAngle = newAngle; 
+        }
+        if (user != gp.player) {
+
+            
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            if (monsterIndex != 999) {
+                gp.player.damageMonster(monsterIndex, gp.player.projectileDamage);
+                alive = false; // projectile alive is false
+                System.out.println("COllision");
+                
+            }
+        }
+        if (user == gp.player) {
+            boolean contactPlayer = gp.cChecker.checkPlayer(this);
+            if (!gp.player.invincible && contactPlayer) {
+                damagePlayer(attack);
+                alive = false;
+                System.out.println("COllision");
+            }
+        }
+        if (alive) {
+            worldX += speed * Math.cos(newAngle);
+            worldY += speed * Math.sin(newAngle);
+            life--;
+    
+            // Check if the projectile's life has expired
+            if (life <= 0) {
+                alive = false;
+            }
+        }
 }
+
+I want the right1 to be displayed as gif instead to be displayed but setup() only works for images.
+Create a function that would make this gif work for me

@@ -103,22 +103,23 @@ public class Projectile extends Entity implements MouseMotionListener,MouseListe
     public void mousePressed(MouseEvent e){
         // mouseX = e.getX();
         // mouseY = e.getY();
-        System.out.println("pressed");
+        // System.out.println("pressed");
     }
     public void mouseReleased(MouseEvent e){
        
         leftClicked =false;
-        System.out.println("released");
+        // System.out.println("released");
     }
     public void mouseDragged(MouseEvent e) {
         mouseX = e.getX();
         mouseY = e.getY();
-        System.out.println("Leftclicked: "+leftClicked+" mosueX: "+mouseX+" mouseY: "+mouseY);
+        // System.out.println("Leftclicked: "+leftClicked+" mosueX: "+mouseX+" mouseY: "+mouseY);
     }
 
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
         mouseY = e.getY();
+        // System.out.println("Leftclicked: "+leftClicked+" mosueX: "+mouseX+" mouseY: "+mouseY);
     }
 
 }

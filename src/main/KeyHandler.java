@@ -6,7 +6,10 @@ public class KeyHandler implements KeyListener {
     GamePanel gp;
     // debugg
     boolean checkDrawTime = false;
-
+    public int playerClass;
+    public final int Knight = 1;
+    public final int Assassin = 2;
+    public final int Caster = 3;
     public KeyHandler(GamePanel gp){
         this.gp =gp;
     }
@@ -87,20 +90,26 @@ public class KeyHandler implements KeyListener {
             gp.playSE(9);
         }
         if(code == KeyEvent.VK_ENTER){
-            if(gp.ui.commandNum == 0){
-                System.out.println("Do some fighter specific");
-                gp.gameState  = gp.playState;
+            if (gp.ui.commandNum == 0) {
+                playerClass = 1;
+                System.out.println("Selected Knight");
+                gp.player.setPlayerClass(playerClass); // Set the player's class
+                gp.gameState = gp.playState;
                 gp.playMusic(0);
+            }
+
+            if (gp.ui.commandNum == 1) {
+                playerClass = 2;
+                System.out.println("Selected Assassin");
+                gp.player.setPlayerClass(playerClass); 
+                gp.gameState = gp.playState;
+                gp.playMusic(0);
+            }
                 
-            }
-            if(gp.ui.commandNum == 1){
-                System.out.println("Do some thief specific");
-                gp.gameState  = gp.playState;
-                gp.playMusic(0);
-                // add
-            }
+            
             if(gp.ui.commandNum == 2){
-                System.out.println("Do some socrerce specific");
+                System.out.println("Selected Assassin");
+                gp.player.setPlayerClass(playerClass); 
                 gp.gameState  = gp.playState;
                 gp.playMusic(0);
             }

@@ -18,30 +18,31 @@ public class OBJ_Fireball extends Projectile{
         double lastAngle;
         public Entity user;
         public int attack;
+        
     public OBJ_Fireball(GamePanel gp){
         super(gp);
         this.gp = gp;
         
         name = "Fireball";
-        speed = 5;
+        speed = 20;
         maxLife = 200;
         life = maxLife;
         useCost = 1;
         alive = false;
         getImage();
+        skillMultiplier = 2;
         // direction = "down";
         type = 10;
         lastAngle = 0;
     }
     public void getImage() {
         // Set imageProjectile1 and imageProjectile2 based on mouse direction
-        
-        // down1 = setup("/pics/projectile/chinko", gp.tileSize, gp.tileSize);
-        // down2 = setup("/pics/projectile/chinko", gp.tileSize, gp.tileSize);
-        
-        down1 = setup("/pics/projectile/fireball_right_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/pics/projectile/fireball_right_2", gp.tileSize, gp.tileSize);   
+        // down1 = setup("/pics/projectile/fireball_right_1", gp.tileSize, gp.tileSize);
+        // down2 = setup("/pics/projectile/fireball_right_2", gp.tileSize, gp.tileSize);   
         // d images based on the calculated angle
+        
+        down1 = setup("/pics/projectile/11", gp.tileSize, gp.tileSize);
+        
     }
     
     // Helper method to rotate an image
@@ -72,7 +73,6 @@ public class OBJ_Fireball extends Projectile{
         // Check if the direction has changed
         if (newAngle != lastAngle) {
             down1 = rotateImage(down1, newAngle);
-            down2 = rotateImage(down2, newAngle);
 
             lastAngle = newAngle; 
         }
@@ -81,9 +81,8 @@ public class OBJ_Fireball extends Projectile{
             
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             if (monsterIndex != 999) {
-                gp.player.damageMonster(monsterIndex, gp.player.projectileDamage);
+                gp.player.damageMonster(monsterIndex, gp.player.projectileDamage*(int)skillMultiplier);
                 alive = false; // projectile alive is false
-                System.out.println("COllision");
                 
             }
         }

@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.Comparator;
 public class GamePanel extends JPanel implements Runnable{
     
-    final int originalTilzeSize = 16;
+    final int originalTilzeSize = 22;
     final int scale = 3;
 
     public final int tileSize = originalTilzeSize * scale;
@@ -60,7 +60,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     // entity and object
     public Player player = new Player(this,keyH, mouseH);
-    public Entity obj[] = new Entity[10];
+    public Entity obj[] = new Entity[500];
     public Entity npc[] = new Entity[10];
     public Entity monster[] = new Entity[20];
     public ArrayList<Entity> projectileList = new ArrayList<>();
@@ -87,13 +87,16 @@ public class GamePanel extends JPanel implements Runnable{
         this.addMouseListener(mouseH);
         addMouseListener(mouseH);
     }
-
+    public Player getPlayer() {
+        return player;
+    }
     public void setupGame(){
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();
+        aSetter.setTree();
         
-        gameState = playState;
+        gameState = titleState;
 
         tempScreen = new BufferedImage(screenWidth, screenHeight,BufferedImage.TYPE_INT_ARGB);
         g2 = (Graphics2D)tempScreen.getGraphics();
@@ -143,7 +146,6 @@ public class GamePanel extends JPanel implements Runnable{
         long lastTime = System.nanoTime();
         long currentTime;
         long timer = 0;
-        // int drawCount =0;
         // System.out.println(mouseH.leftClicked);
     
         while(gameThread!=null){
@@ -159,7 +161,6 @@ public class GamePanel extends JPanel implements Runnable{
                 drawToScreen();
                 delta--;
                 // drawCount++;
-
             }
             if(timer>=1000000000){
                 
@@ -215,7 +216,8 @@ public class GamePanel extends JPanel implements Runnable{
         //title screen
         if(gameState == titleState){
             ui.draw(g2);
-        }else{
+        }
+        else{
                 //tile
                 tileM.draw(g2);
                 //DRAWINGS
@@ -276,7 +278,6 @@ public class GamePanel extends JPanel implements Runnable{
                 g2.drawString("Col: " +(player.worldX + player.solidArea.x)/tileSize, x,y);y+=lineheight;
                 g2.drawString("Row: " +(player.worldY + player.solidArea.y)/tileSize, x,y);y+=lineheight;
                 g2.drawString("Draw Time: "+passed, x,y);
-                // System.out.println("Draw Time: "+passed);
             }
     }
 
