@@ -181,6 +181,7 @@ public class Entity {
             if(spriteNumMobs == 1){
                 spriteNumMobs = 2;
             }
+            
             else if(spriteNumMobs == 2){
                 spriteNumMobs = 1;
             }
