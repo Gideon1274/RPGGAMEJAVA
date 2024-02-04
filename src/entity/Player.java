@@ -219,12 +219,13 @@ public class Player extends Entity implements Cloneable{
         
     }
     public void update(){
-        if(attacking==true){
-            attacking();
-            keyH.enterPressed = false;
-        }
+        // if(attacking==true){
+        //     attacking();
+        //     keyH.enterPressed = false;
+        // }
         //setting
-        else if(keyH.upPressed==true||keyH.downPressed==true||keyH.leftPressed==true||keyH.rightPressed==true || keyH.enterPressed == true && attacking == false){
+        // else 
+        if(keyH.upPressed==true||keyH.downPressed==true||keyH.leftPressed==true||keyH.rightPressed==true || keyH.enterPressed == true && attacking == false){
             if(keyH.upPressed==true){
               if(keyH.leftPressed==true){
                   direction = "upleft";
