@@ -4,7 +4,7 @@ package object;
 import entity.Entity;
 import main.GamePanel;
 
-public class OBJ_Trees extends Entity{
+public class OBJ_Trees extends Entity {
     public OBJ_Trees(GamePanel gp){
         super(gp);
         name = "Door";
@@ -19,5 +19,7 @@ public class OBJ_Trees extends Entity{
         solidAreaDefaultY = solidArea.y;
         
     }
-    
-}
+
+        
+    }
+

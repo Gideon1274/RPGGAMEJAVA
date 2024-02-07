@@ -20,6 +20,7 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class Player extends Entity implements Cloneable{
@@ -33,6 +34,7 @@ public class Player extends Entity implements Cloneable{
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
     public int playerClass;
+    public Random rand = new Random();
     public Player(GamePanel gp, KeyHandler keyH,MouseHandler mouseH){
         super(gp);
     
@@ -100,15 +102,30 @@ public class Player extends Entity implements Cloneable{
         rateOfFire = 10;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
-        projectile = new OBJ_Fireball(gp);
+        // projectile = new OBJ_Fireball(gp);
+        projectile = new OBJ_Getsuga(gp);
         // projectile = new OBJ_Rock(gp);
         attack = getAttack();
         defense = getDefense();
         projectileDamage = getProjectileDamage();
         setItems();
-        getPlayerImage();
-        getPlayerAttackImage();
+        getPlayerImageForKnight();
+        getPlayerAttackImageForKnight();
     }
+    public void getPlayerImageForKnight(){
+        left1 = setup("/pics/player/gokuwalkleft00", gp.tileSize, gp.tileSize);
+        left2 = setup("/pics/player/gokuwalkleft01", gp.tileSize, gp.tileSize);
+        left3 = setup("/pics/player/gokuwalkleft02", gp.tileSize, gp.tileSize);
+
+        right1 = setup("/pics/player/gokuwalkright00", gp.tileSize, gp.tileSize);
+        right2 = setup("/pics/player/gokuwalkright01", gp.tileSize, gp.tileSize);
+        right3 = setup("/pics/player/gokuwalkright02", gp.tileSize, gp.tileSize);   
+    }
+    public void getPlayerAttackImageForKnight(){
+        attackRight1 = setup("/pics/player/gokuattack00", gp.tileSize, gp.tileSize);
+        attackRight2 = setup("/pics/player/gokuattack01", gp.tileSize, gp.tileSize);
+    }
+
     public void setDefaultValuesForAssassin(){
         
         // worldX = gp.tileSize * 8;
@@ -219,13 +236,11 @@ public class Player extends Entity implements Cloneable{
         
     }
     public void update(){
-        // if(attacking==true){
-        //     attacking();
-        //     keyH.enterPressed = false;
-        // }
-        //setting
-        // else 
-        if(keyH.upPressed==true||keyH.downPressed==true||keyH.leftPressed==true||keyH.rightPressed==true || keyH.enterPressed == true && attacking == false){
+        if(attacking==true){
+            attacking();
+            keyH.enterPressed = false;
+        }
+        else if(keyH.upPressed==true||keyH.downPressed==true||keyH.leftPressed==true||keyH.rightPressed==true || keyH.enterPressed == true && attacking == false){
             if(keyH.upPressed==true){
               if(keyH.leftPressed==true){
                   direction = "upleft";
@@ -335,6 +350,9 @@ public class Player extends Entity implements Cloneable{
                 spriteNum = 2;
             }
             else if(spriteNum == 2){
+                spriteNum = 3;
+            }
+            else if(spriteNum == 3){
                 spriteNum = 1;
             }
             spriteCounter=0;
@@ -429,8 +447,9 @@ public class Player extends Entity implements Cloneable{
             spriteNum =1;
         }
         if(spriteCounter > 5 && spriteCounter <=10){
-            spriteNum = 2;
-
+            int random = rand.nextInt(2);
+            spriteNum = 2+random;
+            System.out.println(spriteNum);
             //save the current worldX, WorldY
             int currentWorldX = worldX;
             int currentWorldY = worldY;
@@ -616,75 +635,7 @@ public class Player extends Entity implements Cloneable{
         int tempScreenY = screenY;
         
     
-        // switch(direction){
-        //     case "up":
-        //         if(attacking ==false){
-        //             if(spriteNum ==1){image = up1;}
-        //             if(spriteNum==2){image =up2;}
-        //         }
-        //         if(attacking == true){
-        //             tempScreenY = screenY - gp.tileSize;
-        //             if(spriteNum ==1){image = attackUp1;}
-        //             if(spriteNum==2){image = attackUp2;}
-        //         }
-        //         break;
-        //     case "down":
-        //         if(attacking ==false){
-        //             if(spriteNum ==1){image = down1;}
-        //             if(spriteNum==2){image =down2;}
-        //         }
-        //         if(attacking == true){
-        //             if(spriteNum ==1){image = attackDown1;}
-        //             if(spriteNum==2){image = attackDown2;}
-        //         }
-        //         break;
-        //     case "left":
-        //         if(attacking ==false){
-        //             if(spriteNum ==1){image = left1;}
-        //             if(spriteNum==2){image =left2;}
-        //         }
-        //         if(attacking == true){
-        //             tempScreenX = screenX - gp.tileSize;
-        //             if(spriteNum ==1){image = attackLeft1;}
-        //             if(spriteNum==2){image = attackLeft2;}
-        //         }
-        //         break;
-        //     case "right":
-        //         if(attacking ==false){
-        //             if(spriteNum ==1){image = right1;}
-        //             if(spriteNum==2){image =right2;}
-        //         }
-        //         if(attacking == true){
-        //             if(spriteNum ==1){image = attackRight1;}
-        //             if(spriteNum==2){image = attackRight2;}
-        //         }
-        //         break;
-        //     //8 DIRECTION
-        //     case "upright":
-        //         if(attacking ==false){
-        //             if(spriteNum ==1){image = upright1;}
-        //             if(spriteNum==2){image =upright2;}
-        //         }
-        //         break;
-        //     case "upleft":
-        //         if(attacking ==false){
-        //             if(spriteNum ==1){image = upleft1;}
-        //             if(spriteNum==2){image =upleft2;}
-        //         }
-        //         break;
-        //     case "downright":
-        //         if(attacking ==false){
-        //             if(spriteNum ==1){image = downright1;}
-        //             if(spriteNum==2){image =downright2;}
-        //         }
-        //         break;
-        //     case "downleft":
-        //         if(attacking ==false){
-        //             if(spriteNum ==1){image = downleft1;}
-        //             if(spriteNum==2){image =downleft2;}
-        //         }
-        //         break;
-        // }
+        
         switch(direction){
             case "up":
                 if(attacking ==false && gp.mouseH.getX()>=0 && gp.mouseH.getX()<=gp.screenWidth/2){
@@ -764,6 +715,7 @@ public class Player extends Entity implements Cloneable{
                 if(attacking == true){
                     if(spriteNum ==1){image = attackRight1;}
                     if(spriteNum==2){image = attackRight2;}
+                    if(spriteNum==3){image = attackRight1;}
                 }
                 break;
 

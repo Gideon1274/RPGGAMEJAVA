@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.imageio.ImageIO;
+
 import entity.Entity;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
@@ -28,6 +30,7 @@ public class UI {
     Graphics2D g2;
     Font purisaBold, maruMonica;
     BufferedImage heart_full, heart_half, heart_blank, crystal_full, crystal_blank;
+    public BufferedImage cover;
     public boolean messageOn = false;
     // public String message = "";
     // int messageCounter = 0;
@@ -71,6 +74,18 @@ public class UI {
 
         // arial_40 = new Font("Georgia", Font.PLAIN, 40);
         // arial_80B = new Font("Arial", Font.BOLD, 80);
+    }
+    public BufferedImage setup(String imagePath, int width, int height){
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try{
+            image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
+            image = uTool.scaleImage(image, width, height);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return image;
     }
     public void addMessage(String text){
         // message = text;
@@ -208,7 +223,7 @@ public class UI {
                 messageCounter.set(i, counter);
                 messageY+=50;
 
-                if(messageCounter.get(i) > 180){
+                if(messageCounter.get(i) > 120){
                     message.remove(i);
                     messageCounter.remove(i);
                 }
@@ -224,11 +239,13 @@ public class UI {
     public void drawTitleScreen(){
         g2.setColor(new Color(0,0,0));
         g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
+        cover = setup("/pics/tiles/cover", gp.screenWidth, gp.screenHeight);
 
+        g2.drawImage(cover, 0, 0, null);
         if(titleScreenState==0){
             //title name
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
-            String text = "Blue Boy Adventure";
+            String text = "Dragon Ball Z: Bati";
             int x = getXforCenteredText(text);
             int y = gp.tileSize*3;
             
@@ -237,13 +254,13 @@ public class UI {
             g2.drawString(text, x+5, y+5);
 
             //title screen
-            g2.setColor(Color.white);
+            g2.setColor(new Color(150,5,5));
             g2.drawString(text, x, y);
 
             //blue boy image
-            x = gp.screenWidth/2 - (gp.tileSize*2)/2;
-            y += gp.tileSize*2;
-            g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+            // x = gp.screenWidth/2 - (gp.tileSize*2)/2;
+            // y += gp.tileSize*2;
+            // g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
 
             //menu
             g2.setFont(g2.getFont().deriveFont(Font.BOLD,48F));
@@ -274,7 +291,7 @@ public class UI {
             
         }
         else if (titleScreenState == 1){
-            g2.setColor(Color.white);
+            g2.setColor(new Color(150,5,5));
             g2.setFont(g2.getFont().deriveFont(42F));
 
             String text = "Select your class!";
