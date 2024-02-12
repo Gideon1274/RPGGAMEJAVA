@@ -91,7 +91,6 @@ public class OBJ_Fireball extends Projectile{
             if (!gp.player.invincible && contactPlayer) {
                 damagePlayer(attack);
                 alive = false;
-                System.out.println("COllision");
             }
         }
         if (alive) {

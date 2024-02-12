@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
@@ -16,6 +17,7 @@ import javax.imageio.ImageIO;
 import entity.Entity;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
+import object.subWindow;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -30,6 +32,7 @@ public class UI {
     Graphics2D g2;
     Font purisaBold, maruMonica;
     BufferedImage heart_full, heart_half, heart_blank, crystal_full, crystal_blank;
+    BufferedImage windowMiddle,windowTop, windowLeft, windowRight, windowBottom, windowEdgeTLeft,windowEdgeTRight, windowEdgeBLeft, windowEdgeBRight;
     public BufferedImage cover;
     public boolean messageOn = false;
     // public String message = "";
@@ -44,7 +47,7 @@ public class UI {
     public int titleScreenState = 0; //0 = the first screen, 1 for second screeen
     public int slotCol = 0;
     public int slotRow = 0;
-
+    int subState = 0;
     
     
     public UI(GamePanel gp){
@@ -70,10 +73,43 @@ public class UI {
         Entity crystal = new OBJ_ManaCrystal(gp);
         crystal_full = crystal.image;
         crystal_blank = crystal.image2;
-    
-
+        //subwindow
+        windowEdgeTLeft =   setup("/pics/subwindow/topleft", gp.tileSize, gp.tileSize);
+        windowTop =         setup("/pics/subwindow/top", gp.tileSize, gp.tileSize);
+        windowEdgeTRight =  setup("/pics/subwindow/topright", gp.tileSize, gp.tileSize);
+        windowLeft =        setup("/pics/subwindow/left", gp.tileSize, gp.tileSize);
+        windowMiddle =      setup("/pics/subwindow/middle", gp.tileSize, gp.tileSize);
+        windowRight =       setup("/pics/subwindow/right", gp.tileSize, gp.tileSize);
+        windowEdgeBLeft =   setup("/pics/subwindow/bottomleft", gp.tileSize, gp.tileSize);
+        windowBottom =      setup("/pics/subwindow/bottom", gp.tileSize, gp.tileSize);
+        windowEdgeBRight =  setup("/pics/subwindow/bottomright", gp.tileSize, gp.tileSize);
+        
         // arial_40 = new Font("Georgia", Font.PLAIN, 40);
         // arial_80B = new Font("Arial", Font.BOLD, 80);
+    }
+    public BufferedImage setup(String imagePath, int width, int height, float opacity) {
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+    
+        try {
+            image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
+            image = uTool.scaleImage(image, width, height);
+    
+            // Create a RescaleOp object with the desired opacity
+            float[] scales = {1f, 1f, 1f, opacity}; // RGBA scales
+            float[] offsets = new float[4];
+            RescaleOp op = new RescaleOp(scales, offsets, null);
+    
+            // Apply the opacity adjustment to the image
+            BufferedImage transparentImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2 = transparentImage.createGraphics();
+            g2.drawImage(image, 0, 0, null);
+            g2.dispose();
+            image = op.filter(transparentImage, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return image;
     }
     public BufferedImage setup(String imagePath, int width, int height){
         UtilityTool uTool = new UtilityTool();
@@ -86,6 +122,19 @@ public class UI {
             e.printStackTrace();
         }
         return image;
+    }
+    public BufferedImage adjustOpacity(BufferedImage image, float opacity) {
+        // Create a RescaleOp object with the desired opacity
+        float[] scales = {1f, 1f, 1f, opacity}; // RGBA scales
+        float[] offsets = new float[4];
+        RescaleOp op = new RescaleOp(scales, offsets, null);
+    
+        // Apply the opacity adjustment to the image
+        BufferedImage transparentImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = transparentImage.createGraphics();
+        g2.drawImage(image, 0, 0, null);
+        g2.dispose();
+        return op.filter(transparentImage, null);
     }
     public void addMessage(String text){
         // message = text;
@@ -111,7 +160,6 @@ public class UI {
         //pause state
         if(gp.gameState == gp.pauseState){
             drawPlayerLife();
-            drawPauseScreen();
         }
         //dialogue state
         if(gp.gameState == gp.dialogueState){
@@ -121,8 +169,54 @@ public class UI {
         //chracter state
         if(gp.gameState == gp.characterState){
             drawCharacterScreen();
+        }
+        //inventory state
+        if(gp.gameState == gp.inventoryState){
             drawInventory();
         }
+        //option state
+        if(gp.gameState == gp.optionState){
+            drawOptionScreen();
+        }
+    }
+    public void drawOptionScreen(){
+        g2.setColor(Color.white);
+        g2.setFont(g2.getFont().deriveFont(32F));
+
+        int frameX= gp.tileSize*5;
+        int frameY = gp.tileSize;
+        int frameWidth = gp.tileSize*6;
+        int frameHeight = gp.tileSize*9;
+        drawSubWindow(g2,frameX, frameY, frameWidth, frameHeight);
+        switch(subState){
+            case 0: options_top(frameX, frameY);break;
+            case 1: options_top(frameX, frameY);break;
+            case 2: options_top(frameX, frameY);break;
+        }
+    }
+    public void options_top(int frameX, int frameY){
+        int textX,textY;
+        String text = "Options";
+        textX = getXforCenteredText(text);
+        textY = frameY + gp.tileSize;
+
+        g2.drawString(text, textX, textY);
+        textX = frameX + gp.tileSize;
+        textY += gp.tileSize*1.5;
+        g2.drawString("Full Screne", textX, textY);
+
+        textY+=gp.tileSize;
+        g2.drawString("Music", textX, textY);
+
+        textY+=gp.tileSize;
+        g2.drawString("SE", textX, textY);
+
+        textY+=gp.tileSize;
+        g2.drawString("Control", textX, textY);
+
+        textX = frameX + (int)(gp.tileSize*2.5);
+        textY+=gp.tileSize*2;
+        g2.drawString("EXIT", textX, textY);
     }
     public void drawPlayerLife(){
         int x = gp.tileSize/2;
@@ -158,36 +252,7 @@ public class UI {
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2.setColor(Color.white);
         g2.drawString(gp.player.life+"/"+gp.player.maxLife, x+gp.tileSize, y+20);
-            //max mana
-        // i++;
-        // //draw current life
-        // while(i< gp.player.life){
-        //     g2.drawImage(heart_half,x,y, null);
-        //     i++;
-        //     if(i<gp.player.life){
-        //         g2.drawImage(heart_full, x,y, null);
-        //     }
-        //     i++;
-        //     x+=gp.tileSize;
-        // }
-        //draw max mana
-        // x = (gp.tileSize/2)-5;
-        // y = (int)(gp.tileSize*1.5);
-        // i = 0;
-        // while(i < gp.player.maxMana){
-        //     g2.drawImage(crystal_blank,x,y,null);
-        //     i++;
-        //     x+=35;
-        // }
-        // //draw mana
-        // x = (gp.tileSize/2)-5;
-        // y = (int)(gp.tileSize*1.5);
-        // i = 0;
-        // while(i < gp.player.mana){
-        //     g2.drawImage(crystal_full,x,y, null);
-        //     i++;
-        //     x+=35;
-        // }
+           
         x = gp.tileSize/2+3;
         y = (int)(gp.tileSize*1.5);
         i = 0;
@@ -245,7 +310,7 @@ public class UI {
         if(titleScreenState==0){
             //title name
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
-            String text = "Dragon Ball Z: Bati";
+            String text = "Dragon Ball Z: IYOT";
             int x = getXforCenteredText(text);
             int y = gp.tileSize*3;
             
@@ -335,14 +400,7 @@ public class UI {
 
         
     }
-    public void drawPauseScreen(){
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
-        String text = "PAUSED";
-        int x = getXforCenteredText(text), y = gp.screenHeight/2;
-        
-
-        g2.drawString(text,x,y);
-    }
+    
     // public void drawDialogueScreen(){
     //     int x = gp.tileSize*2;
     //     int y = gp.tileSize/2;
@@ -369,7 +427,7 @@ public class UI {
         int y = gp.tileSize / 2;
         int width = gp.screenWidth - (gp.tileSize * 4);
         int height = gp.tileSize * 4;
-        drawSubWindow(x, y, width, height);
+        drawSubWindow(g2,x, y, width, height);
     
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28F));
         x += gp.tileSize;
@@ -389,7 +447,7 @@ public class UI {
         final int frameY = gp.tileSize;
         final int frameWidth = gp.tileSize*5;
         final int frameHeight = (int)(gp.tileSize*10.5);
-        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+        drawSubWindow(g2,frameX, frameY, frameWidth, frameHeight);
 
         //text
         g2.setColor(Color.white);
@@ -488,11 +546,11 @@ public class UI {
     }
     public void drawInventory(){
         // frame
-        int frameX = gp.tileSize*9;
-        int frameY = gp.tileSize;
-        int frameWidth = gp.tileSize*6;
-        int frameHeight = gp.tileSize*5;
-        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+        int frameX = gp.tileSize;
+        int frameY = gp.tileSize*8;
+        int frameWidth = gp.tileSize*14;
+        int frameHeight = gp.tileSize*4;
+        drawSubWindow(g2,frameX, frameY, frameWidth, frameHeight);
 
         //slot
         final int slotXstart = frameX + 20;
@@ -510,7 +568,7 @@ public class UI {
                     g2.setColor(new Color(240,190,90));
                     g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
                 }
-
+            
             g2.drawImage(gp.player.inventory.get(i).down1, slotX, slotY,null);
             slotX+=slotSize;
             if(i==4 || i == 9 || i == 14){
@@ -518,18 +576,31 @@ public class UI {
                 slotY += slotSize;
             }
         }
-
+        
         //cursor
         int cursorX = slotXstart + (slotSize*slotCol);
         int cursorY = slotYstart + (slotSize*slotRow);
         int cursorWidth = gp.tileSize;
         int cursorHeight = gp.tileSize;
+        g2.setColor(new Color(36,16,212));
+        for(int q = 548;q<=684;q+=68){
+            for(int i = 86;i<=902;i+=68){
+                g2.drawRoundRect(i, q, cursorWidth, cursorHeight, 10, 10);
+            }
+        }
+        
         
         // draw cursor
-        g2.setColor(Color.white);
-        g2.setStroke(new BasicStroke(3));
+        g2.setColor(Color.red);
+        g2.setStroke(new BasicStroke(5));
         g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
-
+        
+        
+        // for(int i = 86;i<=902;i+=cursorWidth){
+        //     for(int j = 548;j<=684;i+=cursorHeight){
+        //         g2.setStroke(new BasicStroke(5));   
+        //     }
+        // }
         //desscription frame
         int dframeX = frameX;
         int dframeY = frameY + frameHeight;
@@ -543,29 +614,95 @@ public class UI {
         int itemIndex = getItemIndexOnSlot();
 
         if(itemIndex < gp.player.inventory.size()){
-            drawSubWindow(dframeX, dframeY, dframeWidth, dframeHeight);
+            drawSubWindow(g2,dframeX, dframeY, dframeWidth, dframeHeight);
             for(String line: gp.player.inventory.get(itemIndex).description.split("\n")){
                 g2.drawString(line, textX, textY);
                 textY+=32;
             }
         }
+        
     }
     public int getItemIndexOnSlot(){
-        int itemIndex = slotCol+(slotRow*5);
-
+        int itemIndex = slotCol+(slotRow*13);
+        // System.out.println(itemIndex);
         return itemIndex;
     }
-    public void drawSubWindow(int x,int y, int width, int height){
-        Color c = new Color(0,0,0,210);
-        g2.setColor(c);
-        g2.fillRoundRect(x, y, width, height,35, 35);
+    // public void drawSubWindow(int x,int y, int width, int height){
+        
+    //     g2.drawImage(windowEdgeTLeft, x, y, null);
+    //     for(int i = x;i<=width;i+=gp.tileSize){
+    //         for(int j = y;j<=height;j+=gp.tileSize){
+    //             if(i==x && j == y){
+    //                 g2.drawImage(windowEdgeTLeft,i,j,null);
+    //             }
+                
+    //             else if(i>x && j==y){
+    //                 g2.drawImage(windowTop,i,j,null);
+    //             }
+    //         }
+    //     }
+    // }
+    
+        // Color c = new Color(0,0,0,210);
+        // g2.setColor(c);
+        // g2.fillRoundRect(x, y, width, height,35, 35);
 
-        c = new Color(255,255,255);
-        g2.setColor(c);
-        g2.setStroke(new BasicStroke(5));
-        g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
+        // c = new Color(255,255,255);
+        // g2.setColor(c);
+        // g2.setStroke(new BasicStroke(5));
+        // g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
+        // int i = x,j = y;
+        public void drawSubWindow(Graphics2D g2, int x, int y, int width, int height) {
+            x= x-gp.tileSize/6;
+            y= y-gp.tileSize/6;
+            width = width +=gp.tileSize/2.5;
+            height = height += gp.tileSize/2.5;
+            g2.drawImage(windowEdgeTLeft, x, y, null);
+            g2.drawImage(windowEdgeTRight, x + width - gp.tileSize, y, null);
+        
+            g2.drawImage(windowEdgeBLeft, x, y + height - gp.tileSize, null);
+            g2.drawImage(windowEdgeBRight, x + width - gp.tileSize, y + height - gp.tileSize, null);
+        
+            for (int i = x + gp.tileSize; i < x + width - gp.tileSize; i += gp.tileSize) {
+                g2.drawImage(windowTop, i, y, null);
+                g2.drawImage(windowBottom, i, y + height - gp.tileSize, null);
+            }
+        
+            for (int i = y + gp.tileSize; i < y + height - gp.tileSize; i += gp.tileSize) {
+                g2.drawImage(windowLeft, x, i, null); 
+                g2.drawImage(windowRight, x + width - gp.tileSize, i, null); 
+            }
+        
+            for (int i = y + gp.tileSize; i < y + height - gp.tileSize; i += gp.tileSize) {
+                for (int j = x + gp.tileSize; j < x + width - gp.tileSize; j += gp.tileSize) {
+                    g2.drawImage(windowMiddle, j, i, null);
+                }
+            }
         }
-    public int getXforCenteredText(String text){
+        
+            // x = gp.tileSize;
+            // y =gp.tileSize;
+           
+            // g2.drawImage(windowBottom,x,y, null);
+            // x+=gp.tileSize;
+            // y+=gp.tileSize;
+            // g2.drawImage(windowRight,x,y, null);
+            // x+=gp.tileSize;
+            // y+=gp.tileSize;
+            // g2.drawImage(windowLeft,x,y, null);
+        
+        // public void qweqwe(){
+        //     int x = gp.tileSize,y =gp.tileSize;
+           
+        //     g2.drawImage(windowBottom,x,y, null);
+        //     x+=gp.tileSize;
+        //     y+=gp.tileSize;
+        //     g2.drawImage(windowRight,x,y, null);
+        //     x+=gp.tileSize;
+        //     y+=gp.tileSize;
+        //     g2.drawImage(windowLeft,x,y, null);
+        // }
+        public int getXforCenteredText(String text){
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = gp.screenWidth/2 - length/2;
         return x;

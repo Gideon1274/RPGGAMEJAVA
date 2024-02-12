@@ -95,7 +95,6 @@ public class OBJ_Getsuga extends Projectile{
             if (monsterIndex != 999) {
                 gp.player.damageMonster(monsterIndex, gp.player.projectileDamage*(int)skillMultiplier);
                  // projectile alive is false
-                System.out.println("COllision");
                 
             }
         }

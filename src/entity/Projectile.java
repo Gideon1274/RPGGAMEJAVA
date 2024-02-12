@@ -66,7 +66,6 @@ public class Projectile extends Entity implements MouseMotionListener,MouseListe
             life--;
             if(life<=0){
                 alive = false;
-                System.out.println("end");
             }
             // System.out.println("Current Position: X = " + mouseX + ", Y =" + mouseY);
             // System.out.println("WORLDPP Position: X = " + worldX + ", Y =" + worldY);
@@ -96,7 +95,6 @@ public class Projectile extends Entity implements MouseMotionListener,MouseListe
 
     public void mouseClicked(MouseEvent e){
         leftClicked = true;
-        System.out.println("clicked");
     }
     public void mouseEntered(MouseEvent e){}
     public void mouseExited(MouseEvent e){}

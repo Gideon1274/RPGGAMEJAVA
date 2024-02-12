@@ -74,8 +74,8 @@ public class GamePanel extends JPanel implements Runnable{
     public final int pauseState = 2;
     public final int dialogueState = 3;
     public final int characterState = 4;
-    
-
+    public final int optionState = 5;
+    public final int inventoryState = 6;
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
@@ -118,42 +118,17 @@ public class GamePanel extends JPanel implements Runnable{
         gameThread.start();
 
     }
-    //  public void run(){
-    //         double drawInterval = 1000000000/FPS;
-    //         double nextDrawTime = System.nanoTime()+drawInterval;
-    //         while(gameThread!=null){
-    //             // long currentTime = System.nanoTime();
-    //             // System.out.println("CurrentTime: "+currentTime);
-    //             update();
-    //             repaint();
-    //             try {
-    //                 double remainingTime = nextDrawTime - System.nanoTime();
-    //                 remainingTime = remainingTime/1000000;
-    //                 if(remainingTime<0){
-    //                     remainingTime=0;
-    //                 }
-    //                 Thread.sleep((long)remainingTime);
-    //                 nextDrawTime+=drawInterval;
-    //             }catch(InterruptedException e){
-    //                 e.printStackTrace();
-    //             }
-    //         }
-    //     }
-    
     public void run(){
         double drawInterval = 1000000000/FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
         long timer = 0;
-        // System.out.println(mouseH.leftClicked);
-        System.out.println(screenWidth);
-        System.out.println(screenHeight);
+        int frames = 0;
         while(gameThread!=null){
             currentTime = System.nanoTime();
             delta += (currentTime-lastTime) / drawInterval;
             timer+=(currentTime-lastTime);
-
             lastTime = currentTime;
             if (delta>=1){
                 update();
@@ -161,11 +136,11 @@ public class GamePanel extends JPanel implements Runnable{
                 drawToTempScreen();
                 drawToScreen();
                 delta--;
-                // drawCount++;
+                frames++;
             }
             if(timer>=1000000000){
-                
-                // drawCount=0;
+                System.out.println("FPS: "+ frames);
+                frames = 0;
                 timer=0;
             }
         }
@@ -204,7 +179,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         }
         if(gameState == pauseState){
-
+            
         }
         
     }

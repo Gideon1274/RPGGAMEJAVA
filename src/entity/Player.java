@@ -32,7 +32,7 @@ public class Player extends Entity implements Cloneable{
     int standCounter = 0;
     public boolean attackCanceled = false;
     public ArrayList<Entity> inventory = new ArrayList<>();
-    public final int maxInventorySize = 20;
+    public final int maxInventorySize = 39;
     public int playerClass;
     public Random rand = new Random();
     public Player(GamePanel gp, KeyHandler keyH,MouseHandler mouseH){
@@ -449,7 +449,6 @@ public class Player extends Entity implements Cloneable{
         if(spriteCounter > 5 && spriteCounter <=10){
             int random = rand.nextInt(2);
             spriteNum = 2+random;
-            System.out.println(spriteNum);
             //save the current worldX, WorldY
             int currentWorldX = worldX;
             int currentWorldY = worldY;

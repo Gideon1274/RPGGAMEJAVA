@@ -1,5 +1,6 @@
 package entity;
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -51,7 +52,7 @@ public class Entity {
 	String dialogues[] = new String[20];
 	int dialogueIndex = 0;
 
-    public BufferedImage image,image2, image3;
+    public BufferedImage image,image2, image3,image4,image5,image6,image7,image8, image9;
     public boolean collision  = false;
     public boolean obtainable = true;
 
@@ -353,6 +354,19 @@ public class Entity {
             e.printStackTrace();
         }
         return image;
+    }
+    public BufferedImage adjustOpacity(BufferedImage image, float opacity) {
+        // Create a RescaleOp object with the desired opacity
+        float[] scales = {1f, 1f, 1f, opacity}; // RGBA scales
+        float[] offsets = new float[4];
+        RescaleOp op = new RescaleOp(scales, offsets, null);
+    
+        // Apply the opacity adjustment to the image
+        BufferedImage transparentImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = transparentImage.createGraphics();
+        g2.drawImage(image, 0, 0, null);
+        g2.dispose();
+        return op.filter(transparentImage, null);
     }
 
     
