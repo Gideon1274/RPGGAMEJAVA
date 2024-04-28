@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 
 public class MouseHandler extends MouseAdapter implements MouseMotionListener,MouseListener {
     public boolean leftClicked = false;
+    public boolean rightClicked = false;
     GamePanel gp;
     private static int mouseX = -1 , mouseY = -1, mouseB = -1;
     public static int getX(){
@@ -38,22 +39,33 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener,Mo
         mouseX = e.getX();
         mouseY = e.getY();
     }
-    public void mouseClicked(MouseEvent e){
-        // leftClicked = true;
-        // System.out.println("clicked");
+        @Override
+    public void mouseClicked(MouseEvent e) {
+        
     }
-    public void mouseEntered(MouseEvent e){}
-    public void mouseExited(MouseEvent e){}
+
+    public void mouseEntered(MouseEvent e){
+
+    }
+    public void mouseExited(MouseEvent e){
+        
+    }
     public void mousePressed(MouseEvent e){
         // mouseX = e.getX();
         // mouseY = e.getY();
         // mouseB = e.getButton();
-        leftClicked = true;
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            leftClicked = true;
+        } else if (e.getButton() == MouseEvent.BUTTON3) {
+            rightClicked=true;
+        }
+        
         // System.out.println("clicked");
     }
     public void mouseReleased(MouseEvent e){
         mouseB = -1;
         leftClicked =false;
+        rightClicked = false;
         // System.out.println("released");
     }
 

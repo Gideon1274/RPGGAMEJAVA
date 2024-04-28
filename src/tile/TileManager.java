@@ -57,17 +57,17 @@ public class TileManager{
             setup(15, "015", true);
             setup(16, "016", false);
             setup(17, "017", false);
-            setup(18, "018", false);
-            setup(19, "019", false);
-            setup(20, "020", false);
-            setup(21, "021", false);
-            setup(22, "022", false);
-            setup(23, "023", false);
-            setup(24, "024", false);
-            setup(25, "025", false);
-            setup(26, "026", false);
-            setup(27, "027", false);
-            setup(28, "028", false);
+            // setup(18, "018", false);
+            // setup(19, "019", false);
+            // setup(20, "020", false);
+            // setup(21, "021", false);
+            // setup(22, "022", false);
+            // setup(23, "023", false);
+            // setup(24, "024", false);
+            // setup(25, "025", false);
+            // setup(26, "026", false);
+            // setup(27, "027", false);
+            // setup(28, "028", false);
             setup(29, "029", false);
             setup(20, "030", true);
  

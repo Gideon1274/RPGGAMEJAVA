@@ -53,7 +53,7 @@ public class Player extends Entity implements Cloneable{
         solidArea.height = 24;
 
         //ATTACK AREA
-        // attackArea = new Rectangle(0,0,36,36);
+        attackArea = new Rectangle(0,0,36,36);
 
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
@@ -113,17 +113,54 @@ public class Player extends Entity implements Cloneable{
         getPlayerAttackImageForKnight();
     }
     public void getPlayerImageForKnight(){
-        left1 = setup("/pics/player/gokuwalkleft00", gp.tileSize, gp.tileSize);
-        left2 = setup("/pics/player/gokuwalkleft01", gp.tileSize, gp.tileSize);
-        left3 = setup("/pics/player/gokuwalkleft02", gp.tileSize, gp.tileSize);
+        left1 = setup("/pics/player/swordsman/swordmanleft1", gp.tileSize, gp.tileSize);
+        left2 = setup("/pics/player/swordsman/swordmanleft2", gp.tileSize, gp.tileSize);
+        left3 = setup("/pics/player/swordsman/swordmanleft3", gp.tileSize, gp.tileSize);
+        left4 = setup("/pics/player/swordsman/swordmanleft4", gp.tileSize, gp.tileSize);
+        left5 = setup("/pics/player/swordsman/swordmanleft5", gp.tileSize, gp.tileSize);
+        
+        right1 = setup("/pics/player/swordsman/swordmanright1", gp.tileSize, gp.tileSize);
+        right2 = setup("/pics/player/swordsman/swordmanright2", gp.tileSize, gp.tileSize);
+        right3 = setup("/pics/player/swordsman/swordmanright3", gp.tileSize, gp.tileSize);
+        right4 = setup("/pics/player/swordsman/swordmanright4", gp.tileSize, gp.tileSize);
+        right5 = setup("/pics/player/swordsman/swordmanright5", gp.tileSize, gp.tileSize);
 
-        right1 = setup("/pics/player/gokuwalkright00", gp.tileSize, gp.tileSize);
-        right2 = setup("/pics/player/gokuwalkright01", gp.tileSize, gp.tileSize);
-        right3 = setup("/pics/player/gokuwalkright02", gp.tileSize, gp.tileSize);   
+        up1 = setup("/pics/player/swordsman/swordmanup1", gp.tileSize, gp.tileSize);
+        up2 = setup("/pics/player/swordsman/swordmanup2", gp.tileSize, gp.tileSize);
+        up3 = setup("/pics/player/swordsman/swordmanup3", gp.tileSize, gp.tileSize);
+        up4 = setup("/pics/player/swordsman/swordmanup4", gp.tileSize, gp.tileSize);
+        up5 = setup("/pics/player/swordsman/swordmanup5", gp.tileSize, gp.tileSize);
+
+        down1 = setup("/pics/player/swordsman/swordmandown1", gp.tileSize, gp.tileSize);
+        down2 = setup("/pics/player/swordsman/swordmandown2", gp.tileSize, gp.tileSize);
+        down3 = setup("/pics/player/swordsman/swordmandown3", gp.tileSize, gp.tileSize);
+        down4 = setup("/pics/player/swordsman/swordmandown4", gp.tileSize, gp.tileSize);
+        down5 = setup("/pics/player/swordsman/swordmandown5", gp.tileSize, gp.tileSize);
+        
     }
     public void getPlayerAttackImageForKnight(){
-        attackRight1 = setup("/pics/player/gokuattack00", gp.tileSize, gp.tileSize);
-        attackRight2 = setup("/pics/player/gokuattack01", gp.tileSize, gp.tileSize);
+        // attackRight1 = setup("/pics/player/gokuattack00", gp.tileSize, gp.tileSize);
+        // attackRight2 = setup("/pics/player/gokuattack01", gp.tileSize, gp.tileSize);
+
+        attackRight1 = setup("/pics/player/swordsman/swordmanattackright1", gp.tileSize, gp.tileSize);
+        attackRight2 = setup("/pics/player/swordsman/swordmanattackright2", gp.tileSize, gp.tileSize);
+        attackRight3 = setup("/pics/player/swordsman/swordmanattackright3", gp.tileSize, gp.tileSize);
+        attackRight4 = setup("/pics/player/swordsman/swordmanattackright4", gp.tileSize, gp.tileSize);
+
+        attackLeft1 = setup("/pics/player/swordsman/swordmanattackleft1", gp.tileSize, gp.tileSize);
+        attackLeft2 = setup("/pics/player/swordsman/swordmanattackleft2", gp.tileSize, gp.tileSize);
+        attackLeft3 = setup("/pics/player/swordsman/swordmanattackleft3", gp.tileSize, gp.tileSize);
+        attackLeft4 = setup("/pics/player/swordsman/swordmanattackleft4", gp.tileSize, gp.tileSize);
+
+        attackUp1 = setup("/pics/player/swordsman/swordmanattackup1", gp.tileSize, gp.tileSize);
+        attackUp2 = setup("/pics/player/swordsman/swordmanattackup2", gp.tileSize, gp.tileSize);
+        attackUp3 = setup("/pics/player/swordsman/swordmanattackup3", gp.tileSize, gp.tileSize);
+        attackUp4 = setup("/pics/player/swordsman/swordmanattackup4", gp.tileSize, gp.tileSize);
+
+        attackDown1 = setup("/pics/player/swordsman/swordmanattackdown1", gp.tileSize, gp.tileSize);
+        attackDown2 = setup("/pics/player/swordsman/swordmanattackdown2", gp.tileSize, gp.tileSize);
+        attackDown3 = setup("/pics/player/swordsman/swordmanattackdown3", gp.tileSize, gp.tileSize);
+        attackDown4 = setup("/pics/player/swordsman/swordmanattackdown4", gp.tileSize, gp.tileSize);
     }
 
     public void setDefaultValuesForAssassin(){
@@ -199,16 +236,12 @@ public class Player extends Entity implements Cloneable{
         left3 = setup("/pics/player/walking/lwa3", gp.tileSize, gp.tileSize);
         left4 = setup("/pics/player/walking/lwa4", gp.tileSize, gp.tileSize);
         left5 = setup("/pics/player/walking/lwa5", gp.tileSize, gp.tileSize);
-        left6 = setup("/pics/player/walking/lwa6", gp.tileSize, gp.tileSize);
-        left7 = setup("/pics/player/walking/lwa7", gp.tileSize, gp.tileSize);
 
         right1 = setup("/pics/player/walking/wa1", gp.tileSize, gp.tileSize);
         right2 = setup("/pics/player/walking/wa2", gp.tileSize, gp.tileSize);
         right3 = setup("/pics/player/walking/wa3", gp.tileSize, gp.tileSize);
         right4 = setup("/pics/player/walking/wa4", gp.tileSize, gp.tileSize);
         right5 = setup("/pics/player/walking/wa5", gp.tileSize, gp.tileSize);
-        right6 = setup("/pics/player/walking/wa6", gp.tileSize, gp.tileSize);
-        right7 = setup("/pics/player/walking/wa7", gp.tileSize, gp.tileSize);
         
         
     }
@@ -273,7 +306,7 @@ public class Player extends Entity implements Cloneable{
               }
               else{direction = "right";}
             }
-    
+            // System.out.println("Speed: "+speed);
         // tig check sa collison
         collisionOn = false;
         gp.cChecker.checkTile(this);
@@ -336,11 +369,16 @@ public class Player extends Entity implements Cloneable{
             }
         }
         
-        if(keyH.enterPressed == true && attackCanceled == false ){
+        if(keyH.enterPressed == true && attackCanceled == false){
+            gp.playSE(7);
+            attacking = true;
+            spriteCounter = 0;
+        } else if( mouseH.rightClicked==true && attackCanceled==false){
             gp.playSE(7);
             attacking = true;
             spriteCounter = 0;
         }
+        
         attackCanceled = false;
         gp.keyH.enterPressed =false;
 
@@ -353,6 +391,12 @@ public class Player extends Entity implements Cloneable{
                 spriteNum = 3;
             }
             else if(spriteNum == 3){
+                spriteNum = 4;
+            }
+            else if(spriteNum == 4){
+                spriteNum = 5;
+            }
+            else if(spriteNum == 5){
                 spriteNum = 1;
             }
             spriteCounter=0;
@@ -625,6 +669,7 @@ public class Player extends Entity implements Cloneable{
         }
 
     }
+    
     public void draw(Graphics2D g2){
 
         // g2.setColor(Color.white); 
@@ -637,52 +682,76 @@ public class Player extends Entity implements Cloneable{
         
         switch(direction){
             case "up":
-                if(attacking ==false && gp.mouseH.getX()>=0 && gp.mouseH.getX()<=gp.screenWidth/2){
-                    if(spriteNum ==1){image = left1;}
-                    if(spriteNum==2){image =left2;}
-                    if(spriteNum==3){image =left3;}
-                    if(spriteNum==4){image =left4;}
-                    if(spriteNum==5){image =left5;}
-                    if(spriteNum==6){image =left6;}
-                    if(spriteNum==7){image =left7;}
-                }
-                if(attacking ==false && gp.mouseH.getX()>=gp.screenWidth/2 && gp.mouseH.getX()<=gp.screenWidth){
-                    if(spriteNum ==1){image = right1;}
-                    if(spriteNum==2){image =right2;}
-                    if(spriteNum==3){image =right3;}
-                    if(spriteNum==4){image =right4;}
-                    if(spriteNum==5){image =right5;}
-                    if(spriteNum==6){image =right6;}
-                    if(spriteNum==7){image =right7;}
-                }
+            if(attacking ==false){
+                if(spriteNum ==1){image = up1;}
+                if(spriteNum==2){image =up2;}
+                if(spriteNum==3){image =up3;}
+                if(spriteNum==4){image =up4;}
+                if(spriteNum==5){image =up5;}
+                // if(spriteNum==6){image =left6;}
+                // if(spriteNum==7){image =left7;}
+            }
+                // if(attacking ==false && gp.mouseH.getX()>=0 && gp.mouseH.getX()<=gp.screenWidth/2){
+                //     if(spriteNum ==1){image = up1;}
+                //     if(spriteNum==2){image =up2;}
+                //     if(spriteNum==3){image =up3;}
+                //     if(spriteNum==4){image =up4;}
+                //     if(spriteNum==5){image =up5;}
+                //     // if(spriteNum==6){image =left6;}
+                //     // if(spriteNum==7){image =left7;}
+                // }
+                // if(attacking ==false && gp.mouseH.getX()>=gp.screenWidth/2 && gp.mouseH.getX()<=gp.screenWidth){
+                //     if(spriteNum ==1){image = right1;}
+                //     if(spriteNum==2){image =right2;}
+                //     if(spriteNum==3){image =right3;}
+                //     if(spriteNum==4){image =right4;}
+                //     if(spriteNum==5){image =right5;}
+                //     if(spriteNum==6){image =right6;}
+                //     if(spriteNum==7){image =right7;}
+                // }
                 if(attacking == true){
-                    tempScreenY = screenY - gp.tileSize;
+                    tempScreenY = screenY - gp.tileSize/2;
                     if(spriteNum ==1){image = attackUp1;}
                     if(spriteNum==2){image = attackUp2;}
+                    if(spriteNum==3){image = attackUp3;}
+                    if(spriteNum==4){image = attackUp4;}
+                    if(spriteNum==5){image = attackUp4;}
                 }
                 
                 break;
             case "down":
-            if(attacking ==false && gp.mouseH.getX()>=0 && gp.mouseH.getX()<=gp.screenWidth/2){
-                if(spriteNum ==1){image = left1;}
-                if(spriteNum==2){image =left2;}
-                if(spriteNum==3){image =left3;}
-                if(spriteNum==4){image =left4;}
-                if(spriteNum==5){image =left5;}
-                if(spriteNum==6){image =left6;}
-                if(spriteNum==7){image =left7;}
-            }if(attacking ==false && gp.mouseH.getX()>=gp.screenWidth/2 && gp.mouseH.getX()<=gp.screenWidth){
-                if(spriteNum ==1){image = right1;}
-                if(spriteNum==2){image =right2;}
-                if(spriteNum==3){image =right3;}
-                if(spriteNum==4){image =right4;}
-                if(spriteNum==5){image =right5;}
-                if(spriteNum==6){image =right6;}
-                if(spriteNum==7){image =right7;}
+            if(attacking ==false){
+                if(spriteNum ==1){image = down1;}
+                if(spriteNum==2){image =down2;}
+                if(spriteNum==3){image =down3;}
+                if(spriteNum==4){image =down4;}
+                if(spriteNum==5){image =down5;}
             }
+            // if(attacking ==false && gp.mouseH.getX()>=0 && gp.mouseH.getX()<=gp.screenWidth/2){
+            //     if(spriteNum ==1){image = left1;}
+            //     if(spriteNum==2){image =left2;}
+            //     if(spriteNum==3){image =left3;}
+            //     if(spriteNum==4){image =left4;}
+            //     if(spriteNum==5){image =left5;}
+            //     if(spriteNum==6){image =left6;}
+            //     if(spriteNum==7){image =left7;}
+            // }if(attacking ==false && gp.mouseH.getX()>=gp.screenWidth/2 && gp.mouseH.getX()<=gp.screenWidth){
+            //     if(spriteNum ==1){image = right1;}
+            //     if(spriteNum==2){image =right2;}
+            //     if(spriteNum==3){image =right3;}
+            //     if(spriteNum==4){image =right4;}
+            //     if(spriteNum==5){image =right5;}
+            //     if(spriteNum==6){image =right6;}
+            //     if(spriteNum==7){image =right7;}
+            // }
                 if(attacking == true){
+                    tempScreenY = screenY + gp.tileSize/2;
                     if(spriteNum ==1){image = attackDown1;}
                     if(spriteNum==2){image = attackDown2;}
+                    if(spriteNum==3){image = attackDown2;}
+                    if(spriteNum==4){image = attackDown3;}
+                    if(spriteNum==5){image = attackDown4;}
+
                 }
                 break;
             case "left":
@@ -692,13 +761,14 @@ public class Player extends Entity implements Cloneable{
                 if(spriteNum==3){image =left3;}
                 if(spriteNum==4){image =left4;}
                 if(spriteNum==5){image =left5;}
-                if(spriteNum==6){image =left6;}
-                if(spriteNum==7){image =left7;}
             }
                 if(attacking == true){
-                    tempScreenX = screenX - gp.tileSize;
+                    tempScreenX = screenX - gp.tileSize/2;
                     if(spriteNum ==1){image = attackLeft1;}
                     if(spriteNum==2){image = attackLeft2;}
+                    if(spriteNum==3){image = attackLeft3;}
+                    if(spriteNum==4){image = attackLeft4;}
+                    if(spriteNum==5){image = attackLeft4;}
                 }
                 break;
             case "right":
@@ -708,13 +778,14 @@ public class Player extends Entity implements Cloneable{
                 if(spriteNum==3){image =right3;}
                 if(spriteNum==4){image =right4;}
                 if(spriteNum==5){image =right5;}
-                if(spriteNum==6){image =right6;}
-                if(spriteNum==7){image =right7;}
             }
                 if(attacking == true){
+                    tempScreenX = screenX + gp.tileSize/2;
                     if(spriteNum ==1){image = attackRight1;}
                     if(spriteNum==2){image = attackRight2;}
-                    if(spriteNum==3){image = attackRight1;}
+                    if(spriteNum==3){image = attackRight3;}
+                    if(spriteNum==4){image = attackRight4;}
+                    if(spriteNum==5){image = attackRight4;}
                 }
                 break;
 
@@ -726,8 +797,6 @@ public class Player extends Entity implements Cloneable{
                 if(spriteNum==3){image =right3;}
                 if(spriteNum==4){image =right4;}
                 if(spriteNum==5){image =right5;}
-                if(spriteNum==6){image =right6;}
-                if(spriteNum==7){image =right7;}
             }
                 break;
             case "upleft":
@@ -737,8 +806,6 @@ public class Player extends Entity implements Cloneable{
                 if(spriteNum==3){image =left3;}
                 if(spriteNum==4){image =left4;}
                 if(spriteNum==5){image =left5;}
-                if(spriteNum==6){image =left6;}
-                if(spriteNum==7){image =left7;}
             }
                 break;
             case "downright":
@@ -748,8 +815,6 @@ public class Player extends Entity implements Cloneable{
                 if(spriteNum==3){image =right3;}
                 if(spriteNum==4){image =right4;}
                 if(spriteNum==5){image =right5;}
-                if(spriteNum==6){image =right6;}
-                if(spriteNum==7){image =right7;}
             }
                 break;
             case "downleft":
@@ -759,8 +824,6 @@ public class Player extends Entity implements Cloneable{
                 if(spriteNum==3){image =left3;}
                 if(spriteNum==4){image =left4;}
                 if(spriteNum==5){image =left5;}
-                if(spriteNum==6){image =left6;}
-                if(spriteNum==7){image =left7;}
             }
                 break;
         }

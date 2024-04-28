@@ -20,11 +20,12 @@ public class Entity {
     public int worldX,worldY;
     
 
-    public BufferedImage up1,up2, down1, down2,down3,down4;
+    public BufferedImage up1,up2,up3,up4,up5, down1, down2,down3,down4,down5;
     public BufferedImage left1,left2,left3,left4,left5,left6,left7;
     public BufferedImage right1,right2,right3,right4,right5,right6,right7;
     public BufferedImage upright1,upright2, upleft1,upleft2,downright1,downright2,downleft1,downleft2;
-    public BufferedImage attackUp1,attackUp2, attackDown1, attackDown2, attackRight1, attackRight2, attackLeft1, attackLeft2;
+    public BufferedImage attackUp1,attackUp2,attackUp3,attackUp4, attackDown1, attackDown2,attackDown3, attackDown4;
+    public BufferedImage attackRight1, attackRight2,attackRight3, attackRight4, attackLeft1, attackLeft2,attackLeft3, attackLeft4;
     public BufferedImage imageProjectile1,imageProjectile2;
     public String direction = "down";
     // public String directionformoving = "hasmoveddown";
