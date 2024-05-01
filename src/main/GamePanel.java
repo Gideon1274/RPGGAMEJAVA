@@ -76,6 +76,12 @@ public class GamePanel extends JPanel implements Runnable{
     public final int characterState = 4;
     public final int optionState = 5;
     public final int inventoryState = 6;
+    
+    public boolean newgameHovered =false;
+    public boolean loadGameHovered = false;
+    public boolean quitHovered = false;
+
+
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
@@ -86,6 +92,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         this.addMouseListener(mouseH);
         addMouseListener(mouseH);
+    
     }
     public Player getPlayer() {
         return player;
@@ -118,6 +125,7 @@ public class GamePanel extends JPanel implements Runnable{
         gameThread.start();
 
     }
+    
     public void run(){
         double drawInterval = 1000000000/FPS;
         double delta = 0;
@@ -183,6 +191,7 @@ public class GamePanel extends JPanel implements Runnable{
         }
         
     }
+    
     public void drawToTempScreen(){
         //debug
         long drawStart = 0;

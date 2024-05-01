@@ -13,6 +13,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import entity.Entity;
 import object.OBJ_Heart;
@@ -23,7 +25,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
-
+import java.awt.FontMetrics;
 import java.awt.event.ActionEvent;
 
 public class UI {
@@ -34,6 +36,8 @@ public class UI {
     BufferedImage heart_full, heart_half, heart_blank, crystal_full, crystal_blank;
     BufferedImage windowMiddle,windowTop, windowLeft, windowRight, windowBottom, windowEdgeTLeft,windowEdgeTRight, windowEdgeBLeft, windowEdgeBRight;
     public BufferedImage cover;
+    public BufferedImage settingsUI;
+    public BufferedImage select1,select2,select3,select4;
     public boolean messageOn = false;
     // public String message = "";
     // int messageCounter = 0;
@@ -54,7 +58,8 @@ public class UI {
         this.gp = gp;
         try{
             //  InputStream is = getClass().getResourceAsStream("/pics/font/PurisaBold.ttf");
-             InputStream is = getClass().getResourceAsStream("/pics/font/maruMonica.ttf");
+            //  InputStream is = getClass().getResourceAsStream("/pics/font/maruMonica.ttf");
+             InputStream is = getClass().getResourceAsStream("/pics/font/final.ttf");
              maruMonica = Font.createFont(Font.TRUETYPE_FONT,is);
             //  purisaBold = Font.createFont(Font.TRUETYPE_FONT,is);
              
@@ -83,6 +88,13 @@ public class UI {
         windowEdgeBLeft =   setup("/pics/subwindow/bottomleft", gp.tileSize, gp.tileSize);
         windowBottom =      setup("/pics/subwindow/bottom", gp.tileSize, gp.tileSize);
         windowEdgeBRight =  setup("/pics/subwindow/bottomright", gp.tileSize, gp.tileSize);
+
+        select1 = setup("/pics/random/Selector01", gp.tileSize/2, gp.tileSize);
+        select2 = setup("/pics/random/Selector02", gp.tileSize/2, gp.tileSize);
+        select3 = setup("/pics/random/Selector03", gp.tileSize/2, gp.tileSize);
+        select4 = setup("/pics/random/Selector04", gp.tileSize/2, gp.tileSize);
+
+        settingsUI = setup("/pics/subwindow/settingsUI",gp.tileSize, gp.tileSize);
         
         // arial_40 = new Font("Georgia", Font.PLAIN, 40);
         // arial_80B = new Font("Arial", Font.BOLD, 80);
@@ -258,6 +270,7 @@ public class UI {
         i = 0;
         g2.drawImage(crystal_full, x, y, null);
         g2.setColor(Color.BLACK);
+        y=(int)(y*1.2);
         g2.fillRoundRect(x*3, y, (int)gp.tileSize*3, rectHeight + 2 * borderSize, 10, 10);
         // g2.setColor(Color.WHITE);
         // g2.fillRect(x, y, rectWidth, rectHeight);
@@ -270,7 +283,8 @@ public class UI {
         g2.setColor(Color.white);
         g2.drawString(gp.player.mana+"/"+gp.player.maxMana, x*4, y+20);
 
-        
+  
+
     }   
     public void drawMessage(){
         int messageX = gp.tileSize;
@@ -330,30 +344,49 @@ public class UI {
             //menu
             g2.setFont(g2.getFont().deriveFont(Font.BOLD,48F));
 
-            text = "NEW GAME";
+            
+            text = "PLAY";
             x = getXforCenteredText(text);
-            y+=gp.tileSize*3.5;
-            g2.drawString(text, x, y);
-            if(commandNum ==0){
-                g2.drawString(">", x - gp.tileSize,y );
-            }
+            y += gp.tileSize * 3.5;
 
-            text = "LOAD GAME";
+        
+            FontMetrics metrics = g2.getFontMetrics();
+            int textWidth = metrics.stringWidth(text);
+
+            if (commandNum == 0) {
+                g2.drawImage(select1, x-15, y-50, null);
+            }
+             
+                g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
+
+                if (commandNum == 0) {
+                g2.drawImage(select2, x + textWidth-15, y-50, null);
+            }
+            text = "BOANG";
             x = getXforCenteredText(text);
             y+=gp.tileSize;
+            textWidth = metrics.stringWidth(text);
+            if(commandNum ==1){
+                // g2.drawString(">", x - gp.tileSize,y );
+                g2.drawImage(select1, x-15, y-50, null);
+            }
             g2.drawString(text, x, y);
             if(commandNum ==1){
-                g2.drawString(">", x - gp.tileSize,y );
+                g2.drawImage(select2, x + textWidth-15, y-50, null);
             }
-            
-            text = "QUIT";
+
+            text = "DI NAKO";
             x = getXforCenteredText(text);
             y+=gp.tileSize;
-            g2.drawString(text, x, y);
-            if(commandNum ==2){
-                g2.drawString(">", x - gp.tileSize,y );
-            }
+            textWidth = metrics.stringWidth(text);
             
+            if(commandNum ==2){
+                g2.drawImage(select1, x-15, y-50, null);
+                // g2.drawString(">", x - gp.tileSize,y );
+            }g2.drawString(text, x, y);
+            if(commandNum ==2){
+                g2.drawImage(select2, x + textWidth-15, y-50, null);
+            }
         }
         else if (titleScreenState == 1){
             g2.setColor(new Color(150,5,5));
@@ -367,33 +400,54 @@ public class UI {
             text = "Knight";
             x = getXforCenteredText(text);
             y+= gp.tileSize*3;
-            g2.drawString(text, x, y);
+            
+            FontMetrics metrics = g2.getFontMetrics();
+            int textWidth = metrics.stringWidth(text);
+
+            // g2.drawString(text, x, y);
             if(commandNum == 0){
-            g2.drawString(">", x-gp.tileSize, y);
+                g2.drawImage(select1, x-15, y-50, null);
+            }
+            g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
+
+            if (commandNum == 0) {
+                g2.drawImage(select2, x + textWidth-15, y-50, null);
             }
             
             text = "Assassin";
             x = getXforCenteredText(text);
             y+= gp.tileSize;
+            textWidth = metrics.stringWidth(text);
             g2.drawString(text, x, y);
             if(commandNum == 1){
-                g2.drawString(">", x-gp.tileSize, y);
+                g2.drawImage(select1, x-15, y-50, null);
+            }
+            if(commandNum == 1){
+                g2.drawImage(select2, x + textWidth-15, y-50, null);
             }
 
             text = "Caster";
             x = getXforCenteredText(text);
             y+= gp.tileSize;
+            textWidth = metrics.stringWidth(text);
             g2.drawString(text, x, y);
             if(commandNum == 2){
-                g2.drawString(">", x-gp.tileSize, y);
+                g2.drawImage(select1, x-15, y-50, null);
+            }
+            if(commandNum == 2){
+                g2.drawImage(select2, x + textWidth-15, y-50, null);
             }
 
             text = "Back";
             x = getXforCenteredText(text);
             y+= gp.tileSize*2;
             g2.drawString(text, x, y);
+            textWidth = metrics.stringWidth(text);
             if(commandNum == 3){
-                g2.drawString(">", x-gp.tileSize, y);
+                g2.drawImage(select1, x-15, y-50, null);
+            }
+            if(commandNum == 3){
+                g2.drawImage(select2, x + textWidth-15, y-50, null);
             }
         }
         
