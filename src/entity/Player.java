@@ -4,6 +4,8 @@ import main.GamePanel;
 import main.KeyHandler;
 import main.MouseHandler;
 import java.awt.event.MouseMotionListener;
+
+import object.OBJ_Arrow;
 import object.OBJ_Fireball;
 import object.OBJ_Getsuga;
 import object.OBJ_Heart;
@@ -103,7 +105,8 @@ public class Player extends Entity implements Cloneable{
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         // projectile = new OBJ_Fireball(gp);
-        projectile = new OBJ_Getsuga(gp);
+        // projectile = new OBJ_Getsuga(gp);
+        projectile = new OBJ_Arrow(gp);
         // projectile = new OBJ_Rock(gp);
         attack = getAttack();
         defense = getDefense();

@@ -165,7 +165,10 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_B){
                 gp.gameState = gp.inventoryState;
             }
-           
+            if (code == KeyEvent.VK_1){
+                gp.gameState = gp.inventoryState;
+            }
+            
             
     }
     public void optionState(int code){
@@ -174,6 +177,7 @@ public class KeyHandler implements KeyListener {
         if(code == KeyEvent.VK_ESCAPE){
             gp.gameState = gp.playState;
         }
+        
     }
     public void inventoryState(int code){
         if(code == KeyEvent.VK_B){

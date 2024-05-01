@@ -3,13 +3,14 @@ package main;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 
 public class MouseHandler extends MouseAdapter implements MouseMotionListener,MouseListener {
     public boolean leftClicked = false;
     public boolean rightClicked = false;
     GamePanel gp;
+    Graphics2D g2;
     private static int mouseX = -1 , mouseY = -1, mouseB = -1;
     public static int getX(){
         return mouseX;
