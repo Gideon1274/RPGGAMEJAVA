@@ -282,7 +282,8 @@ public class UI {
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2.setColor(Color.white);
         g2.drawString(gp.player.mana+"/"+gp.player.maxMana, x*4, y+20);
-
+        
+        
   
 
     }   

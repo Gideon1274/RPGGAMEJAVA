@@ -2,14 +2,17 @@ package main;
 
 import entity.Entity;
 import entity.NPC_OldMan;
+import entity.OBJ_coTree;
 import monster.MON_Crab;
 import monster.MON_GreenSlime;
+import monster.MON_coTree;
 import object.OBJ_Axe;
 import object.OBJ_Coin_Bronze;
 import object.OBJ_Door;
 import object.OBJ_Heart;
 import object.OBJ_Key;
 import object.OBJ_ManaCrystal;
+import object.OBJ_PortalBlue;
 import object.OBJ_Potion_Red;
 import object.OBJ_Shield_Blue;
 import object.OBJ_Trees;
@@ -23,11 +26,13 @@ public class AssetSetter {
 
     public void setObject(){
         int i =0;
-        // gp.obj[i] = new OBJ_Door(gp);
-        // gp.obj[i].worldX = gp.tileSize*26;
-        // gp.obj[i].worldY = gp.tileSize*16;
-        // gp.obj[i].collision = false;
-        // i++;
+        gp.obj[i] = new OBJ_PortalBlue(gp);
+        gp.obj[i].worldX = gp.tileSize*26;
+        gp.obj[i].worldY = gp.tileSize*20;
+        gp.obj[i].collision = false;
+        i++;
+
+        
 
         // gp.obj[i] = new OBJ_Coin_Bronze(gp);
         // gp.obj[i].worldX = gp.tileSize*25;
@@ -65,27 +70,34 @@ public class AssetSetter {
         // i++;
 
         
-
     }
     public void setNPC(){
-        int i;
+        int i=0;
         // gp.npc[i] = new NPC_OldMan(gp);
         // gp.npc[i].worldX = gp.tileSize*9;
         // gp.npc[i].worldY = gp.tileSize*10;
+
+        gp.npc[i] = new OBJ_coTree(gp);
+        gp.npc[i].worldX = gp.tileSize*30;
+        gp.npc[i].worldY = gp.tileSize*30;
+        i++;
         
     }
+    // up1 = setup("/pics/objects/cotree00", gp.tileSize, gp.tileSize);
+    // up2 = setup("/pics/objects/cotree00", gp.tileSize, gp.tileSize);
+    // down1 = setup("/pics/objects/cotree01", gp.tileSize, gp.tileSize);
+    // down2 = setup("/pics/objects/cotree01", gp.tileSize, gp.tileSize);
+    // left1 = setup("/pics/objects/cotree02", gp.tileSize, gp.tileSize);
+    // left2 = setup("/pics/objects/cotree02", gp.tileSize, gp.tileSize);
+    // right1 = setup("/pics/objects/cotree03", gp.tileSize, gp.tileSize);
+    // right2 = setup("/pics/objects/cotree03", gp.tileSize, gp.tileSize);
     public void setMonster(){
         int i  = 0;
 
-        gp.monster[i] = new MON_GreenSlime(gp);
-        gp.monster[i].worldX = gp.tileSize * 11;
-        gp.monster[i].worldY = gp.tileSize * 10;
-        i++;
-
-        gp.monster[i] = new MON_GreenSlime(gp);
-        gp.monster[i].worldX = gp.tileSize * 11;
-        gp.monster[i].worldY = gp.tileSize * 11;
-        i++;
+        // gp.monster[i] = new MON_coTree(gp);
+        // gp.monster[i].worldX = gp.tileSize * 30;
+        // gp.monster[i].worldY = gp.tileSize * 30;
+        // i++;
 
         gp.monster[i] = new MON_GreenSlime(gp);
         gp.monster[i].worldX = gp.tileSize * 23;

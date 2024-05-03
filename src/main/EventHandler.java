@@ -48,13 +48,8 @@ public class EventHandler {
         System.out.println(gp.player.screenX);
         if(canTouchEvent==true){
             // if(hit(26,16, "any") == true){damagePit(26,16,gp.dialogueState);}
-                
-            if(hit(26,20, "any") == true){teleport(gp.dialogueState,30,30);System.out.println(1);}
-            if(hit(27,20, "any") == true){teleport(gp.dialogueState,30,30);System.out.println(2);}
-            if(hit(28,20, "any") == true){teleport(gp.dialogueState,30,30);System.out.println(3);}
-            if(hit(29,20, "any") == true){teleport(gp.dialogueState,30,30);System.out.println(4);}
-            if(hit(30,20, "any") == true){teleport(gp.dialogueState,30,30);System.out.println(5);}
-            if(hit(31,20, "any") == true){teleport(gp.dialogueState,30,30);System.out.println(6);}
+
+            if(hit(26,20, "any") == true){teleport(gp.dialogueState,30,30);}
             if(hit(32, 20, "up") == true){healingPool(23,12,gp.dialogueState);}     
         }
         
@@ -112,5 +107,6 @@ public class EventHandler {
         gp.ui.currentDialogue = "Teleport!";
         gp.player.worldX = gp.tileSize * tlX;
         gp.player.worldY = gp.tileSize * tlY;
+        
     }
 }
