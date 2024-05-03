@@ -17,6 +17,8 @@ public class subWindow extends Entity {
         image7 = setup("/pics/subwindow/bottomleft", gp.tileSize, gp.tileSize);
         image8 = setup("/pics/subwindow/bottom", gp.tileSize, gp.tileSize);
         image9 = setup("/pics/subwindow/bottomright", gp.tileSize, gp.tileSize);
+
+        
         
     }
 
