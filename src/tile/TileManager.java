@@ -25,42 +25,40 @@ public class TileManager{
 
     }
     public void getTileImage(){       
-            // //placeholder
-            // setup(0, "grass00", false);
-            // setup(1, "grass00", false);
-            // setup(2, "grass00", false);
-            // setup(3, "grass00", false);
-            // setup(4, "grass00", false);
-            // setup(5, "grass00", false);
-            // setup(6, "grass00", false);
-            // setup(7, "grass00", false);
-            // setup(8, "grass00", false);
-            // setup(9, "grass00", false);
+            //placeholder
+            setup(0, "000", false);
+            setup(1, "000", false);
+            setup(2, "000", false);
+            setup(3, "000", false);
+            setup(4, "000", false);
+            setup(5, "000", false);
+            setup(6, "000", false);
+            setup(7, "000", false);
+            setup(8, "000", false);
+            setup(9, "000", false);
             //placeholder
 
 
-            setup(0, "000", false); 
-            setup(1, "001", false);
-            setup(2, "002", true);
-            setup(3, "003", true);
-            setup(4, "004", false);
-            setup(5, "005", true);
-            setup(6, "006", false);
-            setup(7, "007", false);
-            setup(8, "008", false);
-            setup(9, "009", false);
-            setup(10, "010", false);
-            setup(11, "011", false);
-            setup(12, "012", false);
-            setup(13, "013", false);
-            setup(14, "014", true);
-            setup(15, "015", true);
-            setup(16, "016", false);
-            setup(17, "017", false);
-            // setup(18, "018", false);
-            // setup(19, "019", false);
-            // setup(20, "020", false);
-            // setup(21, "021", false);
+            setup(10, "000", false); 
+            setup(11, "001", false);
+            setup(12, "002", true);
+            setup(13, "003", true);
+            setup(14, "004", false);
+            setup(15, "005", true);
+            setup(16, "006", false);
+            setup(17, "007", false);
+            setup(18, "008", false);
+            setup(19, "009", false);
+            setup(20, "010", false);
+            setup(21, "011", false);
+            setup(22, "012", false);
+            setup(23, "013", false);
+            setup(24, "014", true);
+            setup(25, "015", true);
+            setup(26, "016", false);
+            setup(27, "017", false);
+            setup(28, "018", true);
+            setup(29, "019", true);
             // setup(22, "022", false);
             // setup(23, "023", false);
             // setup(24, "024", false);
@@ -68,8 +66,6 @@ public class TileManager{
             // setup(26, "026", false);
             // setup(27, "027", false);
             // setup(28, "028", false);
-            setup(29, "029", false);
-            setup(20, "030", true);
  
 
 
