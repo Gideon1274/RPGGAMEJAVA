@@ -29,48 +29,49 @@ public class AssetSetter {
         // gp.obj[i].collision = false;
         // i++;
 
-        gp.obj[i] = new OBJ_Coin_Bronze(gp);
-        gp.obj[i].worldX = gp.tileSize*25;
-        gp.obj[i].worldY = gp.tileSize*19;
-        i++;
+        // gp.obj[i] = new OBJ_Coin_Bronze(gp);
+        // gp.obj[i].worldX = gp.tileSize*25;
+        // gp.obj[i].worldY = gp.tileSize*19;
+        // i++;
 
-        gp.obj[i] = new OBJ_Coin_Bronze(gp);
-        gp.obj[i].worldX = gp.tileSize*24;
-        gp.obj[i].worldY = gp.tileSize*19;
-        i++;
+        // gp.obj[i] = new OBJ_Coin_Bronze(gp);
+        // gp.obj[i].worldX = gp.tileSize*24;
+        // gp.obj[i].worldY = gp.tileSize*19;
+        // i++;
         
-        gp.obj[i] = new OBJ_Axe(gp);
-        gp.obj[i].worldX = gp.tileSize*26;
-        gp.obj[i].worldY = gp.tileSize*21;
-        i++;
+        // gp.obj[i] = new OBJ_Axe(gp);
+        // gp.obj[i].worldX = gp.tileSize*26;
+        // gp.obj[i].worldY = gp.tileSize*21;
+        // i++;
 
-        gp.obj[i] = new OBJ_Shield_Blue(gp);
-        gp.obj[i].worldX = gp.tileSize*25;
-        gp.obj[i].worldY = gp.tileSize*21;
-        i++;
+        // gp.obj[i] = new OBJ_Shield_Blue(gp);
+        // gp.obj[i].worldX = gp.tileSize*25;
+        // gp.obj[i].worldY = gp.tileSize*21;
+        // i++;
 
-        gp.obj[i] = new OBJ_Potion_Red(gp);
-        gp.obj[i].worldX = gp.tileSize*22;
-        gp.obj[i].worldY = gp.tileSize*27;
-        i++;
+        // gp.obj[i] = new OBJ_Potion_Red(gp);
+        // gp.obj[i].worldX = gp.tileSize*22;
+        // gp.obj[i].worldY = gp.tileSize*27;
+        // i++;
 
-        gp.obj[i] = new OBJ_Heart(gp);
-        gp.obj[i].worldX = gp.tileSize*22;
-        gp.obj[i].worldY = gp.tileSize*29;
-        i++;
+        // gp.obj[i] = new OBJ_Heart(gp);
+        // gp.obj[i].worldX = gp.tileSize*22;
+        // gp.obj[i].worldY = gp.tileSize*29;
+        // i++;
 
-        gp.obj[i] = new OBJ_ManaCrystal(gp);
-        gp.obj[i].worldX = gp.tileSize*22;
-        gp.obj[i].worldY = gp.tileSize*31;
-        i++;
+        // gp.obj[i] = new OBJ_ManaCrystal(gp);
+        // gp.obj[i].worldX = gp.tileSize*22;
+        // gp.obj[i].worldY = gp.tileSize*31;
+        // i++;
 
         
 
     }
     public void setNPC(){
-        gp.npc[0] = new NPC_OldMan(gp);
-        gp.npc[0].worldX = gp.tileSize*9;
-        gp.npc[0].worldY = gp.tileSize*10;
+        int i;
+        // gp.npc[i] = new NPC_OldMan(gp);
+        // gp.npc[i].worldX = gp.tileSize*9;
+        // gp.npc[i].worldY = gp.tileSize*10;
         
     }
     public void setMonster(){
@@ -114,17 +115,17 @@ public class AssetSetter {
         i++;
     }
     public void setTree(){
-        int i = 0;
-        for(int q=20;q<=25;q++){
-            for(int j=12;j<=17;j++){
-                Tree(i, q, j);i++;    
-            }      
-        }
-        for(int q=25;q<=30;q++){
-            for(int j=12;j<=17;j++){
-                Tree(i, q, j);i++;    
-            }      
-        }
+        // int i = 0;
+        // for(int q=20;q<=25;q++){
+        //     for(int j=12;j<=17;j++){
+        //         Tree(i, q, j);i++;    
+        //     }      
+        // }
+        // for(int q=25;q<=30;q++){
+        //     for(int j=12;j<=17;j++){
+        //         Tree(i, q, j);i++;    
+        //     }      
+        // }
         
                
     }

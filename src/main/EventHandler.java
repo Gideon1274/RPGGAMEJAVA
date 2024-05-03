@@ -40,14 +40,22 @@ public class EventHandler {
         int xDistance = Math.abs(gp.player.worldX - previousEventX);
         int yDistance = Math.abs(gp.player.worldY - previousEventY);
         int distance = Math.max(xDistance, yDistance);
+        System.out.println((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize+" "+(gp.player.worldY + gp.player.solidArea.y)/gp.tileSize);
         if(distance>gp.tileSize){
             canTouchEvent = true;
 
         }
+        System.out.println(gp.player.screenX);
         if(canTouchEvent==true){
             // if(hit(26,16, "any") == true){damagePit(26,16,gp.dialogueState);}
-            if(hit(26,16, "any") == true){teleport(25,16,gp.dialogueState);}
-            if(hit(23, 12, "up") == true){healingPool(23,12,gp.dialogueState);}     
+                
+            if(hit(26,20, "any") == true){teleport(gp.dialogueState,30,30);System.out.println(1);}
+            if(hit(27,20, "any") == true){teleport(gp.dialogueState,30,30);System.out.println(2);}
+            if(hit(28,20, "any") == true){teleport(gp.dialogueState,30,30);System.out.println(3);}
+            if(hit(29,20, "any") == true){teleport(gp.dialogueState,30,30);System.out.println(4);}
+            if(hit(30,20, "any") == true){teleport(gp.dialogueState,30,30);System.out.println(5);}
+            if(hit(31,20, "any") == true){teleport(gp.dialogueState,30,30);System.out.println(6);}
+            if(hit(32, 20, "up") == true){healingPool(23,12,gp.dialogueState);}     
         }
         
         // if(hit(26,16,6"right") == true){teleport(gp.dialogueState);}
@@ -98,11 +106,11 @@ public class EventHandler {
             gp.aSetter.setMonster();
         }
     }
-    public void teleport(int col, int row, int gameState){
+    public void teleport(int gameState, int tlX,int tlY){
         gp.gameState = gameState;
         gp.playSE(6);
         gp.ui.currentDialogue = "Teleport!";
-        gp.player.worldX = gp.tileSize * 37;
-        gp.player.worldY = gp.tileSize * 10;
+        gp.player.worldX = gp.tileSize * tlX;
+        gp.player.worldY = gp.tileSize * tlY;
     }
 }

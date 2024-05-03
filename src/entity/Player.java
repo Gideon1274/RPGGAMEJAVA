@@ -67,7 +67,7 @@ public class Player extends Entity implements Cloneable{
         this.playerClass = playerClass;
         
         level = 1;
-        speed = 15;
+        speed = 20;
         exp = 0;
         nextLevelExp = 5;
         coin = 0;
