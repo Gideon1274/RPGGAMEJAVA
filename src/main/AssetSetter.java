@@ -54,11 +54,39 @@ public class AssetSetter {
         // gp.obj[i].worldY = gp.tileSize*21;
         // i++;
 
-        // gp.obj[i] = new OBJ_Potion_Red(gp);
-        // gp.obj[i].worldX = gp.tileSize*22;
-        // gp.obj[i].worldY = gp.tileSize*27;
-        // i++;
-
+        gp.obj[i] = new OBJ_Potion_Red(gp);
+        gp.obj[i].worldX = gp.tileSize*22;
+        gp.obj[i].worldY = gp.tileSize*27;
+        i++;
+         gp.obj[i] = new OBJ_Potion_Red(gp);
+        gp.obj[i].worldX = gp.tileSize*23;
+        gp.obj[i].worldY = gp.tileSize*27;
+        i++;
+        gp.obj[i] = new OBJ_Potion_Red(gp);
+        gp.obj[i].worldX = gp.tileSize*23;
+        gp.obj[i].worldY = gp.tileSize*27;
+        i++;gp.obj[i] = new OBJ_Potion_Red(gp);
+        gp.obj[i].worldX = gp.tileSize*23;
+        gp.obj[i].worldY = gp.tileSize*27;
+        i++;gp.obj[i] = new OBJ_Potion_Red(gp);
+        gp.obj[i].worldX = gp.tileSize*23;
+        gp.obj[i].worldY = gp.tileSize*27;
+        i++;gp.obj[i] = new OBJ_Potion_Red(gp);
+        gp.obj[i].worldX = gp.tileSize*23;
+        gp.obj[i].worldY = gp.tileSize*27;
+        i++;gp.obj[i] = new OBJ_Potion_Red(gp);
+        gp.obj[i].worldX = gp.tileSize*23;
+        gp.obj[i].worldY = gp.tileSize*27;
+        i++;gp.obj[i] = new OBJ_Potion_Red(gp);
+        gp.obj[i].worldX = gp.tileSize*23;
+        gp.obj[i].worldY = gp.tileSize*27;
+        i++;gp.obj[i] = new OBJ_Potion_Red(gp);
+        gp.obj[i].worldX = gp.tileSize*23;
+        gp.obj[i].worldY = gp.tileSize*27;
+        i++;gp.obj[i] = new OBJ_Potion_Red(gp);
+        gp.obj[i].worldX = gp.tileSize*23;
+        gp.obj[i].worldY = gp.tileSize*27;
+        i++;
         // gp.obj[i] = new OBJ_Heart(gp);
         // gp.obj[i].worldX = gp.tileSize*22;
         // gp.obj[i].worldY = gp.tileSize*29;
@@ -73,15 +101,41 @@ public class AssetSetter {
     }
     public void setNPC(){
         int i=0;
-        // gp.npc[i] = new NPC_OldMan(gp);
-        // gp.npc[i].worldX = gp.tileSize*9;
-        // gp.npc[i].worldY = gp.tileSize*10;
+        gp.npc[i] = new NPC_OldMan(gp);
+        gp.npc[i].worldX = gp.tileSize*35;
+        gp.npc[i].worldY = gp.tileSize*35;i++;
 
-        gp.npc[i] = new OBJ_coTree(gp);
-        gp.npc[i].worldX = gp.tileSize*30;
-        gp.npc[i].worldY = gp.tileSize*30;
-        i++;
+        gp.npc[i] = new NPC_OldMan(gp);
+        gp.npc[i].worldX = gp.tileSize*35;
+        gp.npc[i].worldY = gp.tileSize*40;i++;
         
+        gp.npc[i] = new NPC_OldMan(gp);
+        gp.npc[i].worldX = gp.tileSize*35;
+        gp.npc[i].worldY = gp.tileSize*45;i++;
+        
+        for(int q=17;q<=82;q++){
+            for(int j=48;j<=54;j++){
+                setcoTree(i, q, j);i++;    
+            }      
+        }
+        // for(int q=25;q<=30;q++){
+        //     for(int j=12;j<=17;j++){
+        //         Tree(i, q, j);i++;    
+        //     }      
+        // }
+        
+        
+    }
+
+    public void setcoTree(int i, int x, int y){
+        gp.npc[i] = new OBJ_coTree(gp);
+        gp.npc[i].worldX = gp.tileSize*x;
+        gp.npc[i].worldY = gp.tileSize*y;
+    }
+    public void Tree(int i, int x, int y){
+        gp.obj[i] = new OBJ_Trees(gp);
+        gp.obj[i].worldX = gp.tileSize*x;
+        gp.obj[i].worldY = gp.tileSize*y;
     }
     // up1 = setup("/pics/objects/cotree00", gp.tileSize, gp.tileSize);
     // up2 = setup("/pics/objects/cotree00", gp.tileSize, gp.tileSize);
@@ -143,9 +197,5 @@ public class AssetSetter {
     }
 
 
-    public void Tree(int i, int x, int y){
-        gp.obj[i] = new OBJ_Trees(gp);
-        gp.obj[i].worldX = gp.tileSize*x;
-        gp.obj[i].worldY = gp.tileSize*y;
-    }
+    
 }

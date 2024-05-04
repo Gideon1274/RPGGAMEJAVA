@@ -13,6 +13,9 @@ import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
+
+import ai.PathFinder;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -56,14 +59,15 @@ public class GamePanel extends JPanel implements Runnable{
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
+    public PathFinder pFinder = new PathFinder(this);
     Thread gameThread;
 
     // entity and object
     public Player player = new Player(this,keyH, mouseH);
     public Entity obj[] = new Entity[500];
-    public Entity npc[] = new Entity[10];
-    public Entity tree[] = new Entity[50];
-    public Entity monster[] = new Entity[20];
+    public Entity npc[] = new Entity[500];
+    public Entity tree[] = new Entity[500];
+    public Entity monster[] = new Entity[500];
     public ArrayList<Entity> projectileList = new ArrayList<>();
     public ArrayList<Entity> entityList = new ArrayList<>();
 
