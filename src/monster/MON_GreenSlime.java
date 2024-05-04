@@ -38,24 +38,30 @@ public class MON_GreenSlime extends Entity {
         
     }
     public void getImage(){
-        up1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-        
-        left1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-        downleft1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        downleft2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-        upleft1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        upleft2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/pics/monster/slimes/up00", gp.tileSize, gp.tileSize);
+        up2 = setup("/pics/monster/slimes/up01", gp.tileSize, gp.tileSize);
 
-        right1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-        downright1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        downright2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-        upright1 = setup("/pics/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        upright2 = setup("/pics/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/pics/monster/slimes/down00", gp.tileSize, gp.tileSize);
+        down2 = setup("/pics/monster/slimes/down01", gp.tileSize, gp.tileSize);
+
+        left1 = setup("/pics/monster/slimes/left00", gp.tileSize, gp.tileSize);
+        left2 = setup("/pics/monster/slimes/left01", gp.tileSize, gp.tileSize);
+
+        right1 = setup("/pics/monster/slimes/right00", gp.tileSize, gp.tileSize);
+        right2 = setup("/pics/monster/slimes/right01", gp.tileSize, gp.tileSize);
+
+        
+        downleft1 = setup("/pics/monster/slimes/left00", gp.tileSize, gp.tileSize);
+        downleft2 = setup("/pics/monster/slimes/left01", gp.tileSize, gp.tileSize);
+
+        upleft1 = setup("/pics/monster/slimes/left00", gp.tileSize, gp.tileSize);
+        upleft2 = setup("/pics/monster/slimes/left01", gp.tileSize, gp.tileSize);
+
+        downright1 = setup("/pics/monster/slimes/right00", gp.tileSize, gp.tileSize);
+        downright2 = setup("/pics/monster/slimes/right01", gp.tileSize, gp.tileSize);
+
+        upright1 = setup("/pics/monster/slimes/right00", gp.tileSize, gp.tileSize);
+        upright2 = setup("/pics/monster/slimes/right01", gp.tileSize, gp.tileSize);
     }
     public void setAction(){
             actionLockCounter++;

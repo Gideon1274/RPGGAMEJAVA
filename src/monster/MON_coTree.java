@@ -24,6 +24,7 @@ public class MON_coTree extends Entity {
         attack = 5;
         defense = 0;
         exp = 6;
+        obtainable = true;
         projectile = new OBJ_Rock(gp);
 
         solidArea.x = 0;

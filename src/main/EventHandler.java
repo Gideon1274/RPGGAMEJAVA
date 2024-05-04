@@ -40,12 +40,12 @@ public class EventHandler {
         int xDistance = Math.abs(gp.player.worldX - previousEventX);
         int yDistance = Math.abs(gp.player.worldY - previousEventY);
         int distance = Math.max(xDistance, yDistance);
-        System.out.println((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize+" "+(gp.player.worldY + gp.player.solidArea.y)/gp.tileSize);
+        // System.out.println((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize+" "+(gp.player.worldY + gp.player.solidArea.y)/gp.tileSize);
         if(distance>gp.tileSize){
             canTouchEvent = true;
 
         }
-        System.out.println(gp.player.screenX);
+        // System.out.println(gp.player.screenX);
         if(canTouchEvent==true){
             // if(hit(26,16, "any") == true){damagePit(26,16,gp.dialogueState);}
 

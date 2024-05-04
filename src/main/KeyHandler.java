@@ -96,7 +96,6 @@ public class KeyHandler implements KeyListener {
         if(code == KeyEvent.VK_ENTER){
             if (gp.ui.commandNum == 0) {
                 playerClass = 1;
-                System.out.println("Selected Knight");
                 gp.player.setPlayerClass(playerClass); // Set the player's class
                 gp.gameState = gp.playState;
                 gp.playMusic(0);
@@ -104,7 +103,6 @@ public class KeyHandler implements KeyListener {
 
             if (gp.ui.commandNum == 1) {
                 playerClass = 2;
-                System.out.println("Selected Assassin");
                 gp.player.setPlayerClass(playerClass); 
                 gp.gameState = gp.playState;
                 gp.playMusic(0);
@@ -112,7 +110,6 @@ public class KeyHandler implements KeyListener {
                 
             
             if(gp.ui.commandNum == 2){
-                System.out.println("Selected Assassin");
                 gp.player.setPlayerClass(playerClass); 
                 gp.gameState  = gp.playState;
                 gp.playMusic(0);

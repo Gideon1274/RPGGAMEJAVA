@@ -376,7 +376,7 @@ public class Player extends Entity implements Cloneable{
             gp.playSE(7);
             attacking = true;
             spriteCounter = 0;
-        } else if( mouseH.rightClicked==true && attackCanceled==false){
+        } else if( mouseH.rightClicked==true){
             gp.playSE(7);
             attacking = true;
             spriteCounter = 0;
@@ -544,11 +544,12 @@ public class Player extends Entity implements Cloneable{
             //invetory items
             else{
                 String text;
-            if(inventory.size()!=maxInventorySize&&gp.obj[i].obtainable==true){
-                inventory.add(gp.obj[i]);
+                if(inventory.size()!=maxInventorySize&&gp.obj[i].obtainable==true){
+                    inventory.add(gp.obj[i]);
                 gp.playSE(1);
                 text = "Got a " + gp.obj[i].name + "!";
                 gp.obj[i] = null;    
+                }
             }
             // else if(gp.obj[i].obtainable == false){
             //     text = "Item cannot be obtained!";
@@ -562,7 +563,7 @@ public class Player extends Entity implements Cloneable{
         }
         
 
-    }
+    
     public void interactNPC(int i){
         if(gp.keyH.enterPressed == true){
             if(i!=999){
@@ -673,6 +674,39 @@ public class Player extends Entity implements Cloneable{
 
     }
     
+    public int searchItemInInventory(String itemName){
+        int itemIndex = 999;
+
+        for (int i = 0;i<inventory.size();i++){
+            if(inventory.get(i).name.equals(itemName)){
+                itemIndex = 1;
+                break;
+            }
+        }
+        return itemIndex; 
+    }
+    public boolean canObtainItem(Entity item){
+        boolean canObtain  = false;
+        if(item.stackable == true){
+            int index = searchItemInInventory(item.name);
+            
+            if(index!=999){
+                inventory.get(index).amount++;
+                canObtain =true;
+            }else{//that means it is a new item
+                if(inventory.size() != maxInventorySize){
+                    inventory.add(item);
+                    canObtain = true;
+                }
+            }
+        }else{//meaning item is not stackable
+            if(inventory.size() != maxInventorySize){
+                inventory.add(item);
+                canObtain = true;
+            }
+        }
+        return canObtain;
+    }
     public void draw(Graphics2D g2){
 
         // g2.setColor(Color.white); 

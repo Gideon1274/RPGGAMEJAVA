@@ -21,6 +21,7 @@ import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
 import object.subWindow;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -38,6 +39,7 @@ public class UI {
     public BufferedImage cover;
     public BufferedImage settingsUI;
     public BufferedImage select1,select2,select3,select4;
+    public BufferedImage yellowbox, whitebox,redbox,greenbox,bluebox;
     public boolean messageOn = false;
     // public String message = "";
     // int messageCounter = 0;
@@ -95,7 +97,12 @@ public class UI {
         select4 = setup("/pics/random/Selector04", gp.tileSize/2, gp.tileSize);
 
         settingsUI = setup("/pics/subwindow/settingsUI",gp.tileSize, gp.tileSize);
-        
+
+        whitebox = setup("/pics/subwindow/whitebox", gp.tileSize, gp.tileSize);
+        redbox = setup("/pics/subwindow/redbox", gp.tileSize, gp.tileSize);
+        bluebox  = setup("/pics/subwindow/bluebox", gp.tileSize, gp.tileSize);
+
+
         // arial_40 = new Font("Georgia", Font.PLAIN, 40);
         // arial_80B = new Font("Arial", Font.BOLD, 80);
     }
@@ -621,12 +628,14 @@ public class UI {
             if(gp.player.inventory.get(i) == gp.player.currentWeapon || 
                 gp.player.inventory.get(i) == gp.player.currentShield){
                     g2.setColor(new Color(240,190,90));
-                    g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
+                    // g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
+                    g2.drawImage(redbox, slotX,slotY,null);
                 }
+            
             
             g2.drawImage(gp.player.inventory.get(i).down1, slotX, slotY,null);
             slotX+=slotSize;
-            if(i==4 || i == 9 || i == 14){
+            if(i==12 || i == 25 || i == 38){
                 slotX = slotXstart;
                 slotY += slotSize;
             }
@@ -640,7 +649,14 @@ public class UI {
         g2.setColor(new Color(36,16,212));
         for(int q = 548;q<=684;q+=68){
             for(int i = 86;i<=902;i+=68){
-                g2.drawRoundRect(i, q, cursorWidth, cursorHeight, 10, 10);
+                
+                // g2.drawRoundRect(i, q, cursorWidth, cursorHeight, 10, 10);
+                float opacity = 0.3f; 
+                AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity);
+                AlphaComposite originalComposite = (AlphaComposite) g2.getComposite();
+                g2.setComposite(alphaComposite);
+                g2.drawImage(whitebox, i, q, null);
+                g2.setComposite(originalComposite);
             }
         }
         
@@ -648,8 +664,8 @@ public class UI {
         // draw cursor
         g2.setColor(Color.red);
         g2.setStroke(new BasicStroke(5));
-        g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
-        
+        // g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
+        g2.drawImage(bluebox,cursorX,cursorY, null );
         
         // for(int i = 86;i<=902;i+=cursorWidth){
         //     for(int j = 548;j<=684;i+=cursorHeight){

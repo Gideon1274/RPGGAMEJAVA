@@ -13,6 +13,7 @@ public class OBJ_coTree extends Entity{
         direction = "down";
         speed = 0;
         getImage();
+        obtainable  = true;
         setDialogue();
     }
 

@@ -18,10 +18,11 @@ public class TileManager{
     public TileManager(GamePanel gp){
         this.gp = gp;
 
-        tile = new Tile[50];
+        tile = new Tile[500];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         getTileImage();
         loadMap("/pics/maps/mappodesu.txt");
+        // loadMap("/pics/maps/worldV2.txt");
 
     }
     public void getTileImage(){       
@@ -39,15 +40,15 @@ public class TileManager{
             //placeholder
 
 
-            setup(10, "010", false);//grass
-            setup(11, "011", false);//grass
-            setup(12, "012", true);//topleftedge
-            setup(13, "013", true);//water
+            setup(10, "010", false); // grass
+            setup(11, "011", false); // grass
+            setup(12, "012", true); // topleftedge
+            setup(13, "013", true); // water
             setup(14, "014", false);
             setup(15, "015", true);
             setup(16, "016", false);
-            setup(17, "017", true);//rightedge
-            setup(18, "018", true);//leftedge
+            setup(17, "017", false); // rightedge
+            setup(18, "018", true); // leftedge
             setup(19, "019", false);
             setup(20, "020", false);
             setup(21, "021", false);
@@ -58,16 +59,37 @@ public class TileManager{
             setup(26, "026", false);
             setup(27, "027", false);
             setup(28, "028", false);
-            setup(29, "029", true);//tree
-            // setup(22, "022", false);
-            // setup(23, "023", false);
-            // setup(24, "024", false);
-            // setup(25, "025", false);
-            // setup(26, "026", false);
-            // setup(27, "027", false);
-            // setup(28, "028", false);
- 
-
+            setup(29, "029", true); // tree
+            setup(30, "030", false);
+            setup(31, "031", false);
+            setup(32, "032", false);
+            setup(33, "033", false);
+            setup(34, "034", false);
+            setup(35, "035", false);
+            setup(36, "036", false);
+            setup(37, "037", false);
+            setup(38, "038", false);
+            setup(39, "039", false);
+            setup(40, "040", false);
+            setup(41, "041", false);
+            setup(42, "042", false);
+            setup(43, "043", false);
+            setup(44, "044", false);
+            setup(45, "045", false);
+            setup(46, "046", false);
+            setup(47, "047", false);
+            setup(48, "048", false);
+            setup(49, "049", false);
+            setup(50, "050", false);
+            setup(51, "051", false);
+            setup(52, "052", false);
+            setup(53, "053", false);
+            setup(54, "054", false);
+            setup(55, "055", false);
+            setup(56, "056", false);
+            setup(57, "057", false);
+            setup(58, "058", false);
+            setup(59, "059", false);
 
 
             
