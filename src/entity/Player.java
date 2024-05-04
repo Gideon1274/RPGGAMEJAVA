@@ -164,6 +164,28 @@ public class Player extends Entity implements Cloneable{
         attackDown2 = setup("/pics/player/swordsman/swordmanattackdown2", gp.tileSize, gp.tileSize);
         attackDown3 = setup("/pics/player/swordsman/swordmanattackdown3", gp.tileSize, gp.tileSize);
         attackDown4 = setup("/pics/player/swordsman/swordmanattackdown4", gp.tileSize, gp.tileSize);
+        
+        //
+
+        attackupRight1 = setup("/pics/player/swordsman/swordmanattackright1", gp.tileSize, gp.tileSize);
+        attackupRight2 = setup("/pics/player/swordsman/swordmanattackright2", gp.tileSize, gp.tileSize);
+        attackupRight3 = setup("/pics/player/swordsman/swordmanattackright3", gp.tileSize, gp.tileSize);
+        attackupRight4 = setup("/pics/player/swordsman/swordmanattackright4", gp.tileSize, gp.tileSize);
+
+        attackupLeft1 = setup("/pics/player/swordsman/swordmanattackleft1", gp.tileSize, gp.tileSize);
+        attackupLeft2 = setup("/pics/player/swordsman/swordmanattackleft2", gp.tileSize, gp.tileSize);
+        attackupLeft3 = setup("/pics/player/swordsman/swordmanattackleft3", gp.tileSize, gp.tileSize);
+        attackupLeft4 = setup("/pics/player/swordsman/swordmanattackleft4", gp.tileSize, gp.tileSize);
+
+        attackdownRight1 = setup("/pics/player/swordsman/swordmanattackright1", gp.tileSize, gp.tileSize);
+        attackdownRight2 = setup("/pics/player/swordsman/swordmanattackright2", gp.tileSize, gp.tileSize);
+        attackdownRight3 = setup("/pics/player/swordsman/swordmanattackright3", gp.tileSize, gp.tileSize);
+        attackdownRight4 = setup("/pics/player/swordsman/swordmanattackright4", gp.tileSize, gp.tileSize);
+
+        attackdownLeft1 = setup("/pics/player/swordsman/swordmanattackleft1", gp.tileSize, gp.tileSize);
+        attackdownLeft2 = setup("/pics/player/swordsman/swordmanattackleft2", gp.tileSize, gp.tileSize);
+        attackdownLeft3 = setup("/pics/player/swordsman/swordmanattackleft3", gp.tileSize, gp.tileSize);
+        attackdownLeft4 = setup("/pics/player/swordsman/swordmanattackleft4", gp.tileSize, gp.tileSize);
     }
 
     public void setDefaultValuesForAssassin(){
@@ -373,10 +395,11 @@ public class Player extends Entity implements Cloneable{
         }
         
         if(keyH.enterPressed == true && attackCanceled == false){
+
             gp.playSE(7);
             attacking = true;
             spriteCounter = 0;
-        } else if( mouseH.rightClicked==true){
+        } else if( gp.rightClicked==true && attackCanceled == false){
             gp.playSE(7);
             attacking = true;
             spriteCounter = 0;
@@ -384,7 +407,6 @@ public class Player extends Entity implements Cloneable{
         
         attackCanceled = false;
         gp.keyH.enterPressed =false;
-
         spriteCounter++;
         if(spriteCounter>12){
             if(spriteNum == 1){
@@ -432,7 +454,7 @@ public class Player extends Entity implements Cloneable{
         //     shotAvailableCounter = 0;
         //     gp.playSE(10);
         // }
-        if (mouseH.leftClicked && shotAvailableCounter == rateOfFire && projectile.haveResource(this)) {
+        if (gp.leftClicked && shotAvailableCounter == rateOfFire && projectile.haveResource(this)) {
             // Cloning the projectile
             Projectile clonedProjectile = null;
             try {
@@ -747,7 +769,7 @@ public class Player extends Entity implements Cloneable{
                 //     if(spriteNum==7){image =right7;}
                 // }
                 if(attacking == true){
-                    tempScreenY = screenY - gp.tileSize/2;
+                    tempScreenY = screenY - (int)(gp.tileSize/1.7);
                     if(spriteNum ==1){image = attackUp1;}
                     if(spriteNum==2){image = attackUp2;}
                     if(spriteNum==3){image = attackUp3;}
@@ -782,7 +804,7 @@ public class Player extends Entity implements Cloneable{
             //     if(spriteNum==7){image =right7;}
             // }
                 if(attacking == true){
-                    tempScreenY = screenY + gp.tileSize/2;
+                    tempScreenY = screenY + (int)(gp.tileSize/1.7);
                     if(spriteNum ==1){image = attackDown1;}
                     if(spriteNum==2){image = attackDown2;}
                     if(spriteNum==3){image = attackDown2;}
@@ -800,7 +822,7 @@ public class Player extends Entity implements Cloneable{
                 if(spriteNum==5){image =left5;}
             }
                 if(attacking == true){
-                    tempScreenX = screenX - gp.tileSize/2;
+                    tempScreenX = screenX - (int)(gp.tileSize/1.7);
                     if(spriteNum ==1){image = attackLeft1;}
                     if(spriteNum==2){image = attackLeft2;}
                     if(spriteNum==3){image = attackLeft3;}
@@ -817,7 +839,7 @@ public class Player extends Entity implements Cloneable{
                 if(spriteNum==5){image =right5;}
             }
                 if(attacking == true){
-                    tempScreenX = screenX + gp.tileSize/2;
+                    tempScreenX = screenX + (int)(gp.tileSize/1.7);
                     if(spriteNum ==1){image = attackRight1;}
                     if(spriteNum==2){image = attackRight2;}
                     if(spriteNum==3){image = attackRight3;}
@@ -834,7 +856,16 @@ public class Player extends Entity implements Cloneable{
                 if(spriteNum==3){image =right3;}
                 if(spriteNum==4){image =right4;}
                 if(spriteNum==5){image =right5;}
+            }if(attacking == true){
+                tempScreenX = screenX + gp.tileSize/2;
+                tempScreenY = screenY - gp.tileSize/2;
+                if(spriteNum ==1){image = attackupRight1;}
+                if(spriteNum==2){image = attackupRight2;}
+                if(spriteNum==3){image = attackupRight3;}
+                if(spriteNum==4){image = attackupRight4;}
+                if(spriteNum==5){image = attackupRight4;}
             }
+
                 break;
             case "upleft":
             if(attacking ==false){
@@ -843,6 +874,14 @@ public class Player extends Entity implements Cloneable{
                 if(spriteNum==3){image =left3;}
                 if(spriteNum==4){image =left4;}
                 if(spriteNum==5){image =left5;}
+            }if(attacking == true){
+                tempScreenX = screenX - gp.tileSize/2;
+                tempScreenY = screenY - gp.tileSize/2;
+                if(spriteNum ==1){image = attackupLeft1;}
+                if(spriteNum==2){image = attackupLeft2;}
+                if(spriteNum==3){image = attackupLeft3;}
+                if(spriteNum==4){image = attackupLeft4;}
+                if(spriteNum==5){image = attackupLeft4;}
             }
                 break;
             case "downright":
@@ -852,6 +891,14 @@ public class Player extends Entity implements Cloneable{
                 if(spriteNum==3){image =right3;}
                 if(spriteNum==4){image =right4;}
                 if(spriteNum==5){image =right5;}
+            }if(attacking == true){
+                tempScreenX = screenX + gp.tileSize/2;
+                tempScreenY = screenY + gp.tileSize/2;
+                if(spriteNum ==1){image = attackdownRight1;}
+                if(spriteNum==2){image = attackdownRight2;}
+                if(spriteNum==3){image = attackdownRight3;}
+                if(spriteNum==4){image = attackdownRight4;}
+                if(spriteNum==5){image = attackdownRight4;}
             }
                 break;
             case "downleft":
@@ -861,6 +908,14 @@ public class Player extends Entity implements Cloneable{
                 if(spriteNum==3){image =left3;}
                 if(spriteNum==4){image =left4;}
                 if(spriteNum==5){image =left5;}
+            }if(attacking == true){
+                tempScreenX = screenX - gp.tileSize/2;
+                tempScreenY = screenY + gp.tileSize/2;
+                if(spriteNum ==1){image = attackdownLeft1;}
+                if(spriteNum==2){image = attackdownLeft2;}
+                if(spriteNum==3){image = attackdownLeft3;}
+                if(spriteNum==4){image = attackdownLeft4;}
+                if(spriteNum==5){image = attackdownLeft4;}
             }
                 break;
         }

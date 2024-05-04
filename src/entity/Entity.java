@@ -2,6 +2,7 @@ package entity;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -26,6 +27,8 @@ public class Entity {
     public BufferedImage upright1,upright2, upleft1,upleft2,downright1,downright2,downleft1,downleft2;
     public BufferedImage attackUp1,attackUp2,attackUp3,attackUp4, attackDown1, attackDown2,attackDown3, attackDown4;
     public BufferedImage attackRight1, attackRight2,attackRight3, attackRight4, attackLeft1, attackLeft2,attackLeft3, attackLeft4;
+    public BufferedImage attackupRight1, attackupRight2,attackupRight3, attackupRight4, attackupLeft1, attackupLeft2,attackupLeft3, attackupLeft4;
+    public BufferedImage attackdownRight1, attackdownRight2,attackdownRight3, attackdownRight4, attackdownLeft1, attackdownLeft2,attackdownLeft3, attackdownLeft4;
     public BufferedImage imageProjectile1,imageProjectile2;
     public String direction = "down";
     // public String directionformoving = "hasmoveddown";
@@ -363,6 +366,21 @@ public class Entity {
         }
         return image;
     }
+    public int getXdistance( Entity target){
+        return Math.abs(worldX - target.worldX);
+    }
+    public int getYdistance( Entity target){
+        return Math.abs(worldY - target.worldY);
+    }
+    public int getTileDistance(Entity target){
+        return (getXdistance(target)+getYdistance(target)/gp.tileSize);
+    }
+    public int getGoalCol(Entity target){
+        return (target.worldX + target.solidArea.x)/gp.tileSize;   
+    }
+    public int getGoalRow(Entity target){
+        return (target.worldY + target.solidArea.y)/gp.tileSize;   
+    }
     public BufferedImage adjustOpacity(BufferedImage image, float opacity) {
         // Create a RescaleOp object with the desired opacity
         float[] scales = {1f, 1f, 1f, opacity}; // RGBA scales
@@ -461,12 +479,78 @@ public class Entity {
                 }
             }
             // for following player, disable this. It should be enabled when npc walking to specified location
-           int nextCol = gp.pFinder.pathList.get(0).col;
-           int nextRow = gp.pFinder.pathList.get(0).row;
-           if(nextCol == goalCol && nextRow == goalRow)
-           {
-               onPath = false;
-           }
+        //    int nextCol = gp.pFinder.pathList.get(0).col;
+        //    int nextRow = gp.pFinder.pathList.get(0).row;
+        //    if(nextCol == goalCol && nextRow == goalRow)
+        //    {
+        //        onPath = false;
+        //    }
         }
     }
+
+    public void checkStopChasingOrNot(Entity target, int distance, int rate){
+        if(getTileDistance(target)<distance){
+                    onPath = true;
+                
+        }
+
+    }
+    public void getRandomDirection(){
+        if(actionLockCounter == 120){
+            Random random = new Random();
+            int i = random.nextInt(128)+1;
+            if(i<=16){
+                direction ="up";
+    
+            }
+            if(i>16 && i<=32){
+                direction = "down";
+            }
+            if(i>32 && i <=48){
+                direction = "left";
+            }
+            if(i>48 &&i<=64){
+                direction ="right";
+            }if(i>64 &&i<=80){
+                direction ="upright";
+            }if(i>80 &&i<=96){
+                direction ="upleft";
+            }if(i>96 &&i<=112){
+                direction ="downright";
+            }if(i>112 &&i<=128){
+                direction ="downleft";
+            }
+            actionLockCounter = 0;
+            }
+    }
+    public void checkStartChasingOrNot(Entity target, int distance, int rate){
+        if(getTileDistance(target)>distance){
+            int i = new Random().nextInt(rate);
+                if(i == 0){
+                    onPath = false;
+                }
+        }
+
+    }
+    public void checkShootOrNot(int rate, int shotInterval)
+    {
+        // int i = new Random().nextInt(rate);
+        // if(i == 0 && projectile.alive == false && shotAvailableCounter == shotInterval)
+        // {
+        //     projectile.set(worldX,worldY,true,this);
+        //     //gp.projectileList.add(projectile);
+        //     //CHECK VACANCY
+        //     for(int ii = 0; ii < gp.projectile[1].length;ii++)
+        //     {
+        //         if(gp.projectile[ii] == null)
+        //         {
+        //             gp.projectile[ii] = projectile;
+        //             break;
+        //         }
+        //     }
+        //     shotAvailableCounter = 0;
+        // }
+    }
 }
+
+

@@ -15,6 +15,7 @@ public class OBJ_coTree extends Entity{
         getImage();
         obtainable  = true;
         setDialogue();
+        collisionOn =false;
     }
 
     public void getImage() {

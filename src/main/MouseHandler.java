@@ -7,8 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 
 public class MouseHandler extends MouseAdapter implements MouseMotionListener,MouseListener {
-    public boolean leftClicked = false;
-    public boolean rightClicked = false;
+    
     GamePanel gp;
     Graphics2D g2;
     private static int mouseX = -1 , mouseY = -1, mouseB = -1;
@@ -55,18 +54,23 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener,Mo
         // mouseX = e.getX();
         // mouseY = e.getY();
         // mouseB = e.getButton();
+        if(gp.gameState == gp.dialogueState){
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                gp.gameState = gp.playState;
+            }
+        }
         if (e.getButton() == MouseEvent.BUTTON1) {
-            leftClicked = true;
+            gp.leftClicked = true;
         } else if (e.getButton() == MouseEvent.BUTTON3) {
-            rightClicked=true;
+            gp.rightClicked=true;
         }
         
         // System.out.println("clicked");
     }
     public void mouseReleased(MouseEvent e){
         mouseB = -1;
-        leftClicked =false;
-        rightClicked = false;
+        gp.leftClicked =false;
+        gp.rightClicked = false;
         // System.out.println("released");
     }
 
