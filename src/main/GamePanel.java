@@ -68,6 +68,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Entity npc[] = new Entity[500];
     public Entity tree[] = new Entity[500];
     public Entity monster[] = new Entity[500];
+    public Entity projectile[][] = new Entity[100][100]; // cut projectile
     public ArrayList<Entity> projectileList = new ArrayList<>();
     public ArrayList<Entity> entityList = new ArrayList<>();
 
@@ -86,7 +87,8 @@ public class GamePanel extends JPanel implements Runnable{
     public boolean loadGameHovered = false;
     public boolean quitHovered = false;
 
-
+    public boolean leftClicked = false;
+    public boolean rightClicked = false;
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
@@ -173,6 +175,22 @@ public class GamePanel extends JPanel implements Runnable{
                     tree[i].update();
                 }
             }
+            // //PROJECTILE
+            // for(int i = 0; i < projectile[1].length; i++)
+            // {
+            //     if(projectile[i] != null)
+            //     {
+            //         if(projectile[i].alive == true)
+            //         {
+            //             projectile[i].update();
+            //         }
+            //         if(projectile[i].alive == false)
+            //         {
+            //             projectile[i] = null;
+            //         }
+            //     }
+            // }
+
             for(int i=0;i<monster.length;i++){
                 if(monster[i]!=null){
                     if(monster[i].alive== true && monster[i].dying == false){

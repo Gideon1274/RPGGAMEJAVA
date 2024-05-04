@@ -105,23 +105,24 @@ public class MON_Crab extends Entity {
         
     }
     public void damageReaction() {
-        actionLockCounter = 0;
+        // actionLockCounter = 0;
         
-        switch (gp.player.direction) {
-            case "left":
-                direction = "right";
-                break;
-            case "right":
-                direction = "left";
-                break;
-            case "up":
-                direction = "down";
-                break;
-            case "down":
-                direction = "up";
-                break;
-            default:
-        }
+        // switch (gp.player.direction) {
+        //     case "left":
+        //         direction = "right";
+        //         break;
+        //     case "right":
+        //         direction = "left";
+        //         break;
+        //     case "up":
+        //         direction = "down";
+        //         break;
+        //     case "down":
+        //         direction = "up";
+        //         break;
+        //     default:
+        // }
+        onPath=true;
     }
     public void checkDrop(){
         //SET DROP RATE

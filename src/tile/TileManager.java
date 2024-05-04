@@ -6,6 +6,8 @@ import main.UtilityTool;
 import java.io.BufferedReader;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,7 +15,7 @@ public class TileManager{
     GamePanel gp;
     public Tile[] tile;
     public int mapTileNum[][];
-
+    boolean drawPath = true;
 
     public TileManager(GamePanel gp){
         this.gp = gp;
@@ -58,8 +60,8 @@ public class TileManager{
             setup(25, "025", true);
             setup(26, "026", false);
             setup(27, "027", false);
-            setup(28, "028", false);
-            setup(29, "029", true); // tree
+            setup(28, "028", true);
+            setup(29, "029", false); // tree
             setup(30, "030", false);
             setup(31, "031", false);
             setup(32, "032", false);
@@ -91,7 +93,29 @@ public class TileManager{
             setup(58, "058", false);
             setup(59, "059", false);
 
+            setup(60, "060", true);//snow tree
+            setup(61, "061", true);//cut tree
+            setup(62, "062", true);//cut tree
+            setup(63, "063", true);//cut tree
+            setup(64, "064", true);
+            setup(65, "065", true);
+            setup(66, "066", true);
+            setup(67, "067", true);
+            setup(68, "068", true);
+            setup(69, "069", true);
+            setup(70, "070", true);
 
+            // setup(32, "snowtree13", true);//snow tree
+            // setup(33, "snowtree14", true);//cut tree
+            // setup(34, "snowtree15", true);//cut tree
+            // setup(35, "snowtreecut16", true);//cut tree
+            // setup(36, "cotreeright", true);
+            // setup(37, "cotreeleft", true);
+            // setup(38, "tree06", true);
+            // setup(39, "BURNHOUSE", true);
+            // setup(40, "BURNTREE", true);
+            // setup(41, "SNOWTILE", true);
+            // setup(42, "034", false);
             
 
     }
@@ -169,6 +193,18 @@ public class TileManager{
                 worldRow++;
 
 
+            }
+        }
+        if(drawPath == true){
+            g2.setColor(new Color(255,0,0,70));
+
+            for(int i = 0;i<gp.pFinder.pathList.size();i++){
+                int worldX =  gp.pFinder.pathList.get(i).col*gp.tileSize;
+                int worldY =  gp.pFinder.pathList.get(i).row*gp.tileSize;
+                int screenX = worldX - gp.player.worldX + gp.player.screenX;
+                int screenY = worldY - gp.player.worldY + gp.player.screenY;
+                
+                g2.fillRect(screenX,screenY, gp.tileSize, gp.tileSize);
             }
         }
     }

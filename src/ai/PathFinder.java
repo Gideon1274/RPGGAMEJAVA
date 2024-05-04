@@ -48,8 +48,8 @@ public class PathFinder {
         while(col < gp.maxWorldCol && row < gp.maxWorldRow)
         {
             //reset open, checked and solid state
-            // node[col][row].open = false;
-            // node[col][row].checked = false;
+            node[col][row].open = false;
+            node[col][row].checked = false;
             node[col][row].solid = false;
 
             col++;
@@ -131,7 +131,7 @@ public class PathFinder {
             int row = currentNode.row;
 
             //check the current node
-            // currentNode.checked = true;
+            currentNode.checked = true;
             openList.remove(currentNode);
 
             //open the UP node
@@ -198,10 +198,9 @@ public class PathFinder {
     }
     public void openNode(Node node)
     {
-        // if(node.open == false && node.checked == false && node.solid == false)
-        if(node.solid == false)
+        if(node.open == false && node.checked == false && node.solid == false)
         {
-            // node.open = true;
+            node.open = true;
             node.parent = currentNode;
             openList.add(node);
         }
@@ -216,5 +215,4 @@ public class PathFinder {
             current = current.parent;
         }
     }
-    
 }

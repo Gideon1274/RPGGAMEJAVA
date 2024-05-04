@@ -13,6 +13,7 @@ import object.OBJ_Heart;
 import object.OBJ_Key;
 import object.OBJ_ManaCrystal;
 import object.OBJ_PortalBlue;
+import object.OBJ_PortalOrange;
 import object.OBJ_Potion_Red;
 import object.OBJ_Shield_Blue;
 import object.OBJ_Trees;
@@ -29,9 +30,12 @@ public class AssetSetter {
         gp.obj[i] = new OBJ_PortalBlue(gp);
         gp.obj[i].worldX = gp.tileSize*26;
         gp.obj[i].worldY = gp.tileSize*20;
-        gp.obj[i].collision = false;
-        i++;
-
+        gp.obj[i].collision = false;i++;
+        
+        gp.obj[i] = new OBJ_PortalOrange(gp);
+        gp.obj[i].worldX = gp.tileSize*55;
+        gp.obj[i].worldY = gp.tileSize*55;
+        gp.obj[i].collision = false;i++;
         
 
         // gp.obj[i] = new OBJ_Coin_Bronze(gp);
@@ -114,7 +118,7 @@ public class AssetSetter {
         gp.npc[i].worldY = gp.tileSize*45;i++;
         
         for(int q=17;q<=82;q++){
-            for(int j=48;j<=54;j++){
+            for(int j=49;j<=54;j++){
                 setcoTree(i, q, j);i++;    
             }      
         }

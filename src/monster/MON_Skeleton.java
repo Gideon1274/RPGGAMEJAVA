@@ -9,18 +9,18 @@ import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
 import object.OBJ_Rock;
 
-public class MON_GreenSlime extends Entity {
+public class MON_Skeleton extends Entity {
          GamePanel gp;
 
-    public MON_GreenSlime(GamePanel gp){
+    public MON_Skeleton(GamePanel gp){
         
         super(gp);
        
         this.gp=gp;
 
         type = type_monster;
-        name = "Green Slime";
-        speed = 1;
+        name = "Undead";
+        speed = 3;
         maxLife = 100;
         life = maxLife;
         attack = 5;
