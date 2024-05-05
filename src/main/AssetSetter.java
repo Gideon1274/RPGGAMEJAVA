@@ -33,9 +33,22 @@ public class AssetSetter {
         gp.obj[i].collision = false;i++;
         
         gp.obj[i] = new OBJ_PortalOrange(gp);
+        gp.obj[i].worldX = gp.tileSize*21;
+        gp.obj[i].worldY = gp.tileSize*64;
+        gp.obj[i].collision = false;i++;
+
+        gp.obj[i] = new OBJ_PortalBlue(gp);
+        gp.obj[i].worldX = gp.tileSize*29;
+        gp.obj[i].worldY = gp.tileSize*20;
+        gp.obj[i].collision = false;i++;
+        
+        gp.obj[i] = new OBJ_PortalOrange(gp);
         gp.obj[i].worldX = gp.tileSize*55;
         gp.obj[i].worldY = gp.tileSize*55;
         gp.obj[i].collision = false;i++;
+
+
+
         
 
         // gp.obj[i] = new OBJ_Coin_Bronze(gp);
