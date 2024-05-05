@@ -49,14 +49,15 @@ public class EventHandler {
         if(canTouchEvent==true){
             // if(hit(26,16, "any") == true){damagePit(26,16,gp.dialogueState);}
 
-            if(hit(26,20, "any") == true){teleport(gp.dialogueState,21,64);}
-            if(hit(22,64, "any") == true){teleport(gp.dialogueState,26,20);}
+            if(hit(80,47, "any") == true){teleport(gp.playState,21,64);}
+            if(hit(22,64, "any") == true){teleport(gp.playState,79,47);}
 
-            if(hit(29,20, "any") == true){teleport(gp.dialogueState,55,55);}
-            if(hit(54,55, "any") == true){teleport(gp.dialogueState,29,20);}
+            if(hit(40,86, "any") == true){teleport(gp.playState,56,58);}
+            if(hit(57,58, "any") == true){teleport(gp.playState,40,87);}
 
             
-            if(hit(32, 20, "up") == true){healingPool(23,12,gp.dialogueState);}     
+            if(hit(35, 14, "any") == true){healingPool(23,12,gp.dialogueState);}    
+            if(hit(36, 14, "any") == true){healingPool(23,12,gp.dialogueState);}     
         }
         
         // if(hit(26,16,6"right") == true){teleport(gp.dialogueState);}
@@ -100,7 +101,16 @@ public class EventHandler {
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
             gp.playSE(6);
-            gp.ui.currentDialogue = "You drink the water.\n Your life has been recovered";
+            if(gp.defeatedBoss==3){
+                teleporttoBoss(gp.dialogueState, 20, 118);
+            }
+
+            else if(gp.defeatedBoss<3){
+                gp.ui.currentDialogue = "You have defeated "+gp.defeatedBoss+"!";    
+            }
+            else{
+                gp.ui.currentDialogue = "Your Life and Mana will be restored!";    
+            }
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;
             
@@ -111,6 +121,14 @@ public class EventHandler {
         gp.gameState = gameState;
         gp.playSE(6);
         gp.ui.currentDialogue = "Teleport!";
+        gp.player.worldX = gp.tileSize * tlX;
+        gp.player.worldY = gp.tileSize * tlY;
+        
+    }
+    public void teleporttoBoss(int gameState, int tlX,int tlY){
+        gp.gameState = gameState;
+        gp.playSE(6);
+        gp.ui.currentDialogue = "You will now face the final boss!";
         gp.player.worldX = gp.tileSize * tlX;
         gp.player.worldY = gp.tileSize * tlY;
         

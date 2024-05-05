@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import ai.PathFinder;
+import data.SaveLoad;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -33,8 +34,8 @@ public class GamePanel extends JPanel implements Runnable{
 
 
     //WORLD SETTINGS
-    public final int maxWorldCol = 100;
-    public final int maxWorldRow = 100;
+    public final int maxWorldCol = 150;
+    public final int maxWorldRow = 150;
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
     // for full screen
@@ -42,8 +43,7 @@ public class GamePanel extends JPanel implements Runnable{
     int screenHeight2 = screenHeight;
     BufferedImage tempScreen;
     Graphics2D g2;
-    
-
+    public int defeatedBoss = 0;
     public final int FPS = 60;
     
     public TileManager tileM = new TileManager(this);
@@ -53,7 +53,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public Sound music = new Sound();
     public Sound se = new Sound();
-
+    SaveLoad saveLoad = new SaveLoad(this);
     
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
@@ -69,7 +69,10 @@ public class GamePanel extends JPanel implements Runnable{
     public Entity tree[] = new Entity[500];
     public Entity monster[] = new Entity[500];
     public Entity projectile[][] = new Entity[100][100]; // cut projectile
+    public Entity projectileforEntities[][] = new Entity[100][100]; // cut projectile
     public ArrayList<Entity> projectileList = new ArrayList<>();
+    public ArrayList<Entity> projectileListfordumbass = new ArrayList<>();
+    
     public ArrayList<Entity> entityList = new ArrayList<>();
 
 
@@ -82,7 +85,9 @@ public class GamePanel extends JPanel implements Runnable{
     public final int characterState = 4;
     public final int optionState = 5;
     public final int inventoryState = 6;
-    
+    public final int gameOverState = 7;
+    public final int finalBossDefeated = 8;
+
     public boolean newgameHovered =false;
     public boolean loadGameHovered = false;
     public boolean quitHovered = false;
@@ -116,6 +121,18 @@ public class GamePanel extends JPanel implements Runnable{
         g2 = (Graphics2D)tempScreen.getGraphics();
         // setFullScreen();
         //diri
+    }
+    public void resetGame(boolean restart){
+
+            
+            aSetter.setMonster();
+        if(restart == true)
+        {player.setPlayerClass(keyH.playerClass);
+            aSetter.setNPC();
+            aSetter.setTree();
+            aSetter.setObject();
+            stopMusic();
+        }
     }
     public void setFullScreen(){
         //get local screen device
@@ -212,14 +229,28 @@ public class GamePanel extends JPanel implements Runnable{
                     }
                 }
             }
+            for(int i=0;i<projectileListfordumbass.size();i++){
+                if(projectileListfordumbass.get(i)!=null){
+                    if(projectileListfordumbass.get(i).alive== true){
+                        projectileListfordumbass.get(i).update();    
+                    }
+                    if(projectileListfordumbass.get(i).alive== false){
+                        projectileListfordumbass.remove(i);
+                    }
+                }
+            }
 
         }
         if(gameState == pauseState){
             
         }
-        
+        if(gameState == playState){
+        if(player.life ==0){
+            gameState = gameOverState;
+        }
+        }        
     }
-    
+
     public void drawToTempScreen(){
         //debug
         long drawStart = 0;

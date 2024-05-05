@@ -10,6 +10,8 @@ import object.OBJ_Fireball;
 import object.OBJ_Getsuga;
 import object.OBJ_Heart;
 import object.OBJ_Key;
+import object.OBJ_KnifeThrow;
+import object.OBJ_MageBlast;
 import object.OBJ_Rock;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
@@ -57,18 +59,22 @@ public class Player extends Entity implements Cloneable{
         //ATTACK AREA
         attackArea = new Rectangle(0,0,36,36);
 
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
         //height bottom
         //width top
         // x = right
     }
+    public void setPlayerDefaultLocation(){
+        worldX = gp.tileSize * 40;
+        worldY = gp.tileSize * 83;
+    }
     public void setPlayerClass(int playerClass){
         this.playerClass = playerClass;
-        
+
+        setPlayerDefaultLocation();
         level = 1;
         speed = 20;
         exp = 0;
+        life = 10;
         nextLevelExp = 5;
         coin = 0;
         direction = "down";
@@ -76,14 +82,35 @@ public class Player extends Entity implements Cloneable{
             setDefaultValuesForKnight();
         }
         if(this.playerClass == 2){
-            setDefaultValuesForAssassin();    
+            setDefaultValuesForAssassin();
         }
         if(this.playerClass == 3){
-            setDefaultValuesForAssassin();    
+            setDefaultValuesForMage();
         }
         
     }
-    
+    public void setDefaultValuesForMage(){
+
+        maxLife = 10;
+        life = maxLife;
+        strength = 1;
+        dexterity = 1;
+        maxMana = 200;
+        mana = maxMana;
+        rateOfFire = 10;
+        currentWeapon = new OBJ_Sword_Normal(gp);
+        currentShield = new OBJ_Shield_Wood(gp);
+        projectile = new OBJ_MageBlast(gp);
+        // projectile = new OBJ_Getsuga(gp);
+        // projectile = new OBJ_Arrow(gp);
+        // projectile = new OBJ_Rock(gp);
+        attack = getAttack();
+        defense = getDefense();
+        projectileDamage = getProjectileDamage();
+        setItems();
+        getPlayerImageForKnight();
+        getPlayerAttackImageForKnight();
+    }
     public void setDefaultValuesForKnight(){
         
         // worldX = gp.tileSize * 8;
@@ -94,12 +121,11 @@ public class Player extends Entity implements Cloneable{
         
         //player life status
         
-        maxLife = 6;
+        maxLife = 10;
         life = maxLife;
         strength = 1;
         dexterity = 1;
         maxMana = 200;
-        ammo = 10;
         mana = maxMana;
         rateOfFire = 10;
         currentWeapon = new OBJ_Sword_Normal(gp);
@@ -193,30 +219,25 @@ public class Player extends Entity implements Cloneable{
         // worldX = gp.tileSize * 8;
         // worldY = gp.tileSize * 6;
         
-        speed = 10;
-        // directionformoving = "hasmoveddown";
-        direction = "down";
-        
-        //player life status
-        
-        maxLife = 20;
+        maxLife = 1000;
         life = maxLife;
-        strength = 1;
-        dexterity = 1;
-        maxMana = 200;
-        ammo = 10;
+        strength = 50;
+        dexterity = 50;
+        maxMana = 1000;
         mana = maxMana;
         rateOfFire = 10;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
-        projectile = new OBJ_Getsuga(gp);
+        // projectile = new OBJ_Fireball(gp);
+        // projectile = new OBJ_Getsuga(gp);
+        projectile = new OBJ_KnifeThrow(gp);
         // projectile = new OBJ_Rock(gp);
         attack = getAttack();
         defense = getDefense();
         projectileDamage = getProjectileDamage();
         setItems();
-        getPlayerImage();
-        getPlayerAttackImage();
+        getPlayerImageForKnight();
+        getPlayerAttackImageForKnight();
     }
     public void setItems(){
         inventory.add(currentWeapon);
@@ -226,10 +247,10 @@ public class Player extends Entity implements Cloneable{
     }
     public int getAttack(){
         attackArea = currentWeapon.attackArea;
-        return attack = strength * currentWeapon.attackValue;
+        return attack = strength * currentWeapon.attackValue*10;
     }
     public int getProjectileDamage(){
-        return strength+dexterity*(int)(currentWeapon.attackValue*0.5);
+        return strength+dexterity*(int)(currentWeapon.attackValue*0.1);
     }
     public int getDefense(){
         return defense = dexterity * currentShield.defenseValue;
@@ -663,15 +684,13 @@ public class Player extends Entity implements Cloneable{
             level++;
             nextLevelExp = nextLevelExp * 2;
             maxLife += 2;
+            maxMana = (int)(maxMana*1.1);
             strength++;
             dexterity++;
             attack = getAttack();
             defense = getDefense();
             projectileDamage = getProjectileDamage();
             gp.playSE(8);
-            // gp.gameState = gp.dialogueState;
-            // gp.ui.currentDialogue = "You are now level " + level + "!\n"
-            //                         + "Your dick is stronger!";
             gp.ui.addMessage("Level up: "+level);
         }
     }

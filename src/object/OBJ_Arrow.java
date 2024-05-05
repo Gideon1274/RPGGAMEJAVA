@@ -25,7 +25,7 @@ public class OBJ_Arrow extends Projectile{
         
         name = "Fireball";
         speed = 10;
-        maxLife = 200;
+        maxLife = 50;
         life = maxLife;
         useCost = 1;
         alive = false;

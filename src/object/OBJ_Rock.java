@@ -2,6 +2,7 @@ package object;
 
 import entity.Entity;
 import entity.Projectile;
+import entity.Projectilefordumbass;
 import main.GamePanel;
 
 public class OBJ_Rock extends Projectile{
@@ -21,14 +22,15 @@ public class OBJ_Rock extends Projectile{
 
     }
     public void getImage(){
-        up1 = setup("/pics/projectile/rock_down_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/pics/projectile/rock_down_1", gp.tileSize, gp.tileSize);
-        down1 = setup("/pics/projectile/rock_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/pics/projectile/rock_down_1", gp.tileSize, gp.tileSize);
-        left1 = setup("/pics/projectile/rock_down_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/pics/projectile/rock_down_1", gp.tileSize, gp.tileSize);
-        right1 = setup("/pics/projectile/rock_down_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/pics/projectile/rock_down_1", gp.tileSize, gp.tileSize);
+        up1 = setup("/pics/projectile/fireball_right_2", gp.tileSize, gp.tileSize);
+        up2 = setup("/pics/projectile/fireball_right_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/pics/projectile/fireball_right_2", gp.tileSize, gp.tileSize);
+        down2 = setup("/pics/projectile/fireball_right_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/pics/projectile/fireball_right_2", gp.tileSize, gp.tileSize);
+        left2 = setup("/pics/projectile/fireball_right_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/pics/projectile/fireball_right_2", gp.tileSize, gp.tileSize);
+        right2 = setup("/pics/projectile/fireball_right_2", gp.tileSize, gp.tileSize);
+        
 
 
     }

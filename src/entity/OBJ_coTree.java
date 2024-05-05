@@ -58,7 +58,11 @@ public class OBJ_coTree extends Entity{
         
     }
     public void setDialogue(){
-
+        dialogues[0] = "*swush*";
+        dialogues[1] = "*swush*";
+        dialogues[2] = "*swush*";
+        dialogues[3] = "*swush*";
+        dialogues[4] = "*swush*";
     }
     public void setAction(){
         actionLockCounter++;

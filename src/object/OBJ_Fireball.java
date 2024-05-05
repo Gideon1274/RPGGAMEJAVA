@@ -41,7 +41,7 @@ public class OBJ_Fireball extends Projectile{
         // down2 = setup("/pics/projectile/fireball_right_2", gp.tileSize, gp.tileSize);   
         // d images based on the calculated angle
         
-        down1 = setup("/pics/projectile/11", gp.tileSize, gp.tileSize);
+        down1 = setup("/pics/projectile/fireball_right_", gp.tileSize, gp.tileSize);
         
     }
     

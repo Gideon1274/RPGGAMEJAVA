@@ -7,6 +7,8 @@ import main.GamePanel;
 import object.OBJ_Coin_Bronze;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
+import object.OBJ_Potion_Red;
+import object.OBJ_Potion_mana;
 import object.OBJ_Rock;
 
 public class MON_Skeleton extends Entity {
@@ -23,10 +25,9 @@ public class MON_Skeleton extends Entity {
         speed = 3;
         maxLife = 100;
         life = maxLife;
-        attack = 10;
+        attack = 2;
         defense = 2;
         exp = 10;
-        projectile = new OBJ_Rock(gp);
 
         solidArea.x = 4;
         solidArea.y = 4;
@@ -175,18 +176,15 @@ public class MON_Skeleton extends Entity {
     }
     public void checkDrop(){
         //SET DROP RATE
-        int i = new Random().nextInt(3)+1;
-        // SET MONSTER DROP 
+        int i = new Random().nextInt(2)+1;
+        // // SET MONSTER DROP 
         if(i==1){
+            dropItem(new OBJ_Potion_mana(gp));
             dropItem(new OBJ_Coin_Bronze(gp));
             
         }
         if(i==2){
-            dropItem(new OBJ_Coin_Bronze(gp));
-            dropItem(new OBJ_Coin_Bronze(gp));
-        }
-        if(i==3){
-            dropItem(new OBJ_Coin_Bronze(gp));
+            dropItem(new OBJ_Potion_Red(gp));
             dropItem(new OBJ_Coin_Bronze(gp));
         }
 

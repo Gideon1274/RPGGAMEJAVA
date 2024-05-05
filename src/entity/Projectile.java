@@ -31,6 +31,15 @@ public class Projectile extends Entity implements MouseMotionListener,MouseListe
 
         calculateTargetAngle();
     }
+    public void set(int worldX, int worldY, String direction, boolean alive, Entity user)
+    {
+        this.worldX = worldX;
+        this.worldY = worldY;
+        this.direction = direction;
+        this.alive = alive;
+        this.user = user;
+        this.life = this.maxLife;  //Reset the life to the max value every time you shoot it.
+    }
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
@@ -55,14 +64,14 @@ public class Projectile extends Entity implements MouseMotionListener,MouseListe
                     
             //     }
             // }
-            // if (user != gp.player) {
-            //     boolean contactPlayer = gp.cChecker.checkPlayer(this);
-            //     if (!gp.player.invincible && contactPlayer) {
-            //         damagePlayer(attack);
-            //         alive = false;
-            //         System.out.println("COllision");
-            //     }
-            // }
+            if (user != gp.player) {
+                boolean contactPlayer = gp.cChecker.checkPlayer(this);
+                if (!gp.player.invincible && contactPlayer) {
+                    damagePlayer(attack);
+                    alive = false;
+                    System.out.println("COllision");
+                }
+            }
             life--;
             if(life<=0){
                 alive = false;

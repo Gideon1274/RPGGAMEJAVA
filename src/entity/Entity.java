@@ -89,6 +89,7 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentShield;
     public Projectile projectile;
+    public Projectilefordumbass projectilefordumbass;
 
     // item attributes
     public int value;
@@ -122,7 +123,7 @@ public class Entity {
     }
 	public void speak(){
 		if(dialogues[dialogueIndex] == null){
-            dialogues[dialogueIndex] = "Do what must be done qwe qwe qwe qwe qwe qwe";
+            dialogues[dialogueIndex] = "This world will only know peace if 'He' is defeated";
         }
         gp.ui.currentDialogue = dialogues[dialogueIndex];
         dialogueIndex++;
@@ -490,6 +491,7 @@ public class Entity {
         BufferedImage image = null;
 
         try{
+            System.out.println(imagePath);
             image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
             image = uTool.scaleImage(image, width, height);
         }catch(IOException e){
@@ -729,50 +731,46 @@ public class Entity {
         // }
     }
     public void attacking(){
-        if(spriteCounter>30){
-            if(spriteNum == 1){
+        spriteCounter++;
+        if (spriteCounter <= 10) {
+            if (spriteNum == 1) {
                 spriteNum = 2;
-            }
-            else if(spriteNum == 2){
+            } else if (spriteNum == 2) {
                 spriteNum = 3;
-            }else if(spriteNum == 3){
-                spriteNum = 4;
-            }else if(spriteNum == 4){
-                spriteNum = 1;
             }
-            // System.out.println(spriteNum);
-            spriteCounter=0;
+            // } else if (spriteNum == 3) {
+            //     spriteNum = 4;
+            // }
         }
-        
-        if(spriteCounter > 5 && spriteCounter <=10){
+        if(spriteCounter > 10 && spriteCounter <= 20){
             spriteNum = 4;
             //save the current worldX, WorldY
             int currentWorldX = worldX;
             int currentWorldY = worldY;
             int solidAreaWidth = solidArea.width;
             int solidAreaHeight = solidArea.height;
-
+    
             // adjust player's worldx/y for the attackarea
             switch(direction){
                 case "up": worldY -= attackArea.height;System.out.println("1");break;
                 case "down": worldY += attackArea.height;System.out.println("2");break;
                 case "left": worldX -= attackArea.width;System.out.println("3");break;
                 case "right": worldX += attackArea.width;System.out.println("4");break;
-
-                case "upright": worldX += attackArea.width*0.7; worldY -= attackArea.height*0.7;System.out.println("5");break;
-                case "upleft": worldX -= attackArea.width*0.7; worldY -= attackArea.height*0.7;System.out.println("6");break;
-                case "downright": worldY += attackArea.height*0.7; worldX+=attackArea.width*0.7;System.out.println("7");break;
-                case "downleft": worldY += attackArea.height*0.7; worldX -=attackArea.width * 0.7;System.out.println("8");break;
-
+    
+                // case "upright": worldX += attackArea.width*0.7; worldY -= attackArea.height*0.7;System.out.println("5");break;
+                // case "upleft": worldX -= attackArea.width*0.7; worldY -= attackArea.height*0.7;System.out.println("6");break;
+                // case "downright": worldY += attackArea.height*0.7; worldX+=attackArea.width*0.7;System.out.println("7");break;
+                // case "downleft": worldY += attackArea.height*0.7; worldX -=attackArea.width * 0.7;System.out.println("8");break;
+    
             }
-
+    
             //attackarea becomes solid Area
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
-
+    
             //check monster collision with the updated worldX, worldY and solid Area
             
-
+    
             if(type == type_monster){
                 if(gp.cChecker.checkPlayer(this) == true){
                     damagePlayer(attack);
@@ -787,12 +785,12 @@ public class Entity {
             solidArea.width = solidAreaWidth;
             solidArea.height = solidAreaHeight;
         }
-        if(spriteCounter >25){
-            spriteNum =1;
+        if (spriteCounter >= 10) {
+            spriteNum = 1;
             spriteCounter = 0;
             attacking = false;
         }
-
+    
     }
     public int getCenterX()
     {
@@ -838,18 +836,18 @@ public class Entity {
                 break;
         }
 
-        // if(tartgetInRange == true)
-        // {
-        //     //Check if it initiates an attack
-        //     int i = new Random().nextInt(rate);
-        //     if(i == 0)
-        //     {
-        //         attacking = true;
-        //         spriteNum = 1;
-        //         spriteCounter = 0;
-        //         shotAvailableCounter = 0;
-        //     }
-        // }
+        if(tartgetInRange == true)
+        {
+            //Check if it initiates an attack
+            int i = new Random().nextInt(rate);
+            if(i == 0)
+            {
+                attacking = true;
+                spriteNum = 1;
+                spriteCounter = 0;
+                shotAvailableCounter = 0;
+            }
+        }
 
     }
 

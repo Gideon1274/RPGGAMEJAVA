@@ -197,6 +197,132 @@ public class UI {
         if(gp.gameState == gp.optionState){
             drawOptionScreen();
         }
+
+        if(gp.gameState == gp.gameOverState){
+            drawGameOverScreen();
+        }
+        if(gp.gameState == gp.finalBossDefeated){
+            finalBossDefeated();
+        }
+    }
+    public void finalBossDefeated(){
+        g2.setColor(new Color(0,0,0,50)); //Half-black
+        g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
+        int x;
+        int y;
+        String text;
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,70f));
+        text = "YOU HAVE CLEARED THE GAME";
+
+        //Shadow
+        g2.setColor(Color.BLACK);
+        x = getXforCenteredText(text);
+        y = gp.tileSize * 4;
+        g2.drawString(text,x,y);
+
+        g2.setColor(Color.white);
+        g2.drawString(text,x-4,y-4);
+
+        g2.setFont(g2.getFont().deriveFont(50f));
+        
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,50f));
+        y = gp.tileSize*2;
+        text = "Members: ";
+        x = getXforCenteredText(text);
+        y += gp.tileSize+gp.tileSize*3;
+        FontMetrics metrics = g2.getFontMetrics();
+        int textWidth = metrics.stringWidth(text);
+            g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,30f));
+        text = "Rainric Randy Yu";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+         metrics = g2.getFontMetrics();
+         textWidth = metrics.stringWidth(text);
+            g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
+            text = "Michael Ferdinand Bacalso";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+         metrics = g2.getFontMetrics();
+         textWidth = metrics.stringWidth(text);
+            g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
+            text = "Patrick Rómulo Cabiling";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+         metrics = g2.getFontMetrics();
+         textWidth = metrics.stringWidth(text);
+            g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
+            text = "Walter Canencia";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+         metrics = g2.getFontMetrics();
+         textWidth = metrics.stringWidth(text);
+            g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
+            text = "Francis Yap";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+         metrics = g2.getFontMetrics();
+         textWidth = metrics.stringWidth(text);
+            g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
+
+    }
+    public void drawGameOverScreen()
+    {
+        g2.setColor(new Color(0,0,0,150)); //Half-black
+        g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
+
+        int x;
+        int y;
+        String text;
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,110f));
+        text = "You Died";
+
+        //Shadow
+        g2.setColor(Color.BLACK);
+        x = getXforCenteredText(text);
+        y = gp.tileSize * 4;
+        g2.drawString(text,x,y);
+
+        g2.setColor(Color.white);
+        g2.drawString(text,x-4,y-4);
+
+        g2.setFont(g2.getFont().deriveFont(50f));
+        
+        
+        y = gp.tileSize*2;
+        text = "RETRY";
+        x = getXforCenteredText(text);
+        y += gp.tileSize+gp.tileSize*3;
+        FontMetrics metrics = g2.getFontMetrics();
+        int textWidth = metrics.stringWidth(text);
+
+        if (commandNum == 0) {
+            g2.drawImage(select1, x-15, y-50, null);
+        }
+         
+            g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
+
+            if (commandNum == 0) {
+            g2.drawImage(select2, x + textWidth-15, y-50, null);
+        }
+
+        text = "QUIT";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+         metrics = g2.getFontMetrics();
+         textWidth = metrics.stringWidth(text);
+
+        if (commandNum == 1) {
+            g2.drawImage(select1, x-15, y-50, null);
+        }
+         
+            g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
+
+            if (commandNum == 1) {
+            g2.drawImage(select2, x + textWidth-15, y-50, null);
+        }
+
     }
     public void drawOptionScreen(){
         g2.setColor(Color.white);
@@ -219,23 +345,87 @@ public class UI {
         textX = getXforCenteredText(text);
         textY = frameY + gp.tileSize;
 
-        g2.drawString(text, textX, textY);
-        textX = frameX + gp.tileSize;
-        textY += gp.tileSize*1.5;
-        g2.drawString("Full Screne", textX, textY);
+        int x;
+        int y = gp.tileSize*2;
+        text = "Full Screen";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        FontMetrics metrics = g2.getFontMetrics();
+        int textWidth = metrics.stringWidth(text);
 
-        textY+=gp.tileSize;
-        g2.drawString("Music", textX, textY);
+        if (commandNum == 0) {
+            g2.drawImage(select1, x-15, y-50, null);
+        }
+         
+            g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
 
-        textY+=gp.tileSize;
-        g2.drawString("SE", textX, textY);
+            if (commandNum == 0) {
+            g2.drawImage(select2, x + textWidth-15, y-50, null);
+        }
+        
 
-        textY+=gp.tileSize;
-        g2.drawString("Control", textX, textY);
+        text = "Music";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        metrics = g2.getFontMetrics();
+        textWidth = metrics.stringWidth(text);
 
-        textX = frameX + (int)(gp.tileSize*2.5);
-        textY+=gp.tileSize*2;
-        g2.drawString("EXIT", textX, textY);
+        if (commandNum == 1) {
+            g2.drawImage(select1, x-15, y-50, null);
+        }
+         
+            g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
+
+            if (commandNum == 1) {
+            g2.drawImage(select2, x + textWidth-15, y-50, null);
+        }
+        text = "SE";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        metrics = g2.getFontMetrics();
+        textWidth = metrics.stringWidth(text);
+
+        if (commandNum == 2) {
+            g2.drawImage(select1, x-15, y-50, null);
+        }
+         
+            g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
+
+            if (commandNum == 2) {
+            g2.drawImage(select2, x + textWidth-15, y-50, null);
+        }
+
+        text = "Control";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        metrics = g2.getFontMetrics();
+        textWidth = metrics.stringWidth(text);
+
+        if (commandNum == 3) {
+            g2.drawImage(select1, x-15, y-50, null);
+        }
+         
+            g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
+
+            if (commandNum == 3) {
+            g2.drawImage(select2, x + textWidth-15, y-50, null);
+        }
+
+        text = "QUIT";
+        x = getXforCenteredText(text);
+        y += gp.tileSize+gp.tileSize;
+        metrics = g2.getFontMetrics();
+        textWidth = metrics.stringWidth(text);
+
+        if (commandNum == 4) {
+            g2.drawImage(select1, x-15, y-50, null);
+        }
+         
+            g2.drawString(text, x + (textWidth - metrics.stringWidth(text)) / 2, y);
+
+            if (commandNum == 4) {
+            g2.drawImage(select2, x + textWidth-15, y-50, null);
+        }
     }
     public void drawPlayerLife(){
         int x = gp.tileSize/2;
@@ -332,7 +522,7 @@ public class UI {
         if(titleScreenState==0){
             //title name
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
-            String text = "Dragon Ball Z: IYOT";
+            String text = "Ethereal Saga";
             int x = getXforCenteredText(text);
             int y = gp.tileSize*3;
             
@@ -370,7 +560,7 @@ public class UI {
                 if (commandNum == 0) {
                 g2.drawImage(select2, x + textWidth-15, y-50, null);
             }
-            text = "BOANG";
+            text = "CONTINUE";
             x = getXforCenteredText(text);
             y+=gp.tileSize;
             textWidth = metrics.stringWidth(text);
@@ -383,7 +573,7 @@ public class UI {
                 g2.drawImage(select2, x + textWidth-15, y-50, null);
             }
 
-            text = "DI NAKO";
+            text = "QUIT";
             x = getXforCenteredText(text);
             y+=gp.tileSize;
             textWidth = metrics.stringWidth(text);
@@ -540,10 +730,10 @@ public class UI {
         textY +=lineHeight;
         g2.drawString("Coin", textX, textY);
         textY +=lineHeight + 20;
-        g2.drawString("Weapon", textX, textY);
-        textY +=lineHeight + 15;
-        g2.drawString("Shield", textX, textY);
-        textY +=lineHeight;
+        // g2.drawString("Weapon", textX, textY);
+        // textY +=lineHeight + 15;
+        // g2.drawString("Shield", textX, textY);
+        // textY +=lineHeight;
 
         // values
         int tailX  = (frameX + frameWidth) - 30;

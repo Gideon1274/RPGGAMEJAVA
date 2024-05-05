@@ -12,6 +12,7 @@ public class OBJ_Shield_Wood extends Entity{
         down1 = setup("/pics/objects/shield_wood", gp.tileSize, gp.tileSize);
         defenseValue = 0;
 
+        
         description = "[" + name + "]\n is an old wooden shield.";
     }
 }

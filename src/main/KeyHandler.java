@@ -46,6 +46,12 @@ public class KeyHandler implements KeyListener {
         else if(gp.gameState == gp.inventoryState){
             inventoryState(code);
         }
+        else if(gp.gameState == gp.gameOverState){
+            gameOverState(code);
+        }
+        if(code == KeyEvent.VK_K){
+            gp.gameState = gp.finalBossDefeated;
+        }
         
     }
     public void titleState(int code){
@@ -70,7 +76,9 @@ public class KeyHandler implements KeyListener {
                 gp.ui.titleScreenState = 1;
             }
             if(gp.ui.commandNum == 1){
-                // add
+                gp.saveLoad.load();
+                    gp.gameState = gp.playState;
+                    gp.playMusic(0);
             }
             if(gp.ui.commandNum == 2){
                 System.exit(0);
@@ -110,6 +118,7 @@ public class KeyHandler implements KeyListener {
                 
             
             if(gp.ui.commandNum == 2){
+                playerClass = 3;
                 gp.player.setPlayerClass(playerClass); 
                 gp.gameState  = gp.playState;
                 gp.playMusic(0);
@@ -168,13 +177,116 @@ public class KeyHandler implements KeyListener {
             
             
     }
-    public void optionState(int code){
-        
-           
-        if(code == KeyEvent.VK_ESCAPE){
+    public void optionState(int code)
+    {
+        if(code == KeyEvent.VK_ESCAPE)
+        {
             gp.gameState = gp.playState;
         }
+        if(code == KeyEvent.VK_ENTER)
+        {   
+            if(gp.ui.commandNum == 4){
+                gp.gameState = gp.titleState;
+            }
+            enterPressed = true;
+        }
+        int maxCommandNum = 0;
+        switch (gp.ui.subState)
+        {
+            case 0: maxCommandNum = 4; break;
+            case 2: maxCommandNum = 1; break;
+        }
+        if(code == KeyEvent.VK_W)
+        {
+            gp.ui.commandNum--;
+            gp.playSE(9);
+            if(gp.ui.commandNum < 0)
+            {
+                gp.ui.commandNum = maxCommandNum;
+            }
+        }
+        if(code == KeyEvent.VK_S)
+        {
+            gp.ui.commandNum++;
+            gp.playSE(9);
+            if(gp.ui.commandNum > maxCommandNum)
+            {
+                gp.ui.commandNum = 0;
+            }
+        }
         
+        // if(code   == KeyEvent.VK_A)
+        // {
+        //     if(gp.ui.subState == 0)
+        //     {
+        //         if(gp.ui.commandNum == 1 && gp.music.volumeScale > 0) //music
+        //         {
+        //             gp.music.volumeScale--;
+        //             gp.music.checkVolume();  //check for music maybe a song is already being played, but you dont need it for SE, when set a sound checkVolume will be execute.
+        //             gp.playSE(9);
+        //         }
+        //         if(gp.ui.commandNum == 2 && gp.se.volumeScale > 0) //SE
+        //         {
+        //             gp.se.volumeScale--;
+        //             gp.playSE(9);
+        //         }
+        //     }
+        // }
+        // if(code == KeyEvent.VK_D)
+        // {
+        //     if(gp.ui.subState == 0)
+        //     {
+        //         if(gp.ui.commandNum == 1 && gp.music.volumeScale < 5) //music
+        //         {
+        //             gp.music.volumeScale++;
+        //             gp.music.checkVolume();
+        //             gp.playSE(9);
+        //         }
+        //         if(gp.ui.commandNum == 2 && gp.se.volumeScale < 5) //SE
+        //         {
+        //             gp.se.volumeScale++;
+        //             gp.playSE(9);
+        //         }
+        //     }
+        // }
+    }
+    public void gameOverState(int code)
+    {
+        if(code == KeyEvent.VK_W)
+        {
+            gp.ui.commandNum--;
+            if(gp.ui.commandNum < 0)
+            {
+                gp.ui.commandNum = 1;
+            }
+            gp.playSE(9);
+        }
+        if(code == KeyEvent.VK_S)
+        {
+            gp.ui.commandNum++;
+            if(gp.ui.commandNum > 1)
+            {
+                gp.ui.commandNum = 0;
+            }
+            gp.playSE(9);
+        }
+        if(code == KeyEvent.VK_ENTER)
+        {
+            if(gp.ui.commandNum == 0) 
+            {   
+                gp.resetGame(true);
+                gp.gameState = gp.playState;
+                gp.playMusic(0);
+                System.out.println(gp.ui.commandNum);
+            }
+            else if(gp.ui.commandNum == 1) 
+            {   
+                gp.resetGame(false);
+                System.out.println(gp.ui.commandNum);
+                gp.ui.titleScreenState = 0;
+                gp.gameState = gp.titleState;
+            }
+        }
     }
     public void inventoryState(int code){
         if(code == KeyEvent.VK_B){
