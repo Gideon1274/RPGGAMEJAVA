@@ -15,7 +15,7 @@ public class TileManager{
     GamePanel gp;
     public Tile[] tile;
     public int mapTileNum[][];
-    boolean drawPath = true;
+    boolean drawPath = false;
 
     public TileManager(GamePanel gp){
         this.gp = gp;
@@ -23,8 +23,8 @@ public class TileManager{
         tile = new Tile[500];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         getTileImage();
-        loadMap("/pics/maps/mappodesu.txt");
-        // loadMap("/pics/maps/worldV2.txt");
+        // loadMap("/pics/maps/mappodesu.txt");
+        loadMap("/pics/maps/waltermap.txt");
 
     }
     public void getTileImage(){       
@@ -44,13 +44,13 @@ public class TileManager{
 
             setup(10, "010", false); // grass
             setup(11, "011", false); // grass
-            setup(12, "012", true); // topleftedge
-            setup(13, "013", true); // water
+            setup(12, "012", false); // topleftedge
+            setup(13, "013", false); // water
             setup(14, "014", false);
-            setup(15, "015", true);
+            setup(15, "015", false);
             setup(16, "016", false);
             setup(17, "017", false); // rightedge
-            setup(18, "018", true); // leftedge
+            setup(18, "018", false); // leftedge
             setup(19, "019", false);
             setup(20, "020", false);
             setup(21, "021", false);
@@ -61,10 +61,10 @@ public class TileManager{
             setup(26, "026", false);
             setup(27, "027", false);
             setup(28, "028", true);
-            setup(29, "029", false); // tree
-            setup(30, "030", false);
-            setup(31, "031", false);
-            setup(32, "032", false);
+            setup(29, "029", true); // tree
+            setup(30, "030", true);
+            setup(31, "031", true);
+            setup(32, "032", true);
             setup(33, "033", false);
             setup(34, "034", false);
             setup(35, "035", false);
@@ -88,11 +88,10 @@ public class TileManager{
             setup(53, "053", false);
             setup(54, "054", false);
             setup(55, "055", false);
-            setup(56, "056", false);
-            setup(57, "057", false);
-            setup(58, "058", false);
-            setup(59, "059", false);
-
+            setup(56, "056", true);
+            setup(57, "057", true);
+            setup(58, "058", true);
+            setup(59, "059", true);
             setup(60, "060", true);//snow tree
             setup(61, "061", true);//cut tree
             setup(62, "062", true);//cut tree
@@ -102,25 +101,44 @@ public class TileManager{
             setup(66, "066", true);
             setup(67, "067", true);
             setup(68, "068", true);
-            setup(69, "069", true);
+            setup(69, "069", false);
             setup(70, "070", true);
-
-            // setup(32, "snowtree13", true);//snow tree
-            // setup(33, "snowtree14", true);//cut tree
-            // setup(34, "snowtree15", true);//cut tree
-            // setup(35, "snowtreecut16", true);//cut tree
-            // setup(36, "cotreeright", true);
-            // setup(37, "cotreeleft", true);
-            // setup(38, "tree06", true);
-            // setup(39, "BURNHOUSE", true);
-            // setup(40, "BURNTREE", true);
-            // setup(41, "SNOWTILE", true);
-            // setup(42, "034", false);
-            
+            setup(71, "071", false);
+            setup(72, "072", false);
+            setup(73, "073", false);
+            setup(74, "074", true);
+            setup(75, "075", false);
+            setup(76, "076", true);
+            setup(77, "077", true);
+            setup(78, "078", true);
+            setup(79, "079", true);
+            setup(80, "080", true);
+            setup(81, "081", true);
+            setup(82, "082", false);
+            setup(83, "083", false);
+            setup(84, "084", false);
+            setup(85, "085", false);
+            setup(86, "086", false);
+            setup(87, "087", false);
+            setup(88, "088", false);
+            setup(89, "089", false);
+            setup(90, "090", true);
+            setup(91, "091", true);//edge
+            setup(92, "092", true);//edge
+            setup(93, "093", true);
+            setup(94, "094", true);
+            setup(95, "095", true);
+            setup(96, "096", true);
+            setup(97, "097", true);
+            setup(98, "098", true);
+            setup(99, "099", true);
+            setup(100, "100", true);
+            setup(101, "101", true);
 
     }
 
     public void setup(int index, String imageName, boolean collision){
+        System.out.println(index);
         UtilityTool uTool = new UtilityTool();
 
         try{
@@ -195,7 +213,7 @@ public class TileManager{
 
             }
         }
-        if(drawPath == true){
+        if(drawPath == false){
             g2.setColor(new Color(255,0,0,70));
 
             for(int i = 0;i<gp.pFinder.pathList.size();i++){
