@@ -41,7 +41,7 @@ public class Player extends Entity implements Cloneable{
     public Random rand = new Random();
     public Player(GamePanel gp, KeyHandler keyH,MouseHandler mouseH){
         super(gp);
-    
+        
         this.keyH = keyH;
         this.mouseH = mouseH;
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
@@ -64,8 +64,8 @@ public class Player extends Entity implements Cloneable{
         // x = right
     }
     public void setPlayerDefaultLocation(){
-        worldX = gp.tileSize * 40;
-        worldY = gp.tileSize * 83;
+        worldX = gp.tileSize * 26;
+        worldY = gp.tileSize * 23;
     }
     public void setPlayerClass(int playerClass){
         this.playerClass = playerClass;
@@ -78,6 +78,7 @@ public class Player extends Entity implements Cloneable{
         nextLevelExp = 5;
         coin = 0;
         direction = "down";
+        gp.gwapoko = true;
         if(this.playerClass == 1){
             setDefaultValuesForKnight();
         }

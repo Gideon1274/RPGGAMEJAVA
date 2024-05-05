@@ -92,6 +92,8 @@ public class GamePanel extends JPanel implements Runnable{
     public boolean loadGameHovered = false;
     public boolean quitHovered = false;
 
+    public boolean gwapoko = false;
+
     public boolean leftClicked = false;
     public boolean rightClicked = false;
     public GamePanel(){
