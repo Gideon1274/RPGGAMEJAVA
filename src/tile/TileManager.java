@@ -21,7 +21,7 @@ public class TileManager{
         this.gp = gp;
 
         tile = new Tile[500];
-        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+        mapTileNum = new int[gp.maxWorldCol*2][gp.maxWorldRow*2];
         getTileImage();
         // loadMap("/pics/maps/mappodesu.txt");
         loadMap("/pics/maps/waltermap.txt");
@@ -44,18 +44,18 @@ public class TileManager{
 
             setup(10, "010", false); // grass
             setup(11, "011", false); // grass
-            setup(12, "012", false); // topleftedge
-            setup(13, "013", false); // water
+            setup(12, "012", true); // topleftedge
+            setup(13, "013", true); // water
             setup(14, "014", false);
-            setup(15, "015", false);
+            setup(15, "015", true);
             setup(16, "016", false);
-            setup(17, "017", false); // rightedge
+            setup(17, "017", true); // rightedge
             setup(18, "018", false); // leftedge
             setup(19, "019", false);
             setup(20, "020", false);
             setup(21, "021", false);
             setup(22, "022", false);
-            setup(23, "023", false);
+            setup(23, "023", true);
             setup(24, "024", true);
             setup(25, "025", true);
             setup(26, "026", false);
@@ -138,7 +138,7 @@ public class TileManager{
     }
 
     public void setup(int index, String imageName, boolean collision){
-        System.out.println(index);
+        // System.out.println(index);
         UtilityTool uTool = new UtilityTool();
 
         try{

@@ -39,12 +39,21 @@ public class MON_coTree extends Entity {
     public void getImage(){
         up1 = setup("/pics/objects/cotree00", gp.tileSize, gp.tileSize);
         up2 = setup("/pics/objects/cotree00", gp.tileSize, gp.tileSize);
+        up3 = setup("/pics/objects/cotree00", gp.tileSize, gp.tileSize);
+        up4 = setup("/pics/objects/cotree00", gp.tileSize, gp.tileSize);
+
         down1 = setup("/pics/objects/cotree01", gp.tileSize, gp.tileSize);
         down2 = setup("/pics/objects/cotree01", gp.tileSize, gp.tileSize);
+        down3 = setup("/pics/objects/cotree01", gp.tileSize, gp.tileSize);
+        down4 = setup("/pics/objects/cotree01", gp.tileSize, gp.tileSize);
         left1 = setup("/pics/objects/cotree02", gp.tileSize, gp.tileSize);
         left2 = setup("/pics/objects/cotree02", gp.tileSize, gp.tileSize);
+        left3 = setup("/pics/objects/cotree02", gp.tileSize, gp.tileSize);
+        left4 = setup("/pics/objects/cotree02", gp.tileSize, gp.tileSize);
         right1 = setup("/pics/objects/cotree03", gp.tileSize, gp.tileSize);
         right2 = setup("/pics/objects/cotree03", gp.tileSize, gp.tileSize);
+        right3 = setup("/pics/objects/cotree03", gp.tileSize, gp.tileSize);
+        right4 = setup("/pics/objects/cotree03", gp.tileSize, gp.tileSize);
 
         upright1 = setup("/pics/objects/cotree00", gp.tileSize, gp.tileSize);
         upright2 = setup("/pics/objects/cotree00", gp.tileSize, gp.tileSize);
@@ -54,6 +63,15 @@ public class MON_coTree extends Entity {
         upleft2 = setup("/pics/objects/cotree02", gp.tileSize, gp.tileSize);
         downleft1 = setup("/pics/objects/cotree01", gp.tileSize, gp.tileSize);
         downleft2 = setup("/pics/objects/cotree01", gp.tileSize, gp.tileSize);
+        
+        upright3 = setup("/pics/objects/cotree00", gp.tileSize, gp.tileSize);
+        upright4 = setup("/pics/objects/cotree00", gp.tileSize, gp.tileSize);
+        downright3 = setup("/pics/objects/cotree03", gp.tileSize, gp.tileSize);
+        downright4 = setup("/pics/objects/cotree03", gp.tileSize, gp.tileSize);
+        upleft3 = setup("/pics/objects/cotree02", gp.tileSize, gp.tileSize);
+        upleft4 = setup("/pics/objects/cotree02", gp.tileSize, gp.tileSize);
+        downleft3 = setup("/pics/objects/cotree01", gp.tileSize, gp.tileSize);
+        downleft4 = setup("/pics/objects/cotree01", gp.tileSize, gp.tileSize);
     }
     public void setAction(){
             actionLockCounter++;

@@ -20,12 +20,43 @@ public class NPC_OldMan extends Entity{
         
         up1 = setup("/pics/npc/oldman_up_1", gp.tileSize, gp.tileSize);
         up2 = setup("/pics/npc/oldman_up_2", gp.tileSize, gp.tileSize);
+        up3 = setup("/pics/npc/oldman_up_1", gp.tileSize, gp.tileSize);
+        up4 = setup("/pics/npc/oldman_up_2", gp.tileSize, gp.tileSize);
+
         down1 = setup("/pics/npc/oldman_down_1", gp.tileSize, gp.tileSize);
         down2 = setup("/pics/npc/oldman_down_2", gp.tileSize, gp.tileSize);
+        down3 = setup("/pics/npc/oldman_down_1", gp.tileSize, gp.tileSize);
+        down4 = setup("/pics/npc/oldman_down_2", gp.tileSize, gp.tileSize);
+
         left1 = setup("/pics/npc/oldman_left_1", gp.tileSize, gp.tileSize);
         left2 = setup("/pics/npc/oldman_left_2", gp.tileSize, gp.tileSize);
+        left3 = setup("/pics/npc/oldman_left_1", gp.tileSize, gp.tileSize);
+        left4 = setup("/pics/npc/oldman_left_2", gp.tileSize, gp.tileSize);
+
         right1 = setup("/pics/npc/oldman_right_1", gp.tileSize, gp.tileSize);
         right2 = setup("/pics/npc/oldman_right_2", gp.tileSize, gp.tileSize);
+        right3 = setup("/pics/npc/oldman_right_1", gp.tileSize, gp.tileSize);
+        right4 = setup("/pics/npc/oldman_right_2", gp.tileSize, gp.tileSize);
+
+        upleft1 = setup("/pics/npc/oldman_left_1", gp.tileSize, gp.tileSize);
+        upleft2 = setup("/pics/npc/oldman_left_2", gp.tileSize, gp.tileSize);
+        upleft3 = setup("/pics/npc/oldman_left_1", gp.tileSize, gp.tileSize);
+        upleft4 = setup("/pics/npc/oldman_left_2", gp.tileSize, gp.tileSize);
+
+        upright1 = setup("/pics/npc/oldman_right_1", gp.tileSize, gp.tileSize);
+        upright2 = setup("/pics/npc/oldman_right_2", gp.tileSize, gp.tileSize);
+        upright3 = setup("/pics/npc/oldman_right_1", gp.tileSize, gp.tileSize);
+        upright4 = setup("/pics/npc/oldman_right_2", gp.tileSize, gp.tileSize);
+
+        downleft1 = setup("/pics/npc/oldman_left_1", gp.tileSize, gp.tileSize);
+        downleft2 = setup("/pics/npc/oldman_left_2", gp.tileSize, gp.tileSize);
+        downleft3 = setup("/pics/npc/oldman_left_1", gp.tileSize, gp.tileSize);
+        downleft4 = setup("/pics/npc/oldman_left_2", gp.tileSize, gp.tileSize);
+
+        downright1 = setup("/pics/npc/oldman_right_1", gp.tileSize, gp.tileSize);
+        downright1 = setup("/pics/npc/oldman_right_2", gp.tileSize, gp.tileSize);
+        downright1 = setup("/pics/npc/oldman_right_1", gp.tileSize, gp.tileSize);
+        downright1 = setup("/pics/npc/oldman_right_2", gp.tileSize, gp.tileSize);
     }
     public void setDialogue(){
         dialogues[0] = "Hello, idiotsqqw eqw e\nqweqwe qwe qwe qwe ";
