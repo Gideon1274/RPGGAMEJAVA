@@ -5,6 +5,7 @@ import entity.NPC_OldMan;
 import entity.OBJ_coTree;
 import monster.MON_Crab;
 import monster.MON_GreenSlime;
+import monster.MON_Skeleton;
 import monster.MON_coTree;
 import object.OBJ_Axe;
 import object.OBJ_Coin_Bronze;
@@ -130,16 +131,13 @@ public class AssetSetter {
         gp.npc[i].worldX = gp.tileSize*35;
         gp.npc[i].worldY = gp.tileSize*45;i++;
         
-        for(int q=17;q<=82;q++){
-            for(int j=49;j<=54;j++){
-                setcoTree(i, q, j);i++;    
-            }      
-        }
-        // for(int q=25;q<=30;q++){
-        //     for(int j=12;j<=17;j++){
-        //         Tree(i, q, j);i++;    
+        
+        // for(int q=17;q<=82;q++){
+        //     for(int j=49;j<=54;j++){
+        //         setcoTree(i, q, j);i++;    
         //     }      
         // }
+        
         
         
     }
@@ -192,10 +190,22 @@ public class AssetSetter {
         gp.monster[i].worldX = gp.tileSize * 23;
         gp.monster[i].worldY = gp.tileSize * 39;
         i++;
-        gp.monster[i] = new MON_Crab(gp);
-        gp.monster[i].worldX = gp.tileSize * 23;
-        gp.monster[i].worldY = gp.tileSize * 39;
+
+        gp.monster[i] = new MON_Skeleton(gp);
+        gp.monster[i].worldX = gp.tileSize * 25;
+        gp.monster[i].worldY = gp.tileSize * 40;
         i++;
+        gp.monster[i] = new MON_Skeleton(gp);
+        gp.monster[i].worldX = gp.tileSize * 25;
+        gp.monster[i].worldY = gp.tileSize * 41;
+        i++;
+        gp.monster[i] = new MON_Skeleton(gp);
+        gp.monster[i].worldX = gp.tileSize * 25;
+        gp.monster[i].worldY = gp.tileSize * 42;
+        i++;
+        
+        
+        
     }
     public void setTree(){
         // int i = 0;

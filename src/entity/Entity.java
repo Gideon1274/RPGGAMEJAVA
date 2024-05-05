@@ -24,7 +24,7 @@ public class Entity {
     public BufferedImage up1,up2,up3,up4,up5, down1, down2,down3,down4,down5;
     public BufferedImage left1,left2,left3,left4,left5,left6,left7;
     public BufferedImage right1,right2,right3,right4,right5,right6,right7;
-    public BufferedImage upright1,upright2, upleft1,upleft2,downright1,downright2,downleft1,downleft2;
+    public BufferedImage upright1,upright2,upright3,upright4, upleft1,upleft2,upleft3,upleft4, downright1,downright2,downright3,downright4, downleft1,downleft2,downleft3,downleft4;
     public BufferedImage attackUp1,attackUp2,attackUp3,attackUp4, attackDown1, attackDown2,attackDown3, attackDown4;
     public BufferedImage attackRight1, attackRight2,attackRight3, attackRight4, attackLeft1, attackLeft2,attackLeft3, attackLeft4;
     public BufferedImage attackupRight1, attackupRight2,attackupRight3, attackupRight4, attackupLeft1, attackupLeft2,attackupLeft3, attackupLeft4;
@@ -173,6 +173,9 @@ public class Entity {
         }
     }
     public void update(){
+        if(attacking  == true){
+            attacking();
+        }
         setAction();
 		checkCollision();
 
@@ -197,8 +200,8 @@ public class Entity {
             else if(spriteNumMobs == 2){
                 spriteNumMobs = 1;
             }
-        spriteCounter++;
-        if(spriteCounter>12){
+        // spriteCounter++;
+        if(spriteCounter>15){
             if(spriteNum == 1){
                 spriteNum = 2;
             }
@@ -207,12 +210,6 @@ public class Entity {
             }else if(spriteNum == 3){
                 spriteNum = 4;
             }else if(spriteNum == 4){
-                spriteNum = 5;
-            }else if(spriteNum == 5){
-                spriteNum = 6;
-            }else if(spriteNum == 6){
-                spriteNum = 7;
-            }else if(spriteNum == 7){
                 spriteNum = 1;
             }
             // System.out.println(spriteNum);
@@ -245,7 +242,7 @@ public class Entity {
             gp.player.invincible = true;
         }
     }
-    public void draw(Graphics2D g2) {
+    public void draw(Graphics2D g2) {   
 		
 		BufferedImage image = null;
 		int screenX = worldX - gp.player.worldX + gp.player.screenX;
@@ -254,44 +251,177 @@ public class Entity {
         
 		if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX && worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
 			worldY + gp.tileSize > gp.player.worldY - gp.player.screenY && worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-			switch(direction) {
+                int tempScreenX = screenX;
+                int tempScreenY = screenY;
                 
-			case "up":
-				if (spriteNumMobs == 1) {image = up1;}
-				if (spriteNumMobs == 2) {image = up2;}
-				break;
-			case "down":
-				if (spriteNumMobs == 1) {image = down1;}
-				if (spriteNumMobs == 2) {image = down2;}
-				break;
-			case "left":
-				if (spriteNumMobs == 1) {image = left1;}
-				if (spriteNumMobs == 2) {image = left2;}
-				break;
-			case "right":
-				if (spriteNumMobs == 1) {image = right1;}
-				if (spriteNumMobs == 2) {image = right2;}
-				break;
             
-            case "upright":
-				if (spriteNumMobs == 1) {image = upright1;}
-				if (spriteNumMobs == 2) {image = upright2;}
-				break;
-            case "upleft":
-				if (spriteNumMobs == 1) {image = upleft1;}
-				if (spriteNumMobs == 2) {image = upleft2;}
-				break;
-            case "downright":
-				if (spriteNumMobs == 1) {image = downright1;}
-				if (spriteNumMobs == 2) {image = downright2;}
-				break;
-            case "downleft":
-				if (spriteNumMobs == 1) {image = downleft1;}
-				if (spriteNumMobs == 2) {image = downleft2;}
-				break;
-            
-            
-			}
+                
+                switch(direction){
+                    case "up":
+                    if(attacking ==false){
+                        if(spriteNum ==1){image = up1;}
+                        if(spriteNum==2){image =up2;}
+                        if(spriteNum==3){image = up3;}
+                        if(spriteNum==4){image =up4;}
+                        // if(spriteNum==6){image =left6;}
+                        // if(spriteNum==7){image =left7;}
+                    }
+                        // if(attacking ==false && gp.mouseH.getX()>=0 && gp.mouseH.getX()<=gp.screenWidth/2){
+                        //     if(spriteNum ==1){image = up1;}
+                        //     if(spriteNum==2){image =up2;}
+                        //     if(spriteNum==3){image =up3;}
+                        //     if(spriteNum==4){image =up4;}
+                        //     if(spriteNum==5){image =up5;}
+                        //     // if(spriteNum==6){image =left6;}
+                        //     // if(spriteNum==7){image =left7;}
+                        // }
+                        // if(attacking ==false && gp.mouseH.getX()>=gp.screenWidth/2 && gp.mouseH.getX()<=gp.screenWidth){
+                        //     if(spriteNum ==1){image = right1;}
+                        //     if(spriteNum==2){image =right2;}
+                        //     if(spriteNum==3){image =right3;}
+                        //     if(spriteNum==4){image =right4;}
+                        //     if(spriteNum==5){image =right5;}
+                        //     if(spriteNum==6){image =right6;}
+                        //     if(spriteNum==7){image =right7;}
+                        // }
+                        if(attacking == true){
+                            // tempScreenY = screenY - (int)(gp.tileSize/1);
+                            if(spriteNum ==1){image = attackUp1;}
+                            System.out.println(spriteNum);
+                            if(spriteNum==2){image = attackUp2;}
+                            System.out.println(spriteNum);
+                            if(spriteNum ==3){image = attackUp3;}
+                            if(spriteNum==4){image = attackUp4;}
+                        }
+                        
+                        break;
+                    case "down":
+                    if(attacking ==false){
+                        if(spriteNum ==1){image = down1;}
+                        if(spriteNum==2){image =down2;}
+                        if(spriteNum ==3){image = down3;}
+                        if(spriteNum==4){image =down4;}
+                    }
+                    // if(attacking ==false && gp.mouseH.getX()>=0 && gp.mouseH.getX()<=gp.screenWidth/2){
+                    //     if(spriteNum ==1){image = left1;}
+                    //     if(spriteNum==2){image =left2;}
+                    //     if(spriteNum==3){image =left3;}
+                    //     if(spriteNum==4){image =left4;}
+                    //     if(spriteNum==5){image =left5;}
+                    //     if(spriteNum==6){image =left6;}
+                    //     if(spriteNum==7){image =left7;}
+                    // }if(attacking ==false && gp.mouseH.getX()>=gp.screenWidth/2 && gp.mouseH.getX()<=gp.screenWidth){
+                    //     if(spriteNum ==1){image = right1;}
+                    //     if(spriteNum==2){image =right2;}
+                    //     if(spriteNum==3){image =right3;}
+                    //     if(spriteNum==4){image =right4;}
+                    //     if(spriteNum==5){image =right5;}
+                    //     if(spriteNum==6){image =right6;}
+                    //     if(spriteNum==7){image =right7;}
+                    // }
+                        if(attacking == true){
+                            // tempScreenY = screenY + (int)(gp.tileSize/1);
+                            if(spriteNum ==1){image = attackDown1;}
+                            if(spriteNum==2){image = attackDown2;}
+                            if(spriteNum ==3){image = attackDown3;}
+                            if(spriteNum==4){image = attackDown4;}
+        
+                        }
+                        break;
+                    case "left":
+                    if(attacking ==false){
+                        if(spriteNum ==1){image = left1;}
+                        if(spriteNum==2){image =left2;}
+                        if(spriteNum ==3){image = left3;}
+                        if(spriteNum==4){image =left4;}
+                    }
+                        if(attacking == true){
+                            // tempScreenX = screenX - (int)(gp.tileSize/1);
+                            if(spriteNum ==1){image = attackLeft1;}
+                            if(spriteNum==2){image = attackLeft2;}
+                            if(spriteNum ==3){image = attackLeft3;}
+                            if(spriteNum==4){image = attackLeft4;}
+                        }
+                        break;
+                    case "right":
+                    if(attacking ==false){
+                        if(spriteNum ==1){image = right1;}
+                        if(spriteNum==2){image =right2;}
+                        if(spriteNum ==3){image = right3;}
+                        if(spriteNum==4){image =right4;}
+                    }
+                        if(attacking == true){
+                            // tempScreenX = screenX + (int)(gp.tileSize/1);
+                            if(spriteNum ==1){image = attackRight1;}
+                            if(spriteNum==2){image = attackRight2;}
+                            if(spriteNum ==3){image = attackRight3;}
+                            if(spriteNum==4){image = attackRight4;}
+                        }
+                        break;
+        
+                    //8 DIRECTION
+                    case "upright":
+                    if(attacking ==false){
+                        if(spriteNum ==1){image = right1;}
+                        if(spriteNum==2){image =right2;}
+                        if(spriteNum ==3){image = right3;}
+                        if(spriteNum==4){image =right4;}
+                    }if(attacking == true){
+                        // tempScreenX = screenX + (int)(gp.tileSize/1);
+                        // tempScreenY = screenY - (int)(gp.tileSize/1);
+                        if(spriteNum ==1){image = attackupRight1;}
+                        if(spriteNum==2){image = attackupRight2;}
+                        if(spriteNum ==3){image = attackupRight3;}
+                        if(spriteNum==4){image = attackupRight4;}
+                    }
+        
+                        break;
+                    case "upleft":
+                    if(attacking ==false){
+                        if(spriteNum ==1){image = left1;}
+                        if(spriteNum==2){image =left2;}
+                        if(spriteNum ==3){image = left3;}
+                        if(spriteNum==4){image =left4;}
+                    }if(attacking == true){
+                        // tempScreenX = screenX - (int)(gp.tileSize/1);
+                        // tempScreenY = screenY - (int)(gp.tileSize/1);
+                        if(spriteNum ==1){image = attackupLeft1;}
+                        if(spriteNum==2){image = attackupLeft2;}
+                        if(spriteNum ==3){image = attackupLeft3;}
+                        if(spriteNum==4){image = attackupLeft4;}
+                    }
+                        break;
+                    case "downright":
+                    if(attacking ==false){
+                        if(spriteNum ==1){image = right1;}
+                        if(spriteNum==2){image =right2;}
+                        if(spriteNum ==3){image = right3;}
+                        if(spriteNum==4){image =right4;}
+                    }if(attacking == true){
+                        // tempScreenX = screenX + (int)(gp.tileSize/1);
+                        // tempScreenY = screenY + (int)(gp.tileSize/1);
+                        if(spriteNum ==1){image = attackdownRight1;}
+                        if(spriteNum==2){image = attackdownRight2;}
+                        if(spriteNum ==3){image = attackdownRight3;}
+                        if(spriteNum==4){image = attackdownRight4;}
+                    }
+                        break;
+                    case "downleft":
+                    if(attacking ==false){
+                        if(spriteNum ==1){image = left1;}
+                        if(spriteNum==2){image =left2;}
+                        if(spriteNum ==3){image = left3;}
+                        if(spriteNum==4){image =left4;}
+                    }if(attacking == true){
+                        // tempScreenX = screenX - (int)(gp.tileSize/1);
+                        // tempScreenY = screenY + (int)(gp.tileSize/1);
+                        if(spriteNum ==1){image = attackdownLeft1;}
+                        if(spriteNum==2){image = attackdownLeft2;}
+                        if(spriteNum ==3){image = attackdownLeft3;}
+                        if(spriteNum==4){image = attackdownLeft4;}
+                    }
+                        break;
+                }
             
         
             
@@ -323,7 +453,7 @@ public class Entity {
             if(dying == true){
                 dyingAnimation(g2);
             }
-			g2.drawImage(image, screenX, screenY, null);
+			g2.drawImage(image, tempScreenX,tempScreenY, null);
             changeAlpha(g2,1F);
 			
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -355,6 +485,7 @@ public class Entity {
     }
     
     public BufferedImage setup(String imagePath, int width, int height){
+        System.out.println(imagePath);
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
 
@@ -366,14 +497,20 @@ public class Entity {
         }
         return image;
     }
-    public int getXdistance( Entity target){
-        return Math.abs(worldX - target.worldX);
+    public int getXdistance(Entity target)
+    {
+        int xDistance = Math.abs(getCenterX() - target.getCenterX());
+        return xDistance;
     }
-    public int getYdistance( Entity target){
-        return Math.abs(worldY - target.worldY);
+    public int getYdistance(Entity target)
+    {
+        int yDistance = Math.abs(getCenterY() - target.getCenterY());
+        return yDistance;
     }
-    public int getTileDistance(Entity target){
-        return (getXdistance(target)+getYdistance(target)/gp.tileSize);
+    public int getTileDistance(Entity target)
+    {
+        int tileDistance = (getXdistance(target) + getYdistance(target))/gp.tileSize;
+        return tileDistance;
     }
     public int getGoalCol(Entity target){
         return (target.worldX + target.solidArea.x)/gp.tileSize;   
@@ -488,17 +625,65 @@ public class Entity {
         }
     }
 
-    public void checkStopChasingOrNot(Entity target, int distance, int rate){
-        if(getTileDistance(target)<distance){
-                    onPath = true;
-                
+    public void checkStartChasingOrNot(Entity target, int distance, int rate)
+    {   
+        // System.out.println("Start Chase: "+ getTileDistance(target));
+        if(getTileDistance(target) < distance)
+        {
+            // int i = new Random().nextInt(rate);
+            // if(i == 0)
+            // {
+                onPath = true;
+            // }
         }
+    }
+    public void checkStopChasingOrNot(Entity target, int distance, int rate)
+    {
+        if(getTileDistance(target) > distance)
+        {
+            // int i = new Random().nextInt(rate);
+            // if(i == 0)
+            // {
+                onPath = false;
+            // }
+        }
+    }
+    public void moveTowardPlayer(int interval)
+    {
+        actionLockCounter++;
 
+        if(actionLockCounter > interval)
+        {
+            if(getXdistance(gp.player) > getYdistance(gp.player)) //if entity far to the player on X axis moves right or left
+            {
+                if(gp.player.getCenterX() < getCenterX()) //Player is left side, entity moves to left
+                {
+                    direction = "left";
+                }
+                else
+                {
+                    direction = "right";
+                }
+            }
+            else if(getXdistance(gp.player) < getYdistance(gp.player))  //if entity far to the player on Y axis moves up or down
+            {
+                if(gp.player.getCenterY() < getCenterY()) //Player is up side, entity moves to up
+                {
+                    direction = "up";
+                }
+                else
+                {
+                    direction = "down";
+                }
+            }
+            actionLockCounter = 0;
+        }
     }
     public void getRandomDirection(){
-        if(actionLockCounter == 120){
-            Random random = new Random();
-            int i = random.nextInt(128)+1;
+        actionLockCounter++;
+        if(actionLockCounter > 120){
+            int i = new Random().nextInt(128)+1;
+            // if(i == 0)
             if(i<=16){
                 direction ="up";
     
@@ -523,15 +708,7 @@ public class Entity {
             actionLockCounter = 0;
             }
     }
-    public void checkStartChasingOrNot(Entity target, int distance, int rate){
-        if(getTileDistance(target)>distance){
-            int i = new Random().nextInt(rate);
-                if(i == 0){
-                    onPath = false;
-                }
-        }
-
-    }
+    
     public void checkShootOrNot(int rate, int shotInterval)
     {
         // int i = new Random().nextInt(rate);
@@ -551,6 +728,133 @@ public class Entity {
         //     shotAvailableCounter = 0;
         // }
     }
+    public void attacking(){
+        if(spriteCounter>30){
+            if(spriteNum == 1){
+                spriteNum = 2;
+            }
+            else if(spriteNum == 2){
+                spriteNum = 3;
+            }else if(spriteNum == 3){
+                spriteNum = 4;
+            }else if(spriteNum == 4){
+                spriteNum = 1;
+            }
+            // System.out.println(spriteNum);
+            spriteCounter=0;
+        }
+        
+        if(spriteCounter > 5 && spriteCounter <=10){
+            spriteNum = 4;
+            //save the current worldX, WorldY
+            int currentWorldX = worldX;
+            int currentWorldY = worldY;
+            int solidAreaWidth = solidArea.width;
+            int solidAreaHeight = solidArea.height;
+
+            // adjust player's worldx/y for the attackarea
+            switch(direction){
+                case "up": worldY -= attackArea.height;System.out.println("1");break;
+                case "down": worldY += attackArea.height;System.out.println("2");break;
+                case "left": worldX -= attackArea.width;System.out.println("3");break;
+                case "right": worldX += attackArea.width;System.out.println("4");break;
+
+                case "upright": worldX += attackArea.width*0.7; worldY -= attackArea.height*0.7;System.out.println("5");break;
+                case "upleft": worldX -= attackArea.width*0.7; worldY -= attackArea.height*0.7;System.out.println("6");break;
+                case "downright": worldY += attackArea.height*0.7; worldX+=attackArea.width*0.7;System.out.println("7");break;
+                case "downleft": worldY += attackArea.height*0.7; worldX -=attackArea.width * 0.7;System.out.println("8");break;
+
+            }
+
+            //attackarea becomes solid Area
+            solidArea.width = attackArea.width;
+            solidArea.height = attackArea.height;
+
+            //check monster collision with the updated worldX, worldY and solid Area
+            
+
+            if(type == type_monster){
+                if(gp.cChecker.checkPlayer(this) == true){
+                    damagePlayer(attack);
+                }
+            }else{
+                int monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
+                gp.player.damageMonster(monsterIndex, attack);
+            }
+            //after checing collision, restore the original state
+            worldX = currentWorldX;
+            worldY = currentWorldY;
+            solidArea.width = solidAreaWidth;
+            solidArea.height = solidAreaHeight;
+        }
+        if(spriteCounter >25){
+            spriteNum =1;
+            spriteCounter = 0;
+            attacking = false;
+        }
+
+    }
+    public int getCenterX()
+    {
+        int centerX = worldX + left1.getWidth()/2;
+        return centerX;
+    }
+    public int getCenterY()
+    {
+        int centerY = worldY + up1.getWidth()/2;
+        return centerY;
+    }
+    public void checkAttackOrNot(int rate, int straight, int horizontal)
+    {
+        boolean tartgetInRange = false;
+        int xDis = getXdistance(gp.player);
+        int yDis = getYdistance(gp.player);
+
+        switch (direction)
+        {
+            case "up":
+                if(gp.player.getCenterY() < getCenterY()  && yDis < straight && xDis < horizontal)
+                {
+                    tartgetInRange = true;
+                }
+                break;
+            case "down":
+                if(gp.player.getCenterY()  > getCenterY()  && yDis < straight && xDis < horizontal)
+                {
+                    tartgetInRange = true;
+                }
+                break;
+            case "left":
+                if(gp.player.getCenterX()  < getCenterX() && xDis < straight && yDis < horizontal)
+                {
+                    tartgetInRange = true;
+                }
+                break;
+            case "right":
+                if(gp.player.getCenterX() > getCenterX() && xDis < straight && yDis < horizontal)
+                {
+                    tartgetInRange = true;
+                }
+                break;
+        }
+
+        // if(tartgetInRange == true)
+        // {
+        //     //Check if it initiates an attack
+        //     int i = new Random().nextInt(rate);
+        //     if(i == 0)
+        //     {
+        //         attacking = true;
+        //         spriteNum = 1;
+        //         spriteCounter = 0;
+        //         shotAvailableCounter = 0;
+        //     }
+        // }
+
+    }
+
 }
+
+
 
 

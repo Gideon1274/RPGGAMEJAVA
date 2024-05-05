@@ -23,66 +23,120 @@ public class MON_Skeleton extends Entity {
         speed = 3;
         maxLife = 100;
         life = maxLife;
-        attack = 5;
-        defense = 0;
-        exp = 6;
+        attack = 10;
+        defense = 2;
+        exp = 10;
         projectile = new OBJ_Rock(gp);
 
-        solidArea.x = 3;
-        solidArea.y = 18;
-        solidArea.width = 42;
-        solidArea.height = 30;
+        solidArea.x = 4;
+        solidArea.y = 4;
+        solidArea.width = 40;
+        solidArea.height = 44;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+        attackArea.width = 48;
+        attackArea.height = 48;
+
         getImage();
-        
+        getAttackImage();
     }
 
     public void getImage(){
-        up1 = setup("/pics/monster/slimes/up00", gp.tileSize, gp.tileSize);
-        up2 = setup("/pics/monster/slimes/up01", gp.tileSize, gp.tileSize);
+        up1 = setup("/pics/monster/skeleton/up00", gp.tileSize, gp.tileSize);
+        up2 = setup("/pics/monster/skeleton/up01", gp.tileSize, gp.tileSize);
+        up3 = setup("/pics/monster/skeleton/up02", gp.tileSize, gp.tileSize);
+        up4 = setup("/pics/monster/skeleton/up03", gp.tileSize, gp.tileSize);
 
-        down1 = setup("/pics/monster/slimes/down00", gp.tileSize, gp.tileSize);
-        down2 = setup("/pics/monster/slimes/down01", gp.tileSize, gp.tileSize);
+        down1 = setup("/pics/monster/skeleton/down00", gp.tileSize, gp.tileSize);
+        down2 = setup("/pics/monster/skeleton/down01", gp.tileSize, gp.tileSize);
+        down3 = setup("/pics/monster/skeleton/down02", gp.tileSize, gp.tileSize);
+        down4 = setup("/pics/monster/skeleton/down03", gp.tileSize, gp.tileSize);
 
-        left1 = setup("/pics/monster/slimes/left00", gp.tileSize, gp.tileSize);
-        left2 = setup("/pics/monster/slimes/left01", gp.tileSize, gp.tileSize);
+        left1 = setup("/pics/monster/skeleton/left00", gp.tileSize, gp.tileSize);
+        left2 = setup("/pics/monster/skeleton/left01", gp.tileSize, gp.tileSize);
+        left3 = setup("/pics/monster/skeleton/left02", gp.tileSize, gp.tileSize);
+        left4 = setup("/pics/monster/skeleton/left03", gp.tileSize, gp.tileSize);
 
-        right1 = setup("/pics/monster/slimes/right00", gp.tileSize, gp.tileSize);
-        right2 = setup("/pics/monster/slimes/right01", gp.tileSize, gp.tileSize);
+        right1 = setup("/pics/monster/skeleton/right00", gp.tileSize, gp.tileSize);
+        right2 = setup("/pics/monster/skeleton/right01", gp.tileSize, gp.tileSize);
+        right3 = setup("/pics/monster/skeleton/right02", gp.tileSize, gp.tileSize);
+        right4 = setup("/pics/monster/skeleton/right03", gp.tileSize, gp.tileSize);
 
         
-        downleft1 = setup("/pics/monster/slimes/left00", gp.tileSize, gp.tileSize);
-        downleft2 = setup("/pics/monster/slimes/left01", gp.tileSize, gp.tileSize);
+        downleft1 = setup("/pics/monster/skeleton/left00", gp.tileSize, gp.tileSize);
+        downleft2 = setup("/pics/monster/skeleton/left01", gp.tileSize, gp.tileSize);
+        downleft3 = setup("/pics/monster/skeleton/left02", gp.tileSize, gp.tileSize);
+        downleft4 = setup("/pics/monster/skeleton/left03", gp.tileSize, gp.tileSize);
 
-        upleft1 = setup("/pics/monster/slimes/left00", gp.tileSize, gp.tileSize);
-        upleft2 = setup("/pics/monster/slimes/left01", gp.tileSize, gp.tileSize);
+        upleft1 = setup("/pics/monster/skeleton/left00", gp.tileSize, gp.tileSize);
+        upleft2 = setup("/pics/monster/skeleton/left01", gp.tileSize, gp.tileSize);
+        upleft3 = setup("/pics/monster/skeleton/left02", gp.tileSize, gp.tileSize);
+        upleft4 = setup("/pics/monster/skeleton/left03", gp.tileSize, gp.tileSize);
 
-        downright1 = setup("/pics/monster/slimes/right00", gp.tileSize, gp.tileSize);
-        downright2 = setup("/pics/monster/slimes/right01", gp.tileSize, gp.tileSize);
+        downright1 = setup("/pics/monster/skeleton/right00", gp.tileSize, gp.tileSize);
+        downright2 = setup("/pics/monster/skeleton/right01", gp.tileSize, gp.tileSize);
+        downright3 = setup("/pics/monster/skeleton/right02", gp.tileSize, gp.tileSize);
+        downright4 = setup("/pics/monster/skeleton/right03", gp.tileSize, gp.tileSize);
 
-        upright1 = setup("/pics/monster/slimes/right00", gp.tileSize, gp.tileSize);
-        upright2 = setup("/pics/monster/slimes/right01", gp.tileSize, gp.tileSize);
+        upright1 = setup("/pics/monster/skeleton/right00", gp.tileSize, gp.tileSize);
+        upright2 = setup("/pics/monster/skeleton/right01", gp.tileSize, gp.tileSize);
+        upright3 = setup("/pics/monster/skeleton/right02", gp.tileSize, gp.tileSize);
+        upright4 = setup("/pics/monster/skeleton/right03", gp.tileSize, gp.tileSize);
     }
-    
+    public void getAttackImage(){
+        attackLeft1 = setup("/pics/monster/skeleton/attackleft01", gp.tileSize, gp.tileSize);
+        attackLeft2 = setup("/pics/monster/skeleton/attackleft02", gp.tileSize, gp.tileSize);
+        attackLeft3 = setup("/pics/monster/skeleton/attackleft03", gp.tileSize, gp.tileSize);
+        attackLeft4 = setup("/pics/monster/skeleton/attackleft00", gp.tileSize, gp.tileSize);
+        
+        attackRight1 = setup("/pics/monster/skeleton/attackright01", gp.tileSize, gp.tileSize);
+        attackRight2 = setup("/pics/monster/skeleton/attackright02", gp.tileSize, gp.tileSize);
+        attackRight3 = setup("/pics/monster/skeleton/attackright03", gp.tileSize, gp.tileSize);
+        attackRight4 = setup("/pics/monster/skeleton/attackright00", gp.tileSize, gp.tileSize);
+
+        attackUp1 = setup("/pics/monster/skeleton/attackup01", gp.tileSize, gp.tileSize);
+        attackUp2 = setup("/pics/monster/skeleton/attackup02", gp.tileSize, gp.tileSize);
+        attackUp3 = setup("/pics/monster/skeleton/attackup03", gp.tileSize, gp.tileSize);
+        attackUp4 = setup("/pics/monster/skeleton/attackup00", gp.tileSize, gp.tileSize);
+        
+        attackDown1 = setup("/pics/monster/skeleton/attackdown00", gp.tileSize, gp.tileSize);
+        attackDown2 = setup("/pics/monster/skeleton/attackdown01", gp.tileSize, gp.tileSize);
+        attackDown3 = setup("/pics/monster/skeleton/attackdown02", gp.tileSize, gp.tileSize);
+        attackDown4 = setup("/pics/monster/skeleton/attackdown03", gp.tileSize, gp.tileSize);
+
+        attackupLeft1 = setup("/pics/monster/skeleton/attackleft01", gp.tileSize, gp.tileSize);
+        attackupLeft2 = setup("/pics/monster/skeleton/attackleft02", gp.tileSize, gp.tileSize);
+        attackupLeft3 = setup("/pics/monster/skeleton/attackleft03", gp.tileSize, gp.tileSize);
+        attackupLeft4 = setup("/pics/monster/skeleton/attackleft00", gp.tileSize, gp.tileSize);
+        
+        attackupRight1 = setup("/pics/monster/skeleton/attackright01", gp.tileSize, gp.tileSize);
+        attackupRight2 = setup("/pics/monster/skeleton/attackright02", gp.tileSize, gp.tileSize);
+        attackupRight3 = setup("/pics/monster/skeleton/attackright03", gp.tileSize, gp.tileSize);
+        attackupRight4 = setup("/pics/monster/skeleton/attackright00", gp.tileSize, gp.tileSize);
+
+        attackdownLeft1 = setup("/pics/monster/skeleton/attackleft01", gp.tileSize, gp.tileSize);
+        attackdownLeft2 = setup("/pics/monster/skeleton/attackleft02", gp.tileSize, gp.tileSize);
+        attackdownLeft3 = setup("/pics/monster/skeleton/attackleft03", gp.tileSize, gp.tileSize);
+        attackdownLeft4 = setup("/pics/monster/skeleton/attackleft00", gp.tileSize, gp.tileSize);
+        
+        attackdownRight1 = setup("/pics/monster/skeleton/attackright01", gp.tileSize, gp.tileSize);
+        attackdownRight2 = setup("/pics/monster/skeleton/attackright02", gp.tileSize, gp.tileSize);
+        attackdownRight3 = setup("/pics/monster/skeleton/attackright03", gp.tileSize, gp.tileSize);
+        attackdownRight4 = setup("/pics/monster/skeleton/attackright00", gp.tileSize, gp.tileSize);
+    }
     public void setAction(){
         
-        int xDistance = getXdistance(gp.player);
-        int yDistance = getYdistance(gp.player);
-
-        int tileDistance = (xDistance + yDistance)/gp.tileSize;
         if(onPath == true){
-            
             //mo hunong kong ang tiledistane kay 20
-            checkStopChasingOrNot(gp.player, 20, 100);
+            checkStopChasingOrNot(gp.player, 15, 100);
             
             searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
         }else{
             
-            checkStartChasingOrNot(gp.player, 5, 100);
-            actionLockCounter++;
+            checkStartChasingOrNot(gp.player, 5, 0);
     
             getRandomDirection();
+
         }
 
     
@@ -93,10 +147,14 @@ public class MON_Skeleton extends Entity {
         //     shotAvailableCounter = 0;
         // }
         
+        //check if its attacks
+        if(attacking == false){
+            checkAttackOrNot(30, gp.tileSize*4, gp.tileSize);
+        }
         
     }
     public void damageReaction() {
-        // actionLockCounter = 0;
+        actionLockCounter = 0;
         
         // switch (gp.player.direction) {
         //     case "left":
